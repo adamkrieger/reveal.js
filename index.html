@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>reveal.js – The HTML Presentation Framework</title>
+    <title>F# Will Make You a Better .Net Developer - adamkrieger.ca</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -65,6 +65,7 @@
                 <section>
                     <h2>F# is... Paradigm</h2>
                     <ul>
+                        <li>Immutable</li>
                         <li>Input/Output Oriented</li>
                         <li>Null-less</li>
                         <li>Terse</li>
@@ -76,7 +77,7 @@
                         <li>Type Safety</li>
                         <li>Pattern Matching</li>
                         <li>Monads</li>
-                        <li>Composition</li>
+                        <li>Composition/Decomposition</li>
                     </ul>
                 </section>
                 <section>
@@ -89,6 +90,75 @@
                     </ul>
                 </section>
             </section>
+            
+            <section>
+                <section>
+                    <h2>Mutability</h2>
+<pre><code class="cs" data-trim contenteditable>
+// 1_mut.csx
+
+public static class ValueProcessor
+{
+    public static void ProcessValue(string value)
+    {
+        Console.WriteLine(value);
+    }
+}
+
+var bucket = "Really Important Value";
+bucket = "Another Important Value";
+
+ValueProcessor.ProcessValue(bucket);
+</code></pre>
+<pre><code data-trim contenteditable>
+$ csi 1_mut.csx
+Another Important Value
+</code></pre>
+                </section>
+                <section>
+                    <h2>Immutability</h2>
+<pre><code class="fs" data-trim contenteditable>
+// 1_mut.fsx
+
+let processValue (value:string) =
+    printfn "%s" value
+
+let bucket = "Really Important Value"
+bucket = "Another Important Value"
+
+processValue bucket
+</code></pre>
+<pre><code data-trim contenteditable>
+$ fsi 1_mut.fsx
+Really Important Value
+</code></pre>
+                </section>
+                <section>
+                    <h2>C# Feedback</h2>
+<pre><code class="cs" data-trim contenteditable>
+// 1_mut_next.csx
+    
+public class ImmutString
+{
+    public readonly string Value;
+    
+    public ImmutString(string value){ this.Value = value; }
+}
+
+Action<string> processValue = value => Console.WriteLine(value);
+
+var bucket = new ImmutString("Really Important Value");
+// bucket.Value = "Another Important Value";
+
+processValue(bucket.Value);
+</code></pre>
+<pre><code data-trim contenteditable>
+$ csi 1_mut_next.csx
+Really Important Value
+</code></pre>
+                </section>
+            </section>
+
 
             <!-- Example of nested vertical slides -->
             <section>
@@ -119,8 +189,7 @@
                 <h2>Slides</h2>
                 <p>
                     Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at
-                    <a
-                    href="http://slides.com" target="_blank">http://slides.com</a>.
+                    <a href="http://slides.com" target="_blank">http://slides.com</a>.
                 </p>
             </section>
 
