@@ -91,6 +91,7 @@
                 </section>
             </section>
             
+            <!-- MUTABILITY / IMMUTABILITY -->
             <section>
                 <section>
                     <h2>Mutability</h2>
@@ -157,8 +158,152 @@ $ csi 1_mut_next.csx
 Really Important Value
 </code></pre>
                 </section>
+                
+                <aside class="notes">
+                    Our initial C# example shows us how easy it is for values to change under our nose.
+                    
+                    F# makes every assignment immutable by default. (Overridable with the mut keyword).
+                    
+                    'readonly' gets us closer, but C# will still allow the parent class assignment to be overwritten.
+                    
+                    In this case, F# shows us developer what we have to watch our for: values changing under our noses.
+                </aside>
             </section>
 
+            <!-- INPUT/OUTPUT -->
+            <section>
+                <section>
+<h2>Unsafe Methods</h2>
+<pre><code class="cs" data-trim contenteditable>
+public string GetAValue(int index){
+    var values = new []{ "Red Windsor", "White Stilton", 
+        "Norwegian Jarlsburger" };
+    return values[index];
+}
+
+var cheese = GetAValue(2);
+
+Console.WriteLine(cheese);
+</code></pre>
+<pre><code data-trim contenteditable>
+$ csi 2_input.csx
+Norwegian Jarlsburger
+</code></pre>
+                </section>
+                <section>
+<h2>Safe Methods</h2>
+<pre><code class="cs" data-trim contenteditable>
+public bool GetAValue(int index, 
+    out string notAtAllObviousActualValue)
+{
+    var values = new []{ "Red Windsor", "White Stilton", 
+        "Norwegian Jarlsburger" };
+    
+    if(index >= 0 && index < values.Length){
+        notAtAllObviousActualValue = values[index];
+        return true;
+    }
+ 
+    notAtAllObviousActualValue = string.Empty;  
+    return false;
+}
+
+var theActualValue = string.Empty;
+var success = GetAValue(5, out theActualValue);
+
+var output = success
+    ? theActualValue
+    : "Nnnnnnnnnnnnnnnnnnnno";    
+
+Console.WriteLine(output);
+</code></pre>
+<pre><code data-trim contenteditable>
+$ csi 2_input_safe.csx
+Nnnnnnnnnnnnnnnnnnnno
+</code></pre>
+                </section>
+                <section>
+                    <h2>Function and Fashion</h2>
+<pre><code class="fs" data-trim contenteditable>
+let cheeses = [|"Red Windsor"; "White Stilton"; 
+        "Norwegian Jarlsburger"|]
+
+let valOrNone array index =
+    let len = array |> Array.length
+    
+    index |> function
+             | i when -1 < i && i < len 
+                 -> Some array.[index]
+             | _ -> None
+    
+// partial application!
+let cheeseGetter = valOrNone cheeses
+
+let cheeseHandler = 
+    function | Some value -> printfn "%s" value
+             | _ -> printfn "%s" "Nnnnnnnnnnnno"
+
+do 5 // int
+   |> cheeseGetter // Some(string)/None
+   |> cheeseHandler // unit
+</code></pre>
+<pre><code data-trim contenteditable>
+$ fsi 2_input.fsx
+Nnnnnnnnnnnno
+</code></pre>
+                </section>
+                <section>
+<h2>A C# Maybe</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+public class Maybe&lt;T>
+{
+    public readonly T Value;
+    public readonly bool Is; 
+    
+    private Maybe(){}
+    private Maybe(bool isSome, T value){
+        Is = isSome;
+        Value = value;
+    }
+    
+    public static Maybe&lt;T> Some(T value){
+        return new Maybe&lt;T>(true, value);
+    }
+    
+    public static Maybe&lt;T> None(){
+        return new Maybe&lt;T>();
+    }
+}
+</code></pre>
+                </section>
+                <section>
+                    <h2>Safe, Functional, C#</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+var cheeses = new []{ "Red Windsor", "White Stilton", 
+        "Norwegian Jarlsburger" };
+
+public Maybe&lt;string> GetAValue(string[] array, int index)
+{
+    var values = new []{ "Red Windsor", "White Stilton", 
+        "Norwegian Jarlsburger" };
+    
+    if(index >= 0 && index < values.Length){
+        return Maybe&lt;string>.Some(values[index]);
+    }
+    
+    return Maybe&lt;string>.None();
+}
+
+var cheese = GetAValue(cheeses, 5);
+
+var output = cheese.Is
+    ? cheese.Value
+    : "Nnnnnnnnnnnnnnnnnnnno";
+
+Console.WriteLine(output);
+</code></pre>
+                </section>
+            </section>
 
             <!-- Example of nested vertical slides -->
             <section>
