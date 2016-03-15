@@ -173,88 +173,110 @@ Really Important Value
             <!-- INPUT/OUTPUT -->
             <section>
                 <section>
-<h2>Unsafe Methods</h2>
+<h2>Unsafe Methods (15 lines)</h2>
 <pre><code class="cs" data-trim contenteditable>
-public string GetAValue(int index){
-    var values = new []{ "Red Windsor", "White Stilton", 
-        "Norwegian Jarlsburger" };
-    return values[index];
+public class Cheese{
+    public string id;
+    public string name;
 }
 
-var cheese = GetAValue(2);
+var cheeses = new Cheese[]{
+    new Cheese(){ id="rwin", name="Red Windsor"},
+    new Cheese(){ id="stil", name="White Stilton"},
+    new Cheese(){ id="jarl", name="Norwegian Jarlsburger"}
+};
 
-Console.WriteLine(cheese);
+public Cheese GetCheese(Cheese[] cheeses, string id){
+    Cheese foundCheese = null;
+    
+    foreach (var cheese in cheeses){
+        if(cheese.id == id){
+            foundCheese = cheese;
+        }
+    }
+    
+    return foundCheese;
+}
+
+var cheese = GetCheese(cheeses, "rwin");
+
+Console.WriteLine(cheese.name);
 </code></pre>
 <pre><code data-trim contenteditable>
-$ csi 2_input.csx
-Norwegian Jarlsburger
+$ csi 2.1_input.csx
+Red Windsor
 </code></pre>
                 </section>
                 <section>
-<h2>Safe Methods</h2>
+<h2>Safe Methods (24 lines)</h2>
 <pre><code class="cs" data-trim contenteditable>
-public bool GetAValue(int index, 
-    out string notAtAllObviousActualValue)
-{
-    var values = new []{ "Red Windsor", "White Stilton", 
-        "Norwegian Jarlsburger" };
-    
-    if(index >= 0 && index < values.Length){
-        notAtAllObviousActualValue = values[index];
-        return true;
+#load "0.1_Cheese.csx"
+
+public bool GetCheese(Cheese[] cheeses, string id,
+    out Cheese notAtAllObviousActualValue){
+        
+    foreach (var cheese in cheeses){
+        if(cheese.id == id){
+            notAtAllObviousActualValue = cheese;
+            return true;
+        }
     }
- 
-    notAtAllObviousActualValue = string.Empty;  
+    
+    notAtAllObviousActualValue = null;
     return false;
 }
 
-var theActualValue = string.Empty;
-var success = GetAValue(5, out theActualValue);
+string outputMessage = string.Empty;
+Cheese cheese = null;
 
-var output = success
-    ? theActualValue
-    : "Nnnnnnnnnnnnnnnnnnnno";    
+if(GetCheese(cheeses, "none", out cheese)){
+    outputMessage = cheese.name;    
+}
+else{
+    outputMessage = "Could not find cheese.";
+}
 
-Console.WriteLine(output);
+Console.WriteLine(outputMessage);
 </code></pre>
 <pre><code data-trim contenteditable>
-$ csi 2_input_safe.csx
-Nnnnnnnnnnnnnnnnnnnno
+$ csi 2.2_input_safe.csx
+Could not find cheese.
 </code></pre>
                 </section>
                 <section>
                     <h2>Function and Fashion</h2>
 <pre><code class="fs" data-trim contenteditable>
-let cheeses = [|"Red Windsor"; "White Stilton"; 
-        "Norwegian Jarlsburger"|]
-
-let valOrNone array index =
-    let len = array |> Array.length
+type Cheese = { Id:string; Name:string }
+let cheeses = 
+    [|
+        { Id = "rwin"; Name = "Red Windsor" };
+        { Id = "stil"; Name = "White Stilton"}; 
+        { Id = "jarl"; Name = "Norwegian Jarlsburger"}
+    |]
     
-    index |> function
-             | i when -1 < i && i < len 
-                 -> Some array.[index]
-             | _ -> None
-    
-// partial application!
-let cheeseGetter = valOrNone cheeses
-
-let cheeseHandler = 
-    function | Some value -> printfn "%s" value
-             | _ -> printfn "%s" "Nnnnnnnnnnnno"
-
-do 5 // int
-   |> cheeseGetter // Some(string)/None
-   |> cheeseHandler // unit
+let pickCheese id =
+    Array.tryFind (fun item -> item.Id = id)
+    >> function 
+       | Some cheese -> printfn "%s" cheese.Name
+       | _           -> printfn "%s" "Completely out."
+ 
+// id:string -> (Cheese[] -> unit)
+pickCheese "none" cheeses
 </code></pre>
 <pre><code data-trim contenteditable>
-$ fsi 2_input.fsx
-Nnnnnnnnnnnno
+$ fsi 2.3_input.fsx
+Completely out.
 </code></pre>
                 </section>
                 <section>
 <h2>A C# Maybe</h2>
 <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+// csc /target:library 0.2_Maybe.csx -> 0.2_Maybe.dll
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+
 public class Maybe&lt;T>
 {
     public readonly T Value;
@@ -273,34 +295,130 @@ public class Maybe&lt;T>
     public static Maybe&lt;T> None(){
         return new Maybe&lt;T>();
     }
+    
+    public Maybe&lt;T> IfIs(Action&lt;T> action){
+        if(Is){
+            action(Value);
+        }
+        return this;
+    }
+    
+    public Maybe&lt;T> IfIsNot(Action action){
+        if(!Is){
+            action();
+        }
+        return this;
+    }
+}
+
+public static class EnumExt
+{
+    public static Maybe&lt;T> TrySingle&lt;T>(
+        this IEnumerable&lt;T> collection, Func&lt;T, bool> pred)
+    {
+        try{
+            return Maybe&lt;T>.Some(collection.Single(pred));
+        }
+        catch(InvalidOperationException){
+            return Maybe&lt;T>.None();
+        }
+    }
 }
 </code></pre>
                 </section>
                 <section>
                     <h2>Safe, Functional, C#</h2>
 <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
-var cheeses = new []{ "Red Windsor", "White Stilton", 
-        "Norwegian Jarlsburger" };
+#r "0.2_Maybe.dll"
+#load "0.1_Cheese.csx"
 
-public Maybe&lt;string> GetAValue(string[] array, int index)
-{
-    var values = new []{ "Red Windsor", "White Stilton", 
-        "Norwegian Jarlsburger" };
+cheeses
+    .TrySingle(cheese => cheese.id == "ched")
+    .IfIs(a => Console.WriteLine(a.name))
+    .IfIsNot(() => Console.WriteLine("Not found."));
     
-    if(index >= 0 && index < values.Length){
-        return Maybe&lt;string>.Some(values[index]);
-    }
-    
-    return Maybe&lt;string>.None();
+0
+</code></pre>
+                </section>
+            </section>
+            
+            <section>
+                <section>
+                    <h2>The Hanging default:</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+public enum StarRating
+{ Five, Four, Three, Two, One }
+
+var rating = StarRating.Three;
+var commission = 0.0;
+var perNight = 300.0;
+
+Console.WriteLine(string.Format(
+    "StarTest: {0}", StarRating.Five > rating));
+
+switch(rating){
+    case StarRating.Five:
+        commission = perNight * .13;
+        break;
+    case StarRating.Four:
+        commission = perNight * .11;
+        break;
+    case StarRating.Three:
+        commission = perNight * .09;
+        break;
+    case StarRating.Two:
+        commission = perNight * .07;
+        break;
+    default:
+        commission = perNight * .05;
+        break;
 }
 
-var cheese = GetAValue(cheeses, 5);
+Console.WriteLine(string.Format("Commission: {0}", commission));
+</code></pre>
+                </section>
+                <section>
+                    <h2>Discriminated Unions</h2>
+<pre><code class="fs" data-trim contenteditable>
+type StarRating =
+        | One | Two | Three | Four | Five 
 
-var output = cheese.Is
-    ? cheese.Value
-    : "Nnnnnnnnnnnnnnnnnnnno";
+let commission perNight starRating = 
+    match starRating with
+    | StarRating.Five -> perNight * 0.13 
+    | StarRating.Four -> perNight * 0.11
+    | StarRating.Three -> perNight * 0.09
+    
+printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
+</code></pre>
+<pre><code data-trim contenteditable>
+$ fsi --warnaserror 3.2_discrim_unions.fsx
+3.2_discrim_unions.fsx(5,11): error FS0025: Incomplete pattern matches on this expression. 
+For example, the value 'One' may indicate a case not covered by the pattern(s).
+</code></pre>
+                </section>
+                <section>
+                    <h2>Free Equality</h2>
+<pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
+type StarRating =
+        | One | Two | Three | Four | Five 
+        
+type GolfScore =
+        | Eight | Seven | Six | Five
+        | Four | Three | Two | One
+        
+let starTest = StarRating.Five > StarRating.Four
+let golfTest = GolfScore.One > GolfScore.Three
 
-Console.WriteLine(output);
+let commission perNight starRating = 
+    match starRating with
+    | StarRating.Five -> perNight * 0.13 
+    | StarRating.Four -> perNight * 0.11
+    | StarRating.Three -> perNight * 0.09
+    | StarRating.Two -> perNight * 0.07
+    | StarRating.One -> perNight * 0.05
+    
+printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
 </code></pre>
                 </section>
             </section>
