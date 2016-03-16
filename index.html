@@ -44,7 +44,7 @@
         <div class="slides">
             <section>
                 <h1>F#</h1>
-                <h2>Will Make You a Better .Net Developer</h2>
+                <h2>Will Make <i><u>You</u></i> <br />a Better .Net Developer</h2>
                 <i class="icon ion-home"></i>
                 <div style="width: 300px; padding-left: 100px; margin: auto">
                     <p style="text-align: left">
@@ -74,7 +74,8 @@
                     </td>
                     <td>
                         <h2 style="text-align: center">Breadth</h2>
-                        <img src="img/fsharp512.png" height="400px"/>
+                        <img src="img/fsharp512.png" height="340px"/>
+                        <h5 style="text-align: center">fsharp.org</h5>
                     </td>
                         </tr>
                     </table>
@@ -110,9 +111,9 @@
                     <h2>F# is... Pragmatism</h2>
                     <ul>
                         <li>C# Interop</li>
-                        <li>Agents</li>
                         <li>Type Providers</li>
-                        <li>Distributed Processing</li>
+                        <li>Agents</li>
+                        <li>Distributed Computing</li>
                     </ul>
                 </section>
             </section>
@@ -120,6 +121,7 @@
             <!-- MUTABILITY / IMMUTABILITY -->
             <section>
                 <section data-transition="fade">
+                    <p>The problem with mutability:</p>
                     <img src="img/mutability.png"/>
                 </section>
                 <section data-transition="fade">
@@ -187,7 +189,7 @@ public class ImmutString
     public ImmutString(string value){ this.Value = value; }
 }
 
-Action<string> processValue = value => Console.WriteLine(value);
+Action&lt;string> processValue = value => Console.WriteLine(value);
 
 var bucket = new ImmutString("Really Important Value");
 // bucket.Value = "Another Important Value";
@@ -211,8 +213,16 @@ Really Important Value
                 </aside>
             </section>
 
-            <!-- INPUT/OUTPUT -->
+            <!-- Safe Programming -->
             <section>
+                <section data-transition="fade">
+                    <h2>Defensive Programming</h2>
+                    <img src="img/fryisntsure.jpg"/>
+                </section>
+                <section data-transition="fade">
+                    <h2>Excessive Scrutiny</h2>
+                    <img src="img/fryisntsure.jpg"/>
+                </section>
                 <section>
 <h2>Unsafe Methods (15 lines)</h2>
 <pre><code class="cs" data-trim contenteditable>
@@ -243,10 +253,10 @@ Red Windsor
 #load "0.1_Cheese.csx"
 
 public bool GetCheese(Cheese[] cheeses, string id,
-    out Cheese notAtAllObviousActualValue){
+    out Cheese notAtAllObviousActualValue) {
         
-    foreach (var cheese in cheeses){
-        if(cheese.id == id){
+    foreach (var cheese in cheeses) {
+        if(cheese.id == id) {
             notAtAllObviousActualValue = cheese;
             return true;
         }
@@ -259,10 +269,10 @@ public bool GetCheese(Cheese[] cheeses, string id,
 string outputMessage = string.Empty;
 Cheese cheese = null;
 
-if(GetCheese(cheeses, "none", out cheese)){
+if(GetCheese(cheeses, "none", out cheese)) {
     outputMessage = cheese.name;    
 }
-else{
+else {
     outputMessage = "Could not find cheese.";
 }
 
@@ -276,19 +286,11 @@ Could not find cheese.
                 <section>
                     <h2>Function and Fashion</h2>
 <pre><code class="fs" data-trim contenteditable>
-type Cheese = { Id:string; Name:string }
-let cheeses = 
-    [|
-        { Id = "rwin"; Name = "Red Windsor" };
-        { Id = "stil"; Name = "White Stilton"}; 
-        { Id = "jarl"; Name = "Norwegian Jarlsburger"}
-    |]
-    
 let pickCheese id =
     Array.tryFind (fun item -> item.Id = id)
     >> function 
        | Some cheese -> printfn "%s" cheese.Name
-       | _           -> printfn "%s" "Completely out."
+       | None        -> printfn "%s" "Completely out."
  
 // id:string -> (Cheese[] -> unit)
 pickCheese "none" cheeses
@@ -298,6 +300,46 @@ $ fsi 2.3_input.fsx
 Completely out.
 </code></pre>
                 </section>
+            </section>
+            
+            <section>
+                <section>
+                    <h2>What is Null? (C#)</h2>
+                    <ul>
+                        <li>Possible absence of value</li>
+                        <li>Possible indication of empty</li>
+                        <li>Stateful, as in DateCancelled</li>
+                        <li>Value of any reference Type</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>What is None? (F#)</h2>
+                    <ul>
+                        <li>Absence of Value of option types</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Why use option?</h2>
+<pre><code class="cs" data-trim contenteditable>
+string[] stringArray;
+
+Console.WriteLine(stringArray[0]);
+</code></pre>
+                    <p>vs</p>
+<pre><code class="fs" data-trim contenteditable>
+let stringArray = Some [| "elem" |]
+
+let length = stringArray.[0] // Will not compile!
+
+let noneOfStringArray = 
+    stringArray |> function
+             | Some arr when arr.[0] = "test" -> Some arr 
+             | _ -> None 
+</code></pre>
+                </section>
+            </section>
+            
+            <section>
                 <section>
 <h2>A C# Maybe</h2>
 <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
@@ -437,8 +479,8 @@ type GolfScore =
         | Eight | Seven | Six | Five
         | Four | Three | Two | One
         
-let starTest = StarRating.Five > StarRating.Four
-let golfTest = GolfScore.One > GolfScore.Three
+let starTest = StarRating.Five > StarRating.Four // True
+let golfTest = GolfScore.One > GolfScore.Three // Also True
 
 let commission perNight starRating = 
     match starRating with
@@ -449,6 +491,97 @@ let commission perNight starRating =
     | StarRating.One -> perNight * 0.05
     
 printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
+</code></pre>
+                </section>
+            </section>
+            
+            <section>
+                <section>
+                    <h2>Bill Pay Dependencies</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+using System;
+
+public enum PaymentType
+{
+    Cash, Visa, Mastercard, Chickens
+}
+
+public class Bill
+{
+    public DateTime DatePaid {get;set;}
+    public decimal Amount {get;set;}
+    public PaymentType TypeOfPayment {get;set;}    
+}
+
+public interface IBillProcessor
+{
+    void PayBill(int id, Bill bill);
+}
+</code></pre>
+                </section>
+                <section>
+                    <h2>Existing Flow</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+#r "6.1_BillPay.dll"
+
+public class BillProcessor : IBillProcessor
+{
+    public void PayBill(int id, Bill bill){
+        Console.WriteLine(string.Format(
+         "Paying bill {0}, paid with {1}, in the amount of ${2} on {3}.", 
+         id, bill.TypeOfPayment, bill.Amount, bill.DatePaid));
+    }
+}
+
+IBillProcessor billProcessor = new BillProcessor();
+
+billProcessor.PayBill(
+    24,
+    new Bill(){ DatePaid = DateTime.Now,
+                Amount = 13.28M,
+                TypeOfPayment = PaymentType.Cash }
+);
+</code></pre>
+                </section>
+                <section>
+                    <h2>Implementing a C# Interface</h2>
+<pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
+module ReplacementBillPayProcessors
+#r "6.1_BillPay.dll"
+
+type BetterBillProcessor() =
+    let calculateTax paymentMethod paymentAmount = 
+        match paymentMethod with
+        | PaymentType.Chickens -> paymentAmount * 1.17M
+        | PaymentType.Mastercard
+        | PaymentType.Visa
+        | PaymentType.Cash -> paymentAmount * 1.05M
+
+    interface IBillProcessor with
+        member this.PayBill(id, bill) =
+            let taxedAmount = calculateTax bill.TypeOfPayment bill.Amount
+        
+            printfn 
+                "Paying bill in %d in F#, paid with %A, in the amount of $%.2f on %A." 
+                id bill.TypeOfPayment taxedAmount bill.DatePaid
+</code></pre>
+                </section>
+                <section>
+                    <h2>Using the F# Implementation from C#</h2>
+<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+#r "6.3_BillPayFs.dll"
+
+IBillProcessor billProcessor = 
+    new ReplacementBillPayProcessors.BetterBillProcessor();
+
+billProcessor.PayBill(
+    24,
+    new Bill(){
+        DatePaid = DateTime.Now,
+        Amount = 13.28M,
+        TypeOfPayment = PaymentType.Cash
+    }
+);
 </code></pre>
                 </section>
             </section>
