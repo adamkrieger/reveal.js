@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -29,6 +30,7 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
 
+    <link rel="stylesheet" href="css/font-awesome.css">
     <!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -43,30 +45,54 @@
             <section>
                 <h1>F#</h1>
                 <h2>Will Make You a Better .Net Developer</h2>
-                <p>
-                    <small>Adam Krieger</small>
-                    <br />
-                    <small>@adamkrieger</small>
-                    <br />
-                    <small>www.adamkrieger.ca</small>
-                    <br />
-                    <small>GitHub: adamkrieger</small>
-                    <br />
-                </p>
+                <i class="icon ion-home"></i>
+                <div style="width: 300px; padding-left: 100px; margin: auto">
+                    <p style="text-align: left">
+                        <small>by Adam Krieger</small>
+                        <br />
+                        <small><i class="fa fa-twitter"></i> @adamkrieger</small>
+                        <br />
+                        <small><i class="fa fa-chrome"></i> www.adamkrieger.ca</small>
+                        <br />
+                        <small><i class="fa fa-github"></i> adamkrieger</small>
+                        <br />
+                    </p>
+                </div>
+                <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
+            </section>
+            
+            <section>
+                <section>
+                    <table>
+                        <tr>
+                    <td>
+                        <h2 style="text-align: center">Depth</h2>
+                        <img src="img/Csharp_nutshell.png" height="400px"/>
+                    </td>
+                    <td>
+                        <p>vs</p>
+                    </td>
+                    <td>
+                        <h2 style="text-align: center">Breadth</h2>
+                        <img src="img/fsharp512.png" height="400px"/>
+                    </td>
+                        </tr>
+                    </table>
+                </section>
             </section>
 
             <section>
                 <section>
-                    <h2>F# in a Nutshell</h2>
+                    <h2>F# in Three Words</h2>
                     <p>
-                        <i>Help! I'm programming in F# and I'm trapped in a nutshell!</i>
+                        <i>Which all, ironically, begin with 'P'</i>
                     </p>
                 </section>
                 <section>
                     <h2>F# is... Paradigm</h2>
                     <ul>
                         <li>Immutable</li>
-                        <li>Input/Output Oriented</li>
+                        <li>Higher-order Functions</li>
                         <li>Null-less</li>
                         <li>Terse</li>
                     </ul>
@@ -77,7 +103,7 @@
                         <li>Type Safety</li>
                         <li>Pattern Matching</li>
                         <li>Monads</li>
-                        <li>Composition/Decomposition</li>
+                        <li>Lisping</li>
                     </ul>
                 </section>
                 <section>
@@ -92,6 +118,21 @@
             </section>
             
             <!-- MUTABILITY / IMMUTABILITY -->
+            <section>
+                <section data-transition="fade">
+                    <img src="img/mutability.png"/>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability2.png"/>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability3.png"/>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability4.png"/>
+                </section>
+            </section>
+            
             <section>
                 <section>
                     <h2>Mutability</h2>
@@ -175,17 +216,6 @@ Really Important Value
                 <section>
 <h2>Unsafe Methods (15 lines)</h2>
 <pre><code class="cs" data-trim contenteditable>
-public class Cheese{
-    public string id;
-    public string name;
-}
-
-var cheeses = new Cheese[]{
-    new Cheese(){ id="rwin", name="Red Windsor"},
-    new Cheese(){ id="stil", name="White Stilton"},
-    new Cheese(){ id="jarl", name="Norwegian Jarlsburger"}
-};
-
 public Cheese GetCheese(Cheese[] cheeses, string id){
     Cheese foundCheese = null;
     
