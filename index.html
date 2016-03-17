@@ -96,6 +96,9 @@
                         <li>Higher-order Functions</li>
                         <li>Null-less</li>
                         <li>Terse</li>
+                        <li>Whitespace Sensitive</li>
+                        <li>Top-down</li>
+                        <li>Type Inferent</li>
                     </ul>
                 </section>
                 <section>
@@ -103,7 +106,7 @@
                     <ul>
                         <li>Type Safety</li>
                         <li>Pattern Matching</li>
-                        <li>Monads</li>
+                        <li>Monad Integration</li>
                         <li>Lisping</li>
                     </ul>
                 </section>
@@ -284,6 +287,16 @@ Could not find cheese.
 </code></pre>
                 </section>
                 <section>
+                    <h3>Where's Waldo?</h3>
+                    <ul>
+                        <li>Anonymous Function</li>
+                        <li>List Processor (LISP)</li>
+                        <li>Option Monad</li>
+                        <li>Pattern Matcher</li>
+                        <li>Function Composition</li>
+                    </ul>
+                </section>
+                <section>
                     <h2>Function and Fashion</h2>
 <pre><code class="fs" data-trim contenteditable>
 let pickCheese id =
@@ -306,10 +319,10 @@ Completely out.
                 <section>
                     <h2>What is Null? (C#)</h2>
                     <ul>
-                        <li>Possible absence of value</li>
-                        <li>Possible indication of empty</li>
-                        <li>Stateful, as in DateCancelled</li>
-                        <li>Value of any reference Type</li>
+                        <li class="fragment">Possible absence of value</li>
+                        <li class="fragment">Possible indication of empty</li>
+                        <li class="fragment">Stateful, as in DateCancelled</li>
+                        <li class="fragment">Value of any reference Type</li>
                     </ul>
                 </section>
                 <section>
@@ -329,7 +342,7 @@ Console.WriteLine(stringArray[0]);
 <pre><code class="fs" data-trim contenteditable>
 let stringArray = Some [| "elem" |]
 
-let length = stringArray.[0] // Will not compile!
+let item = stringArray.[0] // Will not compile!
 
 let noneOfStringArray = 
     stringArray |> function
