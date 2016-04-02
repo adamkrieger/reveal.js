@@ -1,0 +1,48 @@
+#aklogo {
+    position: absolute;
+    width: 10%;
+    padding: 10px;
+}
+
+#onlinelogo{
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    width: 10%;
+}
+
+#titleslide {
+    background: white;
+    color: black;
+    position: absolute;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#titleslide img{
+    box-shadow: none;
+    border: 0;
+}
+
+#titleslide #sessionbanner {
+    background: #7EB23B;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40%;
+}
+
+#sessionbanner #logo {
+    height: 30%;
+    vertical-align: middle;
+    float: left;
+}
+
+#titleslide span {
+    font-family: ALusine;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: ALusine;
+    src: url(../fonts/ALUSRG_.TTF);
+}

@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css" id="theme">
-    
+
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -34,14 +34,30 @@
     <!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+    <link rel="stylesheet" href="css/ak-speaking.css">
 </head>
 
 <body>
+
+    <img id="aklogo" src="img/aklogo.png" />
+    <img id="onlinelogo" src="img/Online_logo.png" />
 
     <div class="reveal">
 
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
+            <section>
+                <div id="titleslide">
+                    <div id="sessionbanner">
+                        <img id="logo" src="img/PrDC_logo.png" />
+                        <span id="sessiontitle">F# Will Make You a Better .Net Developer</span>
+                    </div>
+
+                    <span>SPONSORS</span>
+                    <img src="img/sponsors.png" />
+                </div>
+            </section>
             <section>
                 <h1>F#</h1>
                 <h2>Will Make <i><u>You</u></i> <br />a Better .Net Developer</h2>
@@ -60,23 +76,24 @@
                 </div>
                 <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
             </section>
-            
+
             <section>
                 <section>
+                    <h4>The Dilemma</h4>
                     <table>
                         <tr>
-                    <td>
-                        <h2 style="text-align: center">Depth</h2>
-                        <img src="img/Csharp_nutshell.png" height="400px"/>
-                    </td>
-                    <td>
-                        <p>vs</p>
-                    </td>
-                    <td>
-                        <h2 style="text-align: center">Breadth</h2>
-                        <img src="img/fsharp512.png" height="340px"/>
-                        <h5 style="text-align: center">fsharp.org</h5>
-                    </td>
+                            <td>
+                                <h2 style="text-align: center">Depth</h2>
+                                <img src="img/Csharp_nutshell.png" height="400px" />
+                            </td>
+                            <td>
+                                <p>vs</p>
+                            </td>
+                            <td>
+                                <h2 style="text-align: center">Breadth</h2>
+                                <img src="img/fsharp512.png" height="340px" />
+                                <h5 style="text-align: center">fsharp.org</h5>
+                            </td>
                         </tr>
                     </table>
                 </section>
@@ -97,7 +114,7 @@
                         <li>Null-less</li>
                         <li>Terse</li>
                         <li>Whitespace Sensitive</li>
-                        <li>Top-down</li>
+                        <li>Single-Pass Enumeration</li>
                         <li>Type Inferent</li>
                     </ul>
                 </section>
@@ -121,98 +138,163 @@
                 </section>
             </section>
             
-            <!-- MUTABILITY / IMMUTABILITY -->
             <section>
-                <section data-transition="fade">
-                    <p>The problem with mutability:</p>
-                    <img src="img/mutability.png"/>
+                <section>
+                    <h3>Stage 1: Foundation!</h3>
+                    <ul>
+                        <li>null-less: Absence of Absence</li>
+                        <li>let: Binding over Declaraction & Assignment</li>
+                        <li>Immutability: Your Values are Safe</li>
+                        <li>'|>': Sequential Cohesion that's easy on the eyes</li>
+                    </ul>
                 </section>
-                <section data-transition="fade">
-                    <img src="img/mutability2.png"/>
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability3.png"/>
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability4.png"/>
+                <section>
+                    <h3>Stage 1: Getting part of the way there</h3>
+                    <ul>
+                        <li>Better ctors: An Ounce of Prevention</li>
+                        <li>readonly: Syntactic Intent</li>
+                    </ul>
                 </section>
             </section>
             
             <section>
                 <section>
-                    <h2>Mutability</h2>
-<pre><code class="cs" data-trim contenteditable>
-// 1_mut.csx
+                    <h3>Stage 2: Form!</h3>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </section>
+            </section>
+            
+            <section>
+                <section>
+                    <h3>Stage 3: Functions!</h3>
+                    <ul>
+                        <li>fun: Lame joke alert.</li>
+                        <li>Pattern Matching: Declarative control flow</li>
+                        <li>option: Practical Monads</li>
+                        <li>'>>': Effortless composition</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Stage 3: Conclusion</h3>
+                    <ul>
+                        <li>Stop using 'out' parameters</li>
+                        <li>Build your own Maybe</li>
+                        <li>Enhance LINQ/Streams</li>
+                        <li>Generic Composition instead of 'DSL'</li>
+                    </ul>
+                </section>
+            </section>
+            
+            <section>
+                <section>
+                    <h3>Stage 4: Frailway-oriented Programming!</h3>
+                    <ul>
+                        <li>bind: Cohesive Complexity</li>
+                        <li>choice: What?! Another Monad?</li>
+                        <li>option: Practical Monads</li>
+                        <li>'>>': Effortless composition</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Stage 4: Conclusion</h3>
+                    <ul>
+                        <li>Stop using 'out' parameters</li>
+                        <li>Build your own Maybe</li>
+                        <li>Enhance LINQ/Streams</li>
+                        <li>Generic Composition instead of 'DSL'</li>
+                    </ul>
+                </section>
+            </section>
 
-public static class ValueProcessor
-{
-    public static void ProcessValue(string value)
-    {
-        Console.WriteLine(value);
-    }
-}
+            <section>
+                <h2>Disclaimer</h2>
+                <p>The addition of more tools and code can often make up for C#'s lack of paradigm...</p>
+                <p><i>but then you'd have to maintain those tools.</i></p>
+            </section>
 
+
+            <!-- MUTABILITY / IMMUTABILITY -->
+            <section>
+                <section>
+                    <h2>The Mutability Problem</h2>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability.png" />
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability2.png" />
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability3.png" />
+                </section>
+                <section data-transition="fade">
+                    <img src="img/mutability4.png" />
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Mutability in C#</h2>
+                    <pre><code class="cs" data-trim contenteditable>
 var bucket = "Really Important Value";
 bucket = "Another Important Value";
 
-ValueProcessor.ProcessValue(bucket);
+Console.WriteLine(bucket);
 </code></pre>
-<pre><code data-trim contenteditable>
-$ csi 1_mut.csx
+                    <pre><code data-trim contenteditable>
+$ csi 1.1_mut.csx
 Another Important Value
 </code></pre>
                 </section>
                 <section>
-                    <h2>Immutability</h2>
-<pre><code class="fs" data-trim contenteditable>
-// 1_mut.fsx
-
-let processValue (value:string) =
-    printfn "%s" value
-
+                    <h2>Immutability in F#</h2>
+                    <pre><code class="fs" data-trim contenteditable>
 let bucket = "Really Important Value"
 bucket = "Another Important Value"
+// let bucket = "Something else" <- Error: Duplicate definition
 
-processValue bucket
+let bucket2 = bucket = "Another Important Value"
+
+printfn "%s" bucket
+printfn "%A" bucket2
 </code></pre>
-<pre><code data-trim contenteditable>
-$ fsi 1_mut.fsx
+                    <pre><code data-trim contenteditable>
+$ fsi 1.2_mut.fsx
 Really Important Value
+false
 </code></pre>
                 </section>
                 <section>
-                    <h2>C# Feedback</h2>
-<pre><code class="cs" data-trim contenteditable>
-// 1_mut_next.csx
-    
+                    <h2>Somewhat Immutable C#</h2>
+                    <pre><code class="cs" data-trim contenteditable>
 public class ImmutString
 {
-    public readonly string Value;
+    public ImmutString(string value){
+        this.Value = value;
+    }
     
-    public ImmutString(string value){ this.Value = value; }
+    public readonly string Value;
 }
 
-Action&lt;string> processValue = value => Console.WriteLine(value);
-
 var bucket = new ImmutString("Really Important Value");
+// Error: Readonly field cannot be assigned to.
 // bucket.Value = "Another Important Value";
 
-processValue(bucket.Value);
+Console.WriteLine(bucket.Value);
 </code></pre>
-<pre><code data-trim contenteditable>
-$ csi 1_mut_next.csx
+                    <pre><code data-trim contenteditable>
+$ csi 1.3_mut_next.csx
 Really Important Value
 </code></pre>
                 </section>
-                
+
                 <aside class="notes">
-                    Our initial C# example shows us how easy it is for values to change under our nose.
-                    
-                    F# makes every assignment immutable by default. (Overridable with the mut keyword).
-                    
-                    'readonly' gets us closer, but C# will still allow the parent class assignment to be overwritten.
-                    
-                    In this case, F# shows us developer what we have to watch our for: values changing under our noses.
+                    Our initial C# example shows us how easy it is for values to change under our nose. F# makes every assignment immutable by
+                    default. (Overridable with the mut keyword). 'readonly' gets us closer, but C# will still allow the parent
+                    class assignment to be overwritten. In this case, F# shows us developer what we have to watch our for:
+                    values changing under our noses.
                 </aside>
             </section>
 
@@ -220,15 +302,15 @@ Really Important Value
             <section>
                 <section data-transition="fade">
                     <h2>Defensive Programming</h2>
-                    <img src="img/fryisntsure.jpg"/>
+                    <img src="img/fryisntsure.jpg" />
                 </section>
                 <section data-transition="fade">
                     <h2>Excessive Scrutiny</h2>
-                    <img src="img/fryisntsure.jpg"/>
+                    <img src="img/fryisntsure.jpg" />
                 </section>
                 <section>
-<h2>Unsafe Methods (15 lines)</h2>
-<pre><code class="cs" data-trim contenteditable>
+                    <h2>Unsafe Methods (15 lines)</h2>
+                    <pre><code class="cs" data-trim contenteditable>
 public Cheese GetCheese(Cheese[] cheeses, string id){
     Cheese foundCheese = null;
     
@@ -245,33 +327,33 @@ var cheese = GetCheese(cheeses, "rwin");
 
 Console.WriteLine(cheese.name);
 </code></pre>
-<pre><code data-trim contenteditable>
+                    <pre><code data-trim contenteditable>
 $ csi 2.1_input.csx
 Red Windsor
 </code></pre>
                 </section>
                 <section>
-<h2>Safe Methods (24 lines)</h2>
-<pre><code class="cs" data-trim contenteditable>
+                    <h2>Safe Methods (24 lines)</h2>
+                    <pre><code class="cs" data-trim contenteditable>
 #load "0.1_Cheese.csx"
-
+//      Defensive
 public bool GetCheese(Cheese[] cheeses, string id,
-    out Cheese notAtAllObviousActualValue) {
+    out Cheese notAtAllObviousActualValue) { // Defensive
         
     foreach (var cheese in cheeses) {
         if(cheese.id == id) {
             notAtAllObviousActualValue = cheese;
-            return true;
+            return true; //Defensive
         }
     }
     
     notAtAllObviousActualValue = null;
-    return false;
+    return false; //Defensive
 }
 
 string outputMessage = string.Empty;
-Cheese cheese = null;
-
+Cheese cheese = null; //Defensive
+// Defensive
 if(GetCheese(cheeses, "none", out cheese)) {
     outputMessage = cheese.name;    
 }
@@ -281,24 +363,27 @@ else {
 
 Console.WriteLine(outputMessage);
 </code></pre>
-<pre><code data-trim contenteditable>
+                    <pre><code data-trim contenteditable>
 $ csi 2.2_input_safe.csx
 Could not find cheese.
 </code></pre>
                 </section>
+            </section>
+
+            <section>
                 <section>
                     <h3>Where's Waldo?</h3>
                     <ul>
                         <li>Anonymous Function</li>
                         <li>List Processor (LISP)</li>
-                        <li>Option Monad</li>
+                        <li>Option(Maybe) Monad</li>
                         <li>Pattern Matcher</li>
                         <li>Function Composition</li>
                     </ul>
                 </section>
                 <section>
                     <h2>Function and Fashion</h2>
-<pre><code class="fs" data-trim contenteditable>
+                    <pre><code class="fs" data-trim contenteditable>
 let pickCheese id =
     Array.tryFind (fun item -> item.Id = id)
     >> function 
@@ -308,14 +393,34 @@ let pickCheese id =
 // id:string -> (Cheese[] -> unit)
 pickCheese "none" cheeses
 </code></pre>
-<pre><code data-trim contenteditable>
+                    <pre><code data-trim contenteditable>
 $ fsi 2.3_input.fsx
 Completely out.
 </code></pre>
                 </section>
+                <section>
+                    <pre><code class="fs" data-trim contenteditable>
+let pickCheese id =
+    // LISP        Anon Func
+    Array.tryFind (fun item -> item.Id = id)
+    // Composition of functions
+    >> function 
+        // Pattern Matcher
+       | Some cheese -> printfn "%s" cheese.Name
+            // Option of Some or None
+       | None        -> printfn "%s" "Completely out."
+ 
+// id:string -> (Cheese[] -> unit)
+pickCheese "none" cheeses
+</code></pre>
+                </section>
             </section>
-            
+
             <section>
+                <section>
+                    <h2>Monads</h2>
+                    <p><i>A brief interlude</i></p>
+                </section>
                 <section>
                     <h2>What is Null? (C#)</h2>
                     <ul>
@@ -332,31 +437,35 @@ Completely out.
                     </ul>
                 </section>
                 <section>
-                    <h2>Why use option?</h2>
-<pre><code class="cs" data-trim contenteditable>
+                    <h2>Why use None over Null?</h2>
+                    <pre><code class="cs" data-trim contenteditable>
+// C#: Null is of the same type as the expected value, and...
+//     It compiles and ships *to your customer*!
 string[] stringArray;
 
-Console.WriteLine(stringArray[0]);
+var length = stringArray.Length;
 </code></pre>
                     <p>vs</p>
-<pre><code class="fs" data-trim contenteditable>
-let stringArray = Some [| "elem" |]
+                    <pre><code class="fs" data-trim contenteditable>
+// F#
+let stringArray = Some [| "elem" |] //Can't declare without assignment
 
-let item = stringArray.[0] // Will not compile!
-
-let noneOfStringArray = 
+// Will not compile, as stringArray is 'string[] option'
+let item = stringArray.Length 
+// Absence as a first class citizen
+let firstElement = 
     stringArray |> function
-             | Some arr when arr.[0] = "test" -> Some arr 
+             | Some arr when arr.Length > 0 -> Some arr.[0] 
              | _ -> None 
 </code></pre>
                 </section>
             </section>
-            
+
             <section>
                 <section>
-<h2>A C# Maybe</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
-// csc /target:library 0.2_Maybe.csx -> 0.2_Maybe.dll
+                    <h2>A C# Maybe</h2>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+// csc /target:library 0.2_Maybe.csx
 using System;
 using System.Linq;
 using System.Collections;
@@ -413,24 +522,39 @@ public static class EnumExt
                 </section>
                 <section>
                     <h2>Safe, Functional, C#</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 #r "0.2_Maybe.dll"
 #load "0.1_Cheese.csx"
 
 cheeses
-    .TrySingle(cheese => cheese.id == "ched")
-    .IfIs(a => Console.WriteLine(a.name))
+    .TrySingle(cheese => cheese.id == "ched") //Returns Maybe&lt;string>
+    .IfIs(a => Console.WriteLine(a.name)) //Also returns Maybe&lt;string>
     .IfIsNot(() => Console.WriteLine("Not found."));
-    
-0
 </code></pre>
                 </section>
             </section>
-            
+
+
             <section>
                 <section>
+                    <h2>Immutable Performance</h2>
+                </section>
+                <section data-transition="fade">
+                    <img src="img/immutability_bloat.png" />
+                </section>
+                <section data-transition="fade">
+                    <img src="img/immutability_lean.png" />
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Pattern Matching</h2>
+                    <p><i>Handling data with a safety net.</i></p>
+                </section>
+                <section>
                     <h2>The Hanging default:</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 public enum StarRating
 { Five, Four, Three, Two, One }
 
@@ -464,7 +588,7 @@ Console.WriteLine(string.Format("Commission: {0}", commission));
                 </section>
                 <section>
                     <h2>Discriminated Unions</h2>
-<pre><code class="fs" data-trim contenteditable>
+                    <pre><code class="fs" data-trim contenteditable>
 type StarRating =
         | One | Two | Three | Four | Five 
 
@@ -476,7 +600,7 @@ let commission perNight starRating =
     
 printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
 </code></pre>
-<pre><code data-trim contenteditable>
+                    <pre><code data-trim contenteditable>
 $ fsi --warnaserror 3.2_discrim_unions.fsx
 3.2_discrim_unions.fsx(5,11): error FS0025: Incomplete pattern matches on this expression. 
 For example, the value 'One' may indicate a case not covered by the pattern(s).
@@ -484,7 +608,7 @@ For example, the value 'One' may indicate a case not covered by the pattern(s).
                 </section>
                 <section>
                     <h2>Free Equality</h2>
-<pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
+                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
 type StarRating =
         | One | Two | Three | Four | Five 
         
@@ -507,11 +631,15 @@ printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
 </code></pre>
                 </section>
             </section>
-            
+
             <section>
                 <section>
-                    <h2>Bill Pay Dependencies</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+                    <h2>Getting the value from F#unctional</h2>
+                    <p><i>When in a .Net shop</i></p>
+                </section>
+                <section>
+                    <h3>Boostrapping the example</h3>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 using System;
 
 public enum PaymentType
@@ -533,8 +661,8 @@ public interface IBillProcessor
 </code></pre>
                 </section>
                 <section>
-                    <h2>Existing Flow</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+                    <h4>Existing Flow</h4>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 #r "6.1_BillPay.dll"
 
 public class BillProcessor : IBillProcessor
@@ -557,8 +685,8 @@ billProcessor.PayBill(
 </code></pre>
                 </section>
                 <section>
-                    <h2>Implementing a C# Interface</h2>
-<pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
+                    <h4>Implementing a C# Interface in F#</h4>
+                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
 module ReplacementBillPayProcessors
 #r "6.1_BillPay.dll"
 
@@ -580,8 +708,8 @@ type BetterBillProcessor() =
 </code></pre>
                 </section>
                 <section>
-                    <h2>Using the F# Implementation from C#</h2>
-<pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
+                    <h4>Using the F# Implementation from C#</h4>
+                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 #r "6.3_BillPayFs.dll"
 
 IBillProcessor billProcessor = 
@@ -598,333 +726,47 @@ billProcessor.PayBill(
 </code></pre>
                 </section>
             </section>
-
-            <!-- Example of nested vertical slides -->
+            
             <section>
                 <section>
-                    <h2>Vertical Slides</h2>
-                    <p>Slides can be nested inside of each other.</p>
-                    <p>Use the <em>Space</em> key to navigate through all slides.</p>
-                    <br>
-                    <a href="#" class="navigate-down">
-                        <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-                    </a>
+                    <h3>Canned Challenge</h3>
+                    <ul>
+                        <li>Take an int n</li>
+                        <li>Take x more ints, printing each n-times</li>
+                    </ul>
                 </section>
                 <section>
-                    <h2>Basement Level 1</h2>
-                    <p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+                    <img src="img/challenge1_sample.PNG" />
                 </section>
                 <section>
-                    <h2>Basement Level 2</h2>
-                    <p>That's it, time to go back up.</p>
-                    <br>
-                    <a href="#/2">
-                        <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-                    </a>
+                    <h5>1 of 6</h5>
+                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
+module ReplacementBillPayProcessors
+#r "6.1_BillPay.dll"
+
+type BetterBillProcessor() =
+    let calculateTax paymentMethod paymentAmount = 
+        match paymentMethod with
+        | PaymentType.Chickens -> paymentAmount * 1.17M
+        | PaymentType.Mastercard
+        | PaymentType.Visa
+        | PaymentType.Cash -> paymentAmount * 1.05M
+
+    interface IBillProcessor with
+        member this.PayBill(id, bill) =
+            let taxedAmount = calculateTax bill.TypeOfPayment bill.Amount
+        
+            printfn 
+                "Paying bill in %d in F#, paid with %A, in the amount of $%.2f on %A." 
+                id bill.TypeOfPayment taxedAmount bill.DatePaid
+</code></pre>
                 </section>
             </section>
 
             <section>
-                <h2>Slides</h2>
-                <p>
-                    Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at
-                    <a href="http://slides.com" target="_blank">http://slides.com</a>.
-                </p>
+                <h2>Thank you.</h2>
             </section>
 
-            <section>
-                <h2>Point of View</h2>
-                <p>
-                    Press <strong>ESC</strong> to enter the slide overview.
-                </p>
-                <p>
-                    Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>.
-                    Alt + click anywhere to zoom back out.
-                </p>
-            </section>
-
-            <section>
-                <h2>Touch Optimized</h2>
-                <p>
-                    Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-                </p>
-            </section>
-
-            <section data-markdown>
-                <script type="text/template">
-                    ## Markdown support Write content using inline or external Markdown. Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-                    ```
-                    <section data-markdown>
-                        ## Markdown support Write content using inline or external Markdown. Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-                    </section>
-                    ```
-                </script>
-            </section>
-
-            <section>
-                <section id="fragments">
-                    <h2>Fragments</h2>
-                    <p>Hit the next arrow...</p>
-                    <p class="fragment">... to step through ...</p>
-                    <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-                    <aside class="notes">
-                        This slide has fragments which are also stepped through in the notes window.
-                    </aside>
-                </section>
-                <section>
-                    <h2>Fragment Styles</h2>
-                    <p>There's different types of fragments, like:</p>
-                    <p class="fragment grow">grow</p>
-                    <p class="fragment shrink">shrink</p>
-                    <p class="fragment fade-out">fade-out</p>
-                    <p class="fragment current-visible">current-visible</p>
-                    <p class="fragment highlight-red">highlight-red</p>
-                    <p class="fragment highlight-blue">highlight-blue</p>
-                </section>
-            </section>
-
-            <section id="transitions">
-                <h2>Transition Styles</h2>
-                <p>
-                    You can select from different transitions, like:
-                    <br>
-                    <a href="?transition=none#/transitions">None</a> -
-                    <a href="?transition=fade#/transitions">Fade</a> -
-                    <a href="?transition=slide#/transitions">Slide</a> -
-                    <a href="?transition=convex#/transitions">Convex</a> -
-                    <a href="?transition=concave#/transitions">Concave</a> -
-                    <a href="?transition=zoom#/transitions">Zoom</a>
-                </p>
-            </section>
-
-            <section id="themes">
-                <h2>Themes</h2>
-                <p>
-                    reveal.js comes with a few themes built in:
-                    <br>
-                    <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a>
-                    <br>
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a>                    -
-                    <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-                </p>
-            </section>
-
-            <section>
-                <section data-background="#dddddd">
-                    <h2>Slide Backgrounds</h2>
-                    <p>
-                        Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color
-                        formats are supported.
-                    </p>
-                    <a href="#" class="navigate-down">
-                        <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-                    </a>
-                </section>
-                <section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-                    <h2>Image Backgrounds</h2>
-                    <pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-                </section>
-                <section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat"
-                data-background-size="100px">
-                    <h2>Tiled Backgrounds</h2>
-                    <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-                </section>
-                <section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm"
-                data-background-color="#000000">
-                    <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-                        <h2>Video Backgrounds</h2>
-                        <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-                    </div>
-                </section>
-                <section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-                    <h2>... and GIFs!</h2>
-                </section>
-            </section>
-
-            <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-                <h2>Background Transitions</h2>
-                <p>
-                    Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-                </p>
-                <pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-            </section>
-
-            <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-                <h2>Background Transitions</h2>
-                <p>
-                    You can override background transitions per-slide.
-                </p>
-                <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-            </section>
-
-            <section>
-                <h2>Pretty Code</h2>
-                <pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-                <p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-            </section>
-
-            <section>
-                <h2>Marvelous List</h2>
-                <ul>
-                    <li>No order here</li>
-                    <li>Or here</li>
-                    <li>Or here</li>
-                    <li>Or here</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Fantastic Ordered List</h2>
-                <ol>
-                    <li>One is smaller than...</li>
-                    <li>Two is smaller than...</li>
-                    <li>Three!</li>
-                </ol>
-            </section>
-
-            <section>
-                <h2>Tabular Tables</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Value</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Apples</td>
-                            <td>$1</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>Lemonade</td>
-                            <td>$2</td>
-                            <td>18</td>
-                        </tr>
-                        <tr>
-                            <td>Bread</td>
-                            <td>$3</td>
-                            <td>2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section>
-                <h2>Clever Quotes</h2>
-                <p>
-                    These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-                </p>
-                <blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-                    &ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would reproduce
-                    the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-                </blockquote>
-            </section>
-
-            <section>
-                <h2>Intergalactic Interconnections</h2>
-                <p>
-                    You can link between slides internally,
-                    <a href="#/2/3">like this</a>.
-                </p>
-            </section>
-
-            <section>
-                <h2>Speaker View</h2>
-                <p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer,
-                    preview of the upcoming slide as well as your speaker notes.</p>
-                <p>Press the <em>S</em> key to try it out.</p>
-
-                <aside class="notes">
-                    Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes
-                    window (hit 's' on your keyboard).
-                </aside>
-            </section>
-
-            <section>
-                <h2>Export to PDF</h2>
-                <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's
-                    an example:</p>
-                <iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0"
-                marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen>
-                </iframe>
-            </section>
-
-            <section>
-                <h2>Global State</h2>
-                <p>
-                    Set <code>data-state="something"</code> on a slide and <code>"something"</code> will be added as a class
-                    to the document element when the slide is open. This lets you apply broader style changes, like switching
-                    the page background.
-                </p>
-            </section>
-
-            <section data-state="customevent">
-                <h2>State Events</h2>
-                <p>
-                    Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code>                    name.
-                </p>
-                <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-            </section>
-
-            <section>
-                <h2>Take a Moment</h2>
-                <p>
-                    Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting
-                    slides off the screen.
-                </p>
-            </section>
-
-            <section>
-                <h2>Much more</h2>
-                <ul>
-                    <li>Right-to-left support</li>
-                    <li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-                    <li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-                    <li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-                    <li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-                </ul>
-            </section>
-
-            <section style="text-align: left;">
-                <h1>THE END</h1>
-                <p>
-                    - <a href="http://slides.com">Try the online editor</a>
-                    <br> - <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-                </p>
-            </section>
 
         </div>
 
