@@ -109,13 +109,9 @@
                 <section>
                     <h2>F# is... Paradigm</h2>
                     <ul>
-                        <li>Immutable</li>
-                        <li>Higher-order Functions</li>
+                        <li>Immutability</li>
+                        <li>Terseness</li>
                         <li>Null-less</li>
-                        <li>Terse</li>
-                        <li>Whitespace Sensitive</li>
-                        <li>Single-Pass Enumeration</li>
-                        <li>Type Inferent</li>
                     </ul>
                 </section>
                 <section>
@@ -133,7 +129,6 @@
                         <li>C# Interop</li>
                         <li>Type Providers</li>
                         <li>Agents</li>
-                        <li>Distributed Computing</li>
                     </ul>
                 </section>
             </section>
@@ -141,19 +136,91 @@
             <section>
                 <section>
                     <h3>Stage 1: Foundation!</h3>
-                    <ul>
-                        <li>null-less: Absence of Absence</li>
-                        <li>let: Binding over Declaraction & Assignment</li>
-                        <li>Immutability: Your Values are Safe</li>
-                        <li>'|>': Sequential Cohesion that's easy on the eyes</li>
-                    </ul>
+                    <table>
+                        <tr><td>No nulls!</td><td><i>Absence of Absence</i></td></tr>
+                        <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Declaraction & Assignment</i></td></tr>
+                        <tr><td>Immutability</td><td><i>Your Values are Safe</i></td></tr>
+                        <tr><td><pre><code class="fs">val |> fun</code></pre></td><td><i>Sequential Cohesion</i></td></tr>
+                    </table>
                 </section>
                 <section>
-                    <h3>Stage 1: Getting part of the way there</h3>
-                    <ul>
-                        <li>Better ctors: An Ounce of Prevention</li>
-                        <li>readonly: Syntactic Intent</li>
-                    </ul>
+<pre><code class="fs">
+type Item = { Price: decimal }
+
+let withTax price = price * 1.14M; // price:decimal -> decimal
+
+let shirt = { Price = 10.00M }
+
+do shirt.Price
+|> withTax
+|> printfn "%.2f"
+
+</code></pre>
+                </section>
+                <section>
+<pre><code class="cs" style="max-height: 500px;">
+public class Item{
+    public decimal Price;
+    public decimal WithTax()
+    {
+        Price *= 1.14M;
+        return Price;
+    }
+}
+
+Item shirt;
+// Oops #1: shirt is null
+
+shirt = new Item(); 
+// Oops #2: shirt.Price is 0
+shirt.Price = 10.00M;
+
+var priceWithTax = shirt.WithTax();
+//Oops #3: shirt.Price has been changed to 11.40
+
+</code></pre>
+                </section>
+                <section>
+<pre><code class="cs" style="max-height: 500px">public class ImmutableItem
+{
+    private ImmutableItem(){}
+    private ImmutableItem(decimal price){ this.Price = price; }
+    
+    public readonly decimal Price;
+    
+    public static ImmutableItem Create(decimal price){
+        return new ImmutableItem(price);
+    }
+    
+    public decimal WithTax(){
+        //Price *= 1.14M; <-- A readonly field cannot be assigned to
+        return Price * 1.14M;
+    }
+}
+
+var shirt = ImmutableItem.Create(10.00M);
+var priceWithTax = shirt.WithTax();
+Console.WriteLine(priceWithTax);
+</code></pre>
+                </section>
+                <section>
+                    <h3>Stage 1: Conclusion</h3>
+                    <table style="width: 80%">
+                        <tr><td>Constructors</td><td><i>Lock 'em down</i></td></tr>
+                        <tr><td><pre><code class="fs">readonly</code></pre></td><td><i>Explicitly declare intent</i></td></tr>
+                    </table>
+<pre><code class="fs">
+type Item = { Price: decimal }
+
+let withTax price = price * 1.14M; // price:decimal -> decimal
+
+let shirt = { Price = 10.00M }
+
+do shirt.Price
+|> withTax
+|> printfn "%.2f"
+
+</code></pre>
                 </section>
             </section>
             
