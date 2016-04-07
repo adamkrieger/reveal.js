@@ -50,12 +50,20 @@
             <section>
                 <div id="titleslide">
                     <div id="sessionbanner">
-                        <img id="logo" src="img/PrDC_logo.png" />
-                        <span id="sessiontitle">F# Will Make You a Better .Net Developer</span>
+                        <div id="logo">
+                            <img src="img/PrDC_logo.png" />
+                        </div>
+                        <div id="sessiontitle">
+                            <span>F# WILL MAKE YOU A BETTER .NET DEVELOPER</span>
+                            <br />
+                            <br />
+                            <span>ADAM KRIEGER</span>
+                        </div>
                     </div>
-
-                    <span>SPONSORS</span>
-                    <img src="img/sponsors.png" />
+                    <div id="sponsors">
+                        <span>SPONSORS</span>
+                        <img src="img/sponsors.png" />
+                    </div>
                 </div>
             </section>
             <section>
@@ -101,41 +109,22 @@
 
             <section>
                 <section>
-                    <h2>F# in Three Words</h2>
-                    <p>
-                        <i>Which all, ironically, begin with 'P'</i>
-                    </p>
+                    <h2>Why is it 'Better'?</h2>
+                    <p>Types -> Enhanced Safety</p>
+                    <p>Funcs -> Roll-Forward Flow</p>
+                    <p>.Net  -> Pragmatic Leverage</p>
                 </section>
-                <section>
-                    <h2>F# is... Paradigm</h2>
-                    <ul>
-                        <li>Immutability</li>
-                        <li>Terseness</li>
-                        <li>Null-less</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>F# is... Power</h2>
-                    <ul>
-                        <li>Type Safety</li>
-                        <li>Pattern Matching</li>
-                        <li>Monad Integration</li>
-                        <li>Lisping</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>F# is... Pragmatism</h2>
-                    <ul>
-                        <li>C# Interop</li>
-                        <li>Type Providers</li>
-                        <li>Agents</li>
-                    </ul>
+            </section>
+            
+            <section>
+                <section data-transition="fade">
+                    <img src="img/feedbackloop.png"/>
                 </section>
             </section>
             
             <section>
                 <section>
-                    <h3>Stage 1: Foundation!</h3>
+                    <h3>Foundation</h3>
                     <table>
                         <tr><td>No nulls!</td><td><i>Absence of Absence</i></td></tr>
                         <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Declaraction & Assignment</i></td></tr>
@@ -144,6 +133,7 @@
                     </table>
                 </section>
                 <section>
+                    <h5>Foundation</h5>
 <pre><code class="fs">
 type Item = { Price: decimal }
 
@@ -158,6 +148,7 @@ do shirt.Price
 </code></pre>
                 </section>
                 <section>
+                    <h5>Foundation: Error-prone C#</h5>
 <pre><code class="cs" style="max-height: 500px;">
 public class Item{
     public decimal Price;
@@ -181,6 +172,7 @@ var priceWithTax = shirt.WithTax();
 </code></pre>
                 </section>
                 <section>
+                    <h5>Foundation: Safe-ish C#</h5>
 <pre><code class="cs" style="max-height: 500px">public class ImmutableItem
 {
     private ImmutableItem(){}
@@ -204,13 +196,12 @@ Console.WriteLine(priceWithTax);
 </code></pre>
                 </section>
                 <section>
-                    <h3>Stage 1: Conclusion</h3>
+                    <h5>Foundation: Conclusion</h5>
                     <table style="width: 80%">
                         <tr><td>Constructors</td><td><i>Lock 'em down</i></td></tr>
                         <tr><td><pre><code class="fs">readonly</code></pre></td><td><i>Explicitly declare intent</i></td></tr>
                     </table>
-<pre><code class="fs">
-type Item = { Price: decimal }
+<pre><code class="fs">type Item = { Price: decimal }
 
 let withTax price = price * 1.14M; // price:decimal -> decimal
 
@@ -219,24 +210,92 @@ let shirt = { Price = 10.00M }
 do shirt.Price
 |> withTax
 |> printfn "%.2f"
-
 </code></pre>
                 </section>
             </section>
             
             <section>
                 <section>
-                    <h3>Stage 2: Form!</h3>
+                    <h3>Form</h3>
+                    <table style="width: 90%">
+                        <tr><td>Variety</td><td><i>The spice of Life!</i></td></tr>
+                        <tr><td>Decomposition</td><td><i>Good for the environment!</i></td></tr>
+                        <tr><td>Inference</td><td><i>The compiler comes to you</i></td></tr>
+                        <tr><td>Currying</td><td><i>Enough spice, already!</i></td></tr>
+                    </table>
+                </section>
+                
+                <section>
+                    <h5>Form: Composition/Decomposition</h5>
+<pre><code class="fs">
+let point = 4, 5
+let x, y = point
+
+type person = { FirstName: string; LastName: string }
+let amySmith = { FirstName = "Amy"; LastName = "Smith" }
+let { LastName = smith } = amySmith
+
+</code></pre>
+                    <i>No need for GetHashCode() or Equals()!</i>
+                </section>
+                
+                <section>
+                    <h3>Variety</h3>
                     <table style="width: 80%">
-                        <tr><td>Unions</td><td><i>Explicitly and Exclusive</i></td></tr>
-                        <tr><td><pre><code class="fs">readonly</code></pre></td><td><i>Explicitly declare intent</i></td></tr>
+                        <tr><td>Tuples</td><td><i>Light as a feather</i></td></tr>
+                        <tr><td>Records</td><td><i>Immutable Databags</i></td></tr>
+                        <tr><td>Unions</td><td><i>This, That, or the Other</i></td></tr>
+                        <tr><td>Lists</td><td><i>Collections, redefined</i></td></tr>
+                        <tr><td>Functions</td><td><i>Automatically curried</i></td></tr>
+                    </table>
+                </section>
+                
+                <section>
+                    <h5>Form: Leveraging Safety</h5>
+<pre><code class="fs" style="max-height: 500px">type Username     = string
+type Password     = Password of string
+type Server       = URL of string | IP of byte[]
+type HttpResponse = Response of int * string
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: Leveraging Safety</h5>
+<pre><code class="fs" style="max-height: 500px">type Username     = string
+type Password     = Password of string
+type Server       = URL of string | IP of byte[]
+type HttpResponse = Response of int * string
+    
+let sendSecureMessageToServer (name:Username) (pword:Password) 
+                              (dest:Server) message =
+    Response (200, "Delivered Successfully")
+     
+let password = Password "12345"
+let url = URL "https://localhost:9999/api/messages"
+
+let sendMessage = sendSecureMessageToServer "johnny" password url 
+do sendMessage "Oh hi, Mark."      |> ignore
+do sendMessage "I have a problem." |> ignore
+
+let sendNumber = sendSecureMessageToServer "mark" password url
+do sendNumber 9001                 |> ignore
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: Conclusion</h5>
+                    <table>
+                        <tr><td>Types</td><td><i>Declare intent</i></td></tr>
+                        <tr><td>Composition</td><td><i>Over construction</i></td></tr>
+                        <tr><td>Safety</td><td><i>Lint the danger</i></td></tr>
+                        <tr><td>Currying</td><td><i>Without heavy DSLs</i></td></tr>
                     </table>
                 </section>
             </section>
             
             <section>
                 <section>
-                    <h3>Stage 3: Functions!</h3>
+                    <h3>Functions!</h3>
                     <ul>
                         <li>fun: Lame joke alert.</li>
                         <li>Pattern Matching: Declarative control flow</li>
@@ -244,8 +303,276 @@ do shirt.Price
                         <li>'>>': Effortless composition</li>
                     </ul>
                 </section>
+                
                 <section>
-                    <h3>Stage 3: Conclusion</h3>
+                    <h5>Form: Safety in 7 Lines</h5>
+<pre><code class="fs" style="max-height: 500px">let getName =
+    function 
+    | Some cheese -> printfn "%s" cheese.Name
+    | None        -> printfn "%s" "Completely out."
+    
+let pickCheese id =
+    List.tryFind (fun item -> item.Id = id)
+    >> getName
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: Unsafe C# (11 Lines)</h5>
+<pre><code class="cs" style="max-height: 500px">public Cheese GetCheese(Cheese[] cheeses, string id){
+    Cheese foundCheese = null;
+    
+    foreach (var cheese in cheeses){
+        if(cheese.id == id){
+            foundCheese = cheese;
+        }
+    }
+    
+    return foundCheese;
+}
+
+var cheese = GetCheese(cheeses, "rwin");
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: Safe C# (27 Lines)</h5>
+<pre><code class="cs" style="max-height: 500px">public bool GetCheese(Cheese[] cheeses, string id,
+    out Cheese notAtAllObviousActualValue){
+        
+    foreach (var cheese in cheeses){
+        if(cheese.id == id){
+            notAtAllObviousActualValue = cheese;
+            return true;
+        }
+    }
+    notAtAllObviousActualValue = null;
+    return false;
+}
+
+string outputMessage = string.Empty;
+Cheese cheese = null;
+
+if(GetCheese(cheeses, "none", out cheese)){
+    outputMessage = cheese.name;    
+}
+else{ outputMessage = "Could not find cheese."; }
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: A C# Maybe</h5>
+<pre><code class="cs" style="max-height: 500px">using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Maybe&lt;T>
+{
+    public readonly T Value;
+    public readonly bool Is; 
+    
+    private Maybe(){}
+    private Maybe(bool isSome, T value){
+        Is = isSome;
+        Value = value;
+    }
+    
+    public static Maybe&lt;T> Some(T value){
+        return new Maybe&lt;T>(true, value);
+    }
+    
+    public static Maybe&lt;T> None(){
+        return new Maybe&lt;T>();
+    }
+    
+    public Maybe&lt;T> IfIs(Action&lt;T> action){
+        if(Is){
+            action(Value);
+        }
+        return this;
+    }
+    
+    public Maybe&lt;T> IfIsNot(Action action){
+        if(!Is){
+            action();
+        }
+        return this;
+    }
+}
+
+public static class EnumExt
+{
+    public static Maybe&lt;T> TrySingle&lt;T>(
+        this IEnumerable&lt;T> collection, Func&lt;T, bool> pred)
+    {
+        try{
+            return Maybe&lt;T>.Some(collection.Single(pred));
+        }
+        catch(InvalidOperationException){
+            return Maybe&lt;T>.None();
+        }
+    }
+}
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Form: Safe C# (4+50 Lines)</h5>
+<pre><code class="cs" style="max-height: 500px">cheeses
+    .TrySingle(cheese => cheese.id == "ched")
+    .IfIs(a => Console.WriteLine(a.name))
+    .IfIsNot(() => Console.WriteLine("Not found."));
+</code></pre>
+                </section>
+
+                
+                <section>
+                    <h3>Functions: Conclusion</h3>
+                    <ul>
+                        <li>Stop using 'out' parameters</li>
+                        <li>Build your own Maybe</li>
+                        <li>Enhance LINQ/Streams</li>
+                    </ul>
+<pre><code class="fs" style="max-height: 500px">let getName =
+    function 
+    | Some cheese -> printfn "%s" cheese.Name
+    | None        -> printfn "%s" "Completely out."
+    
+let pickCheese id =
+    List.tryFind (fun item -> item.Id = id)
+    >> getName
+</code></pre>
+                </section>
+            </section>
+            
+            <section>
+                <section data-transition="fade">
+                    <img src="img/feedbackloop.png"/>
+                </section>
+                
+                <section data-transition="fade">
+                    <img src="img/feedbackloop_accel.png"/>
+                </section>
+            </section>
+
+            
+            <section>
+                <section>
+                    <h3>Railway-oriented Programming!</h3>
+                    <ul>
+                        <li>bind: Cohesive Complexity</li>
+                        <li>choice: What?! Another Monad?</li>
+                        <li>option: Practical Monads</li>
+                        <li>'>>': Effortless composition</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h5>Plug-in Validation</h5>
+<pre><code class="fs" style="max-height: 500px">input
+|> idNotZero
+|> bind actuallyGoingSomewhere
+|> bind addPlanet
+|> function
+    | Success booking -> printfn "Have fun in %s!" booking.Destination
+    | Failure error -> printfn "%s" error
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Start with one</h5>
+<pre><code class="fs" style="max-height: 500px">type Booking = { Id: int;
+                 Destination: string }
+    
+let idNotZero booking = 
+    match booking.Id with
+    | 0 -> None
+    | id -> Some booking
+    
+let input = {
+        Id = 2;
+        Destination = "France"
+    }
+
+input
+|> idNotZero
+|> function
+    | Some booking -> printfn "Have fun in %s!" booking.Destination
+    | None -> printfn "%s" "Oops!"
+</code></pre>
+                </section>
+                
+                <section>
+                    <h5>Add another</h5>
+<pre><code class="fs" style="max-height: 500px">let idNotZero booking = 
+    match booking.Id with
+    | 0 -> None
+    | id -> Some booking
+    
+let actuallyGoingSomewhere =
+    function
+    | None -> None
+    | Some booking ->
+        booking.Source = booking.Destination
+        |> function
+            | true -> None
+            | false -> Some booking  
+</code></pre>
+                    <i>But design for N</i>
+                </section>
+                
+                <section>
+                    <h5>Option.bind</h5>
+<pre><code class="fs" style="max-height: 500px">let idNotZero booking = 
+    match booking.Id with
+    | 0 -> None
+    | id -> Some booking
+    
+let actuallyGoingSomewhere booking =
+    booking.Source = booking.Destination
+    |> function
+       | true -> None
+       | false -> Some booking
+       
+input
+|> idNotZero
+|> Option.bind actuallyGoingSomewhere
+|> Option.bind planetExists
+|> function
+    | Some booking -> printfn "Have fun in %s!" booking.Destination
+    | None -> printfn "%s" "Oops!"
+</code></pre>
+                    <i>But which one failed?</i>
+                </section>
+                
+                <section>
+                    <h5>Custom 'switcher'</h5>
+<pre><code class="fs" style="max-height: 500px">type Result<'TSuccess, 'TFailure> =
+    | Success of 'TSuccess
+    | Failure of 'TFailure 
+
+let bind f = fun eitherInput ->
+                match eitherInput with
+                | Success x -> f x
+                | Failure x -> Failure x
+        
+let idNotZero booking = match booking.Id with
+                        | 0 -> Failure "Oops, the id is zero."
+                        | id -> Success booking
+    
+input
+|> idNotZero
+|> bind actuallyGoingSomewhere
+|> bind addPlanet
+|> function
+    | Success booking -> printfn "Have fun in %s!" booking.Destination
+    | Failure error -> printfn "%s" error
+</code></pre>
+                </section>
+                
+                <section>
+                    <h3>Railways: Conclusion</h3>
                     <ul>
                         <li>Stop using 'out' parameters</li>
                         <li>Build your own Maybe</li>
@@ -256,30 +583,36 @@ do shirt.Price
             </section>
             
             <section>
-                <section>
-                    <h3>Stage 4: Frailway-oriented Programming!</h3>
-                    <ul>
-                        <li>bind: Cohesive Complexity</li>
-                        <li>choice: What?! Another Monad?</li>
-                        <li>option: Practical Monads</li>
-                        <li>'>>': Effortless composition</li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Stage 4: Conclusion</h3>
-                    <ul>
-                        <li>Stop using 'out' parameters</li>
-                        <li>Build your own Maybe</li>
-                        <li>Enhance LINQ/Streams</li>
-                        <li>Generic Composition instead of 'DSL'</li>
-                    </ul>
-                </section>
+                <h2>Thank you.</h2>
             </section>
 
             <section>
                 <h2>Disclaimer</h2>
                 <p>The addition of more tools and code can often make up for C#'s lack of paradigm...</p>
                 <p><i>but then you'd have to maintain those tools.</i></p>
+                
+                
+                                <section>
+                    <h5>Form: An Immutable Quicksort</h5>
+<pre><code class="fs" style="max-height: 500px">let rec sortIter lt eq gt list pivot =
+     match list with
+     | [] -> lt, eq, gt
+     | head::tail when head < pivot -> 
+                                sortIter (head::lt) eq gt tail pivot
+                                
+     | head::tail when head > pivot -> 
+                                sortIter lt eq (head::gt) tail pivot
+                                
+     | head::tail -> 
+                                sortIter lt (head::eq) gt tail pivot
+            
+let rec qsort list = 
+    match list with
+    | []          -> []
+    | pivot::tail -> let lt, eq, gt = sortIter [] [] [] tail pivot
+                     List.collect id [ qsort lt; [pivot]; eq; qsort gt ]
+</code></pre>
+                </section>
             </section>
 
 
