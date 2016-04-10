@@ -41,6 +41,10 @@
 <body>
 
     <img id="aklogo" src="img/aklogo.png" />
+    <div id="akinfo">
+        <p><b>www.adamkrieger.ca</b><br /></p>
+        <p><b><i class="fa fa-twitter"></i> @adamkrieger</b></p>
+    </div>
     <img id="onlinelogo" src="img/Online_logo.png" />
 
     <div class="reveal">
@@ -73,16 +77,10 @@
                 <div style="width: 300px; padding-left: 100px; margin: auto">
                     <p style="text-align: left">
                         <small>by Adam Krieger</small>
-                        <br />
-                        <small><i class="fa fa-twitter"></i> @adamkrieger</small>
-                        <br />
-                        <small><i class="fa fa-chrome"></i> www.adamkrieger.ca</small>
-                        <br />
-                        <small><i class="fa fa-github"></i> adamkrieger</small>
-                        <br />
                     </p>
                 </div>
-                <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
+                <i class="fa fa-chrome"></i> <a href="https://www.adamkrieger.ca/talks/fsbetter">https://www.adamkrieger.ca/talks/fsbetter</a><br />
+                <i class="fa fa-github"></i> <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
             </section>
 
             <section>
@@ -92,7 +90,7 @@
                         <tr>
                             <td>
                                 <h2 style="text-align: center">Depth</h2>
-                                <img src="img/Csharp_nutshell.png" height="400px" />
+                                <img src="img/Csharp_nutshell_small.png" height="400px" />
                             </td>
                             <td>
                                 <p>vs</p>
@@ -109,7 +107,7 @@
 
             <section>
                 <section>
-                    <h2>Why is it 'Better'?</h2>
+                    <h2>What is Better?</h2>
                     <p>Types -> Enhanced Safety</p>
                     <p>Funcs -> Roll-Forward Flow</p>
                     <p>.Net  -> Pragmatic Leverage</p>
@@ -117,8 +115,11 @@
             </section>
             
             <section>
-                <section data-transition="fade">
+                <section data-transition="concave">
                     <img src="img/feedbackloop.png"/>
+                </section>
+                <section data-transition="concave">
+                    <img src="img/feedbackloop_zoomout.png"/>
                 </section>
             </section>
             
@@ -133,7 +134,7 @@
                     </table>
                 </section>
                 <section>
-                    <h5>Foundation</h5>
+                    <h5>Foundation: Basics</h5>
 <pre><code class="fs">
 type Item = { Price: decimal }
 
@@ -312,7 +313,7 @@ do sendNumber 9001                 |> ignore
                 </section>
                 
                 <section>
-                    <h5>Func: F# Safety in 7 Lines</h5>
+                    <h5>Func: F# Safety in 6 Lines</h5>
 <pre><code class="fs" style="max-height: 500px">let getName input =
     match input with | Some cheese -> printfn "%s" cheese.Name
                      | None        -> printfn "%s" "Completely out."
@@ -435,10 +436,10 @@ public static class EnumExt
                 
                 <section>
                     <h5 style="text-align: left">Better C# Functions</h5>
-                    <table style="width: 90%">
-                        <tr><td>Get 'out', out</td><td><i>Just Stop!</i></td></tr>
+                    <table style="width: 95%">
+                        <tr><td>Get 'out', out</td><td><i>Stop the confusion</i></td></tr>
                         <tr><td><pre><code class="cs">Maybe&lt;T></code></pre></td><td><i>Build your own reusable control.</i></td></tr>
-                        <tr><td><pre><code class="cs">TrySingle().IfIs()</code></pre></td><td><i>Extend LINQ Genericallly</i></td></tr>
+                        <tr><td><pre><code class="cs">TrySingle().IfIs()</code></pre></td><td><i>Extend LINQ Generically</i></td></tr>
                     </table>
                     <h5 style="text-align: left">F# Functions</h5>
 <pre><code class="fs" style="max-height: 500px">let getName = function 
@@ -465,12 +466,11 @@ let pickCheese id = List.tryFind (fun item -> item.Id = id)
             <section>
                 <section>
                     <h3>Railway-oriented Programming!</h3>
-                    <ul>
-                        <li>bind: Cohesive Complexity</li>
-                        <li>choice: What?! Another Monad?</li>
-                        <li>option: Practical Monads</li>
-                        <li>'>>': Effortless composition</li>
-                    </ul>
+                    <table style="width: 90%">
+                        <tr><td><pre><code class="fs">bind</code></pre></td><td><i>Lightweight coupling</i></td></tr>
+                        <tr><td><pre><code class="fs">choice</code></pre></td><td><i>What?! Another Monad?</i></td></tr>
+                        <tr><td>Roll Forward</td><td><i>Ride the rails</i></td></tr>
+                    </table>
                 </section>
                 
                 <section>
@@ -577,36 +577,14 @@ input
                 </section>
                 
             </section>
-            
-            <section>
-                <h2>Thank you!</h2>
-<pre><code class="fs" style="max-height: 500px">let rec sortIter lt eq gt list pivot =
-     match list with
-     | [] -> lt, eq, gt
-     | head::tail when head < pivot -> 
-                                sortIter (head::lt) eq gt tail pivot
-                                
-     | head::tail when head > pivot -> 
-                                sortIter lt eq (head::gt) tail pivot
-                                
-     | head::tail -> 
-                                sortIter lt (head::eq) gt tail pivot
-            
-let rec qsort list = 
-    match list with
-    | []          -> []
-    | pivot::tail -> let lt, eq, gt = sortIter [] [] [] tail pivot
-                     List.collect id [ qsort lt; [pivot]; eq; qsort gt ]
-</code></pre>
-            </section>
 
             <section>
                 <section>
-                    <h2>Getting the value from F#unctional</h2>
-                    <p><i>When in a .Net shop</i></p>
+                    <h2>C# / F# Interop</h2>
+                    <p><i>Getting value without rewrites</i></p>
                 </section>
                 <section>
-                    <h3>Boostrapping the example</h3>
+                    <h3>Bootstrapping the example</h3>
                     <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
 using System;
 
@@ -696,46 +674,26 @@ billProcessor.PayBill(
             </section>
             
             <section>
-                <section>
-                    <h3>Canned Challenge</h3>
-                    <ul>
-                        <li>Take an int n</li>
-                        <li>Take x more ints, printing each n-times</li>
-                    </ul>
-                </section>
-                <section>
-                    <img src="img/challenge1_sample.PNG" />
-                </section>
-                <section>
-                    <h5>1 of 6</h5>
-                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
-module ReplacementBillPayProcessors
-#r "6.1_BillPay.dll"
-
-type BetterBillProcessor() =
-    let calculateTax paymentMethod paymentAmount = 
-        match paymentMethod with
-        | PaymentType.Chickens -> paymentAmount * 1.17M
-        | PaymentType.Mastercard
-        | PaymentType.Visa
-        | PaymentType.Cash -> paymentAmount * 1.05M
-
-    interface IBillProcessor with
-        member this.PayBill(id, bill) =
-            let taxedAmount = calculateTax bill.TypeOfPayment bill.Amount
-        
-            printfn 
-                "Paying bill in %d in F#, paid with %A, in the amount of $%.2f on %A." 
-                id bill.TypeOfPayment taxedAmount bill.DatePaid
+                <h2>Thank you!</h2>
+<pre><code class="fs" style="max-height: 500px">let rec sortIter lt eq gt list pivot =
+     match list with
+     | [] -> lt, eq, gt
+     | head::tail when head < pivot -> 
+                                sortIter (head::lt) eq gt tail pivot
+                                
+     | head::tail when head > pivot -> 
+                                sortIter lt eq (head::gt) tail pivot
+                                
+     | head::tail -> 
+                                sortIter lt (head::eq) gt tail pivot
+            
+let rec qsort list = 
+    match list with
+    | []          -> []
+    | pivot::tail -> let lt, eq, gt = sortIter [] [] [] tail pivot
+                     List.collect id [ qsort lt; [pivot]; eq; qsort gt ]
 </code></pre>
-                </section>
             </section>
-
-            <section>
-                <h2>Thank you.</h2>
-            </section>
-
-
         </div>
 
     </div>
@@ -759,7 +717,7 @@ type BetterBillProcessor() =
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
