@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/theme/black_ak.css" id="theme">
 
 
     <!-- Code syntax highlighting -->
@@ -125,11 +125,11 @@
             <section>
                 <section>
                     <h3>Foundation</h3>
-                    <table>
+                    <table style="width: 100%">
                         <tr><td>No nulls!</td><td><i>Absence of Absence</i></td></tr>
-                        <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Declaraction & Assignment</i></td></tr>
-                        <tr><td>Immutability</td><td><i>Your Values are Safe</i></td></tr>
-                        <tr><td><pre><code class="fs">val |> fun</code></pre></td><td><i>Sequential Cohesion</i></td></tr>
+                        <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Assignment</i></td></tr>
+                        <tr><td>Immutability</td><td><i>Write-once</i></td></tr>
+                        <tr><td><pre><code class="fs">data |> func</code></pre></td><td><i>Sequential Cohesion</i></td></tr>
                     </table>
                 </section>
                 <section>
@@ -196,11 +196,12 @@ Console.WriteLine(priceWithTax);
 </code></pre>
                 </section>
                 <section>
-                    <h5>Foundation: Conclusion</h5>
+                    <h5 style="text-align: left">For Better C#</h5>
                     <table style="width: 80%">
-                        <tr><td>Constructors</td><td><i>Lock 'em down</i></td></tr>
-                        <tr><td><pre><code class="fs">readonly</code></pre></td><td><i>Explicitly declare intent</i></td></tr>
+                        <tr><td><pre><code class="cs">private</code></pre></td><td><i>Lock down constructors</i></td></tr>
+                        <tr><td><pre><code class="cs">readonly</code></pre></td><td><i>Write-once properties</i></td></tr>
                     </table>
+                    <h5 style="text-align: left">Or Use F#</h5>
 <pre><code class="fs">type Item = { Price: decimal }
 
 let withTax price = price * 1.14M; // price:decimal -> decimal
@@ -216,7 +217,7 @@ do shirt.Price
             
             <section>
                 <section>
-                    <h3>Form</h3>
+                    <h3>Form (Types)</h3>
                     <table style="width: 90%">
                         <tr><td>Variety</td><td><i>The spice of Life!</i></td></tr>
                         <tr><td>Decomposition</td><td><i>Good for the environment!</i></td></tr>
@@ -226,21 +227,21 @@ do shirt.Price
                 </section>
                 
                 <section>
-                    <h5>Form: Composition/Decomposition</h5>
-<pre><code class="fs">
+                    <h5>Form: Composition / Decomposition</h5>
+<pre><code class="fs">// Tuple without Tuple&lt;int,int>
 let point = 4, 5
 let x, y = point
 
+// Record
 type person = { FirstName: string; LastName: string }
 let amySmith = { FirstName = "Amy"; LastName = "Smith" }
 let { LastName = smith } = amySmith
-
 </code></pre>
                     <i>No need for GetHashCode() or Equals()!</i>
                 </section>
                 
                 <section>
-                    <h3>Variety</h3>
+                    <h3>Form: Variety</h3>
                     <table style="width: 80%">
                         <tr><td>Tuples</td><td><i>Light as a feather</i></td></tr>
                         <tr><td>Records</td><td><i>Immutable Databags</i></td></tr>
@@ -251,16 +252,20 @@ let { LastName = smith } = amySmith
                 </section>
                 
                 <section>
-                    <h5>Form: Leveraging Safety</h5>
-<pre><code class="fs" style="max-height: 500px">type Username     = string
+                    <h5>Form: Unions</h5>
+<pre><code class="fs" style="max-height: 500px">// Alias
+type Username     = string
+// Single-choice Union
 type Password     = Password of string
+// Two-choice Union
 type Server       = URL of string | IP of byte[]
+// Single-choice Union with a Tuple type
 type HttpResponse = Response of int * string
 </code></pre>
                 </section>
                 
                 <section>
-                    <h5>Form: Leveraging Safety</h5>
+                    <h5>Form: Inferent Typing</h5>
 <pre><code class="fs" style="max-height: 500px">type Username     = string
 type Password     = Password of string
 type Server       = URL of string | IP of byte[]
@@ -283,8 +288,10 @@ do sendNumber 9001                 |> ignore
                 </section>
                 
                 <section>
-                    <h5>Form: Conclusion</h5>
-                    <table>
+                    <h5 style="text-align: left">C# Types</h5>
+                    <i>Everything's an Object!</i>
+                    <h5 style="text-align: left">F# Types</h5>
+                    <table style="width: 90%">
                         <tr><td>Types</td><td><i>Declare intent</i></td></tr>
                         <tr><td>Composition</td><td><i>Over construction</i></td></tr>
                         <tr><td>Safety</td><td><i>Lint the danger</i></td></tr>
@@ -296,20 +303,19 @@ do sendNumber 9001                 |> ignore
             <section>
                 <section>
                     <h3>Functions!</h3>
-                    <ul>
-                        <li>fun: Lame joke alert.</li>
-                        <li>Pattern Matching: Declarative control flow</li>
-                        <li>option: Practical Monads</li>
-                        <li>'>>': Effortless composition</li>
-                    </ul>
+                    <table style="width: 90%">
+                        <tr><td><pre><code class="fs">fun x = x + 2</code></pre></td><td><i>Lame joke alert.</i></td></tr>
+                        <tr><td>Pattern Matching</td><td><i>Ditch the switch</i></td></tr>
+                        <tr><td><pre><code class="fs">option 'a</code></pre></td><td><i>A friendly Monad</i></td></tr>
+                        <tr><td><pre><code class="fs">thisFunc >> thatFunc</code></pre></td><td><i>Snap functions together</i></td></tr>
+                    </table>
                 </section>
                 
                 <section>
-                    <h5>Form: Safety in 7 Lines</h5>
-<pre><code class="fs" style="max-height: 500px">let getName =
-    function 
-    | Some cheese -> printfn "%s" cheese.Name
-    | None        -> printfn "%s" "Completely out."
+                    <h5>Func: F# Safety in 7 Lines</h5>
+<pre><code class="fs" style="max-height: 500px">let getName input =
+    match input with | Some cheese -> printfn "%s" cheese.Name
+                     | None        -> printfn "%s" "Completely out."
     
 let pickCheese id =
     List.tryFind (fun item -> item.Id = id)
@@ -318,7 +324,7 @@ let pickCheese id =
                 </section>
                 
                 <section>
-                    <h5>Form: Unsafe C# (11 Lines)</h5>
+                    <h5>Func: Unsafe C# (11 Lines)</h5>
 <pre><code class="cs" style="max-height: 500px">public Cheese GetCheese(Cheese[] cheeses, string id){
     Cheese foundCheese = null;
     
@@ -336,7 +342,7 @@ var cheese = GetCheese(cheeses, "rwin");
                 </section>
                 
                 <section>
-                    <h5>Form: Safe C# (27 Lines)</h5>
+                    <h5>Func: Safe C# (27 Lines)</h5>
 <pre><code class="cs" style="max-height: 500px">public bool GetCheese(Cheese[] cheeses, string id,
     out Cheese notAtAllObviousActualValue){
         
@@ -361,7 +367,7 @@ else{ outputMessage = "Could not find cheese."; }
                 </section>
                 
                 <section>
-                    <h5>Form: A C# Maybe</h5>
+                    <h5>Func: A C# Maybe</h5>
 <pre><code class="cs" style="max-height: 500px">using System;
 using System.Linq;
 using System.Collections;
@@ -418,7 +424,7 @@ public static class EnumExt
                 </section>
                 
                 <section>
-                    <h5>Form: Safe C# (4+50 Lines)</h5>
+                    <h5>Func: Safe C# (4+50 Lines)</h5>
 <pre><code class="cs" style="max-height: 500px">cheeses
     .TrySingle(cheese => cheese.id == "ched")
     .IfIs(a => Console.WriteLine(a.name))
@@ -428,20 +434,19 @@ public static class EnumExt
 
                 
                 <section>
-                    <h3>Functions: Conclusion</h3>
-                    <ul>
-                        <li>Stop using 'out' parameters</li>
-                        <li>Build your own Maybe</li>
-                        <li>Enhance LINQ/Streams</li>
-                    </ul>
-<pre><code class="fs" style="max-height: 500px">let getName =
-    function 
-    | Some cheese -> printfn "%s" cheese.Name
-    | None        -> printfn "%s" "Completely out."
+                    <h5 style="text-align: left">Better C# Functions</h5>
+                    <table style="width: 90%">
+                        <tr><td>Get 'out', out</td><td><i>Just Stop!</i></td></tr>
+                        <tr><td><pre><code class="cs">Maybe&lt;T></code></pre></td><td><i>Build your own reusable control.</i></td></tr>
+                        <tr><td><pre><code class="cs">TrySingle().IfIs()</code></pre></td><td><i>Extend LINQ Genericallly</i></td></tr>
+                    </table>
+                    <h5 style="text-align: left">F# Functions</h5>
+<pre><code class="fs" style="max-height: 500px">let getName = function 
+              | Some cheese -> printfn "%s" cheese.Name
+              | None        -> printfn "%s" "Completely out."
     
-let pickCheese id =
-    List.tryFind (fun item -> item.Id = id)
-    >> getName
+let pickCheese id = List.tryFind (fun item -> item.Id = id)
+                    >> getName
 </code></pre>
                 </section>
             </section>
@@ -571,29 +576,10 @@ input
 </code></pre>
                 </section>
                 
-                <section>
-                    <h3>Railways: Conclusion</h3>
-                    <ul>
-                        <li>Stop using 'out' parameters</li>
-                        <li>Build your own Maybe</li>
-                        <li>Enhance LINQ/Streams</li>
-                        <li>Generic Composition instead of 'DSL'</li>
-                    </ul>
-                </section>
             </section>
             
             <section>
-                <h2>Thank you.</h2>
-            </section>
-
-            <section>
-                <h2>Disclaimer</h2>
-                <p>The addition of more tools and code can often make up for C#'s lack of paradigm...</p>
-                <p><i>but then you'd have to maintain those tools.</i></p>
-                
-                
-                                <section>
-                    <h5>Form: An Immutable Quicksort</h5>
+                <h2>Thank you!</h2>
 <pre><code class="fs" style="max-height: 500px">let rec sortIter lt eq gt list pivot =
      match list with
      | [] -> lt, eq, gt
@@ -612,425 +598,6 @@ let rec qsort list =
     | pivot::tail -> let lt, eq, gt = sortIter [] [] [] tail pivot
                      List.collect id [ qsort lt; [pivot]; eq; qsort gt ]
 </code></pre>
-                </section>
-            </section>
-
-
-            <!-- MUTABILITY / IMMUTABILITY -->
-            <section>
-                <section>
-                    <h2>The Mutability Problem</h2>
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability.png" />
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability2.png" />
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability3.png" />
-                </section>
-                <section data-transition="fade">
-                    <img src="img/mutability4.png" />
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h2>Mutability in C#</h2>
-                    <pre><code class="cs" data-trim contenteditable>
-var bucket = "Really Important Value";
-bucket = "Another Important Value";
-
-Console.WriteLine(bucket);
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ csi 1.1_mut.csx
-Another Important Value
-</code></pre>
-                </section>
-                <section>
-                    <h2>Immutability in F#</h2>
-                    <pre><code class="fs" data-trim contenteditable>
-let bucket = "Really Important Value"
-bucket = "Another Important Value"
-// let bucket = "Something else" <- Error: Duplicate definition
-
-let bucket2 = bucket = "Another Important Value"
-
-printfn "%s" bucket
-printfn "%A" bucket2
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ fsi 1.2_mut.fsx
-Really Important Value
-false
-</code></pre>
-                </section>
-                <section>
-                    <h2>Somewhat Immutable C#</h2>
-                    <pre><code class="cs" data-trim contenteditable>
-public class ImmutString
-{
-    public ImmutString(string value){
-        this.Value = value;
-    }
-    
-    public readonly string Value;
-}
-
-var bucket = new ImmutString("Really Important Value");
-// Error: Readonly field cannot be assigned to.
-// bucket.Value = "Another Important Value";
-
-Console.WriteLine(bucket.Value);
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ csi 1.3_mut_next.csx
-Really Important Value
-</code></pre>
-                </section>
-
-                <aside class="notes">
-                    Our initial C# example shows us how easy it is for values to change under our nose. F# makes every assignment immutable by
-                    default. (Overridable with the mut keyword). 'readonly' gets us closer, but C# will still allow the parent
-                    class assignment to be overwritten. In this case, F# shows us developer what we have to watch our for:
-                    values changing under our noses.
-                </aside>
-            </section>
-
-            <!-- Safe Programming -->
-            <section>
-                <section data-transition="fade">
-                    <h2>Defensive Programming</h2>
-                    <img src="img/fryisntsure.jpg" />
-                </section>
-                <section data-transition="fade">
-                    <h2>Excessive Scrutiny</h2>
-                    <img src="img/fryisntsure.jpg" />
-                </section>
-                <section>
-                    <h2>Unsafe Methods (15 lines)</h2>
-                    <pre><code class="cs" data-trim contenteditable>
-public Cheese GetCheese(Cheese[] cheeses, string id){
-    Cheese foundCheese = null;
-    
-    foreach (var cheese in cheeses){
-        if(cheese.id == id){
-            foundCheese = cheese;
-        }
-    }
-    
-    return foundCheese;
-}
-
-var cheese = GetCheese(cheeses, "rwin");
-
-Console.WriteLine(cheese.name);
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ csi 2.1_input.csx
-Red Windsor
-</code></pre>
-                </section>
-                <section>
-                    <h2>Safe Methods (24 lines)</h2>
-                    <pre><code class="cs" data-trim contenteditable>
-#load "0.1_Cheese.csx"
-//      Defensive
-public bool GetCheese(Cheese[] cheeses, string id,
-    out Cheese notAtAllObviousActualValue) { // Defensive
-        
-    foreach (var cheese in cheeses) {
-        if(cheese.id == id) {
-            notAtAllObviousActualValue = cheese;
-            return true; //Defensive
-        }
-    }
-    
-    notAtAllObviousActualValue = null;
-    return false; //Defensive
-}
-
-string outputMessage = string.Empty;
-Cheese cheese = null; //Defensive
-// Defensive
-if(GetCheese(cheeses, "none", out cheese)) {
-    outputMessage = cheese.name;    
-}
-else {
-    outputMessage = "Could not find cheese.";
-}
-
-Console.WriteLine(outputMessage);
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ csi 2.2_input_safe.csx
-Could not find cheese.
-</code></pre>
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h3>Where's Waldo?</h3>
-                    <ul>
-                        <li>Anonymous Function</li>
-                        <li>List Processor (LISP)</li>
-                        <li>Option(Maybe) Monad</li>
-                        <li>Pattern Matcher</li>
-                        <li>Function Composition</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Function and Fashion</h2>
-                    <pre><code class="fs" data-trim contenteditable>
-let pickCheese id =
-    Array.tryFind (fun item -> item.Id = id)
-    >> function 
-       | Some cheese -> printfn "%s" cheese.Name
-       | None        -> printfn "%s" "Completely out."
- 
-// id:string -> (Cheese[] -> unit)
-pickCheese "none" cheeses
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ fsi 2.3_input.fsx
-Completely out.
-</code></pre>
-                </section>
-                <section>
-                    <pre><code class="fs" data-trim contenteditable>
-let pickCheese id =
-    // LISP        Anon Func
-    Array.tryFind (fun item -> item.Id = id)
-    // Composition of functions
-    >> function 
-        // Pattern Matcher
-       | Some cheese -> printfn "%s" cheese.Name
-            // Option of Some or None
-       | None        -> printfn "%s" "Completely out."
- 
-// id:string -> (Cheese[] -> unit)
-pickCheese "none" cheeses
-</code></pre>
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h2>Monads</h2>
-                    <p><i>A brief interlude</i></p>
-                </section>
-                <section>
-                    <h2>What is Null? (C#)</h2>
-                    <ul>
-                        <li class="fragment">Possible absence of value</li>
-                        <li class="fragment">Possible indication of empty</li>
-                        <li class="fragment">Stateful, as in DateCancelled</li>
-                        <li class="fragment">Value of any reference Type</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>What is None? (F#)</h2>
-                    <ul>
-                        <li>Absence of Value of option types</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Why use None over Null?</h2>
-                    <pre><code class="cs" data-trim contenteditable>
-// C#: Null is of the same type as the expected value, and...
-//     It compiles and ships *to your customer*!
-string[] stringArray;
-
-var length = stringArray.Length;
-</code></pre>
-                    <p>vs</p>
-                    <pre><code class="fs" data-trim contenteditable>
-// F#
-let stringArray = Some [| "elem" |] //Can't declare without assignment
-
-// Will not compile, as stringArray is 'string[] option'
-let item = stringArray.Length 
-// Absence as a first class citizen
-let firstElement = 
-    stringArray |> function
-             | Some arr when arr.Length > 0 -> Some arr.[0] 
-             | _ -> None 
-</code></pre>
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h2>A C# Maybe</h2>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
-// csc /target:library 0.2_Maybe.csx
-using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-
-public class Maybe&lt;T>
-{
-    public readonly T Value;
-    public readonly bool Is; 
-    
-    private Maybe(){}
-    private Maybe(bool isSome, T value){
-        Is = isSome;
-        Value = value;
-    }
-    
-    public static Maybe&lt;T> Some(T value){
-        return new Maybe&lt;T>(true, value);
-    }
-    
-    public static Maybe&lt;T> None(){
-        return new Maybe&lt;T>();
-    }
-    
-    public Maybe&lt;T> IfIs(Action&lt;T> action){
-        if(Is){
-            action(Value);
-        }
-        return this;
-    }
-    
-    public Maybe&lt;T> IfIsNot(Action action){
-        if(!Is){
-            action();
-        }
-        return this;
-    }
-}
-
-public static class EnumExt
-{
-    public static Maybe&lt;T> TrySingle&lt;T>(
-        this IEnumerable&lt;T> collection, Func&lt;T, bool> pred)
-    {
-        try{
-            return Maybe&lt;T>.Some(collection.Single(pred));
-        }
-        catch(InvalidOperationException){
-            return Maybe&lt;T>.None();
-        }
-    }
-}
-</code></pre>
-                </section>
-                <section>
-                    <h2>Safe, Functional, C#</h2>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
-#r "0.2_Maybe.dll"
-#load "0.1_Cheese.csx"
-
-cheeses
-    .TrySingle(cheese => cheese.id == "ched") //Returns Maybe&lt;string>
-    .IfIs(a => Console.WriteLine(a.name)) //Also returns Maybe&lt;string>
-    .IfIsNot(() => Console.WriteLine("Not found."));
-</code></pre>
-                </section>
-            </section>
-
-
-            <section>
-                <section>
-                    <h2>Immutable Performance</h2>
-                </section>
-                <section data-transition="fade">
-                    <img src="img/immutability_bloat.png" />
-                </section>
-                <section data-transition="fade">
-                    <img src="img/immutability_lean.png" />
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h2>Pattern Matching</h2>
-                    <p><i>Handling data with a safety net.</i></p>
-                </section>
-                <section>
-                    <h2>The Hanging default:</h2>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>
-public enum StarRating
-{ Five, Four, Three, Two, One }
-
-var rating = StarRating.Three;
-var commission = 0.0;
-var perNight = 300.0;
-
-Console.WriteLine(string.Format(
-    "StarTest: {0}", StarRating.Five > rating));
-
-switch(rating){
-    case StarRating.Five:
-        commission = perNight * .13;
-        break;
-    case StarRating.Four:
-        commission = perNight * .11;
-        break;
-    case StarRating.Three:
-        commission = perNight * .09;
-        break;
-    case StarRating.Two:
-        commission = perNight * .07;
-        break;
-    default:
-        commission = perNight * .05;
-        break;
-}
-
-Console.WriteLine(string.Format("Commission: {0}", commission));
-</code></pre>
-                </section>
-                <section>
-                    <h2>Discriminated Unions</h2>
-                    <pre><code class="fs" data-trim contenteditable>
-type StarRating =
-        | One | Two | Three | Four | Five 
-
-let commission perNight starRating = 
-    match starRating with
-    | StarRating.Five -> perNight * 0.13 
-    | StarRating.Four -> perNight * 0.11
-    | StarRating.Three -> perNight * 0.09
-    
-printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
-</code></pre>
-                    <pre><code data-trim contenteditable>
-$ fsi --warnaserror 3.2_discrim_unions.fsx
-3.2_discrim_unions.fsx(5,11): error FS0025: Incomplete pattern matches on this expression. 
-For example, the value 'One' may indicate a case not covered by the pattern(s).
-</code></pre>
-                </section>
-                <section>
-                    <h2>Free Equality</h2>
-                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>
-type StarRating =
-        | One | Two | Three | Four | Five 
-        
-type GolfScore =
-        | Eight | Seven | Six | Five
-        | Four | Three | Two | One
-        
-let starTest = StarRating.Five > StarRating.Four // True
-let golfTest = GolfScore.One > GolfScore.Three // Also True
-
-let commission perNight starRating = 
-    match starRating with
-    | StarRating.Five -> perNight * 0.13 
-    | StarRating.Four -> perNight * 0.11
-    | StarRating.Three -> perNight * 0.09
-    | StarRating.Two -> perNight * 0.07
-    | StarRating.One -> perNight * 0.05
-    
-printfn "Per Night Commission: %A" (commission 300.0 StarRating.Three)
-</code></pre>
-                </section>
             </section>
 
             <section>
