@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>F# Will Make You a Better .Net Developer - adamkrieger.ca</title>
+    <title>Agility in Containers - adamkrieger.ca</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -38,6 +38,11 @@
     <link rel="stylesheet" href="css/ak-speaking.css">
 </head>
 
+<!-- Sources
+
+https://blog.docker.com/2016/03/containers-are-not-vms/
+-->
+
 <body>
 
     <img id="aklogo" src="img/aklogo.png" />
@@ -58,7 +63,7 @@
                             <img src="img/PrDC_logo.png" />
                         </div>
                         <div id="sessiontitle">
-                            <span>F# WILL MAKE YOU A BETTER .NET DEVELOPER</span>
+                            <span>AGILITY IN CONTAINERS</span>
                             <br />
                             <br />
                             <span>ADAM KRIEGER</span>
@@ -71,150 +76,42 @@
                 </div>
             </section>
             <section>
-                <h1>F#</h1>
-                <h2>Will Make <i><u>You</u></i> <br />a Better .Net Developer</h2>
+                <h1>Agility in Containers</h1>
+                <h2>How Work Evolves with Docker</h2>
                 <i class="icon ion-home"></i>
                 <div style="width: 300px; padding-left: 100px; margin: auto">
                     <p style="text-align: left">
                         <small>by Adam Krieger</small>
                     </p>
                 </div>
-                <i class="fa fa-chrome"></i> <a href="https://www.adamkrieger.ca/talks/fsbetter">https://www.adamkrieger.ca/talks/fsbetter</a><br />
+                <i class="fa fa-chrome"></i> <a href="https://www.adamkrieger.ca/talks/dockerworkflows">https://www.adamkrieger.ca/talks/dockerworkflows</a><br />
                 <i class="fa fa-github"></i> <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
             </section>
 
             <section>
-                <section>
-                    <h4>The Dilemma</h4>
-                    <table>
-                        <tr>
-                            <td>
-                                <h2 style="text-align: center">Depth</h2>
-                                <img src="img/Csharp_nutshell_small.png" height="400px" />
-                            </td>
-                            <td>
-                                <p>vs</p>
-                            </td>
-                            <td>
-                                <h2 style="text-align: center">Breadth</h2>
-                                <img src="img/fsharp512.png" height="340px" />
-                                <h5 style="text-align: center">fsharp.org</h5>
-                            </td>
-                        </tr>
-                    </table>
-                </section>
-            </section>
-
-            <section>
-                <section>
-                    <h2>What is Better?</h2>
-                    <p>Types -> Enhanced Safety</p>
-                    <p>Funcs -> Roll-Forward Flow</p>
-                    <p>.Net  -> Pragmatic Leverage</p>
-                </section>
-            </section>
-            
-            <section>
-                <section data-transition="concave">
-                    <img src="img/feedbackloop.png"/>
-                </section>
-                <section data-transition="concave">
-                    <img src="img/feedbackloop_zoomout.png"/>
-                </section>
-            </section>
-            
-            <section>
-                <section>
-                    <h3>Foundation</h3>
-                    <table style="width: 100%">
-                        <tr><td>No nulls!</td><td><i>Absence of Absence</i></td></tr>
-                        <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Assignment</i></td></tr>
-                        <tr><td>Immutability</td><td><i>Write-once</i></td></tr>
-                        <tr><td><pre><code class="fs">data |> func</code></pre></td><td><i>Sequential Cohesion</i></td></tr>
-                    </table>
-                </section>
-                <section>
-                    <h5>Foundation: Basics</h5>
-<pre><code class="fs">
-type Item = { Price: decimal }
-
-let withTax price = price * 1.14M; // price:decimal -> decimal
-
-let shirt = { Price = 10.00M }
-
-do shirt.Price
-|> withTax
-|> printfn "%.2f"
-
-</code></pre>
-                </section>
-                <section>
-                    <h5>Foundation: Error-prone C#</h5>
-<pre><code class="cs" style="max-height: 500px;">
-public class Item{
-    public decimal Price;
-    public decimal WithTax()
-    {
-        Price *= 1.14M;
-        return Price;
-    }
-}
-
-Item shirt;
-// Oops #1: shirt is null
-
-shirt = new Item(); 
-// Oops #2: shirt.Price is 0
-shirt.Price = 10.00M;
-
-var priceWithTax = shirt.WithTax();
-//Oops #3: shirt.Price has been changed to 11.40
-
-</code></pre>
-                </section>
-                <section>
-                    <h5>Foundation: Safe-ish C#</h5>
-<pre><code class="cs" style="max-height: 500px">public class ImmutableItem
-{
-    private ImmutableItem(){}
-    private ImmutableItem(decimal price){ this.Price = price; }
-    
-    public readonly decimal Price;
-    
-    public static ImmutableItem Create(decimal price){
-        return new ImmutableItem(price);
-    }
-    
-    public decimal WithTax(){
-        //Price *= 1.14M; <-- A readonly field cannot be assigned to
-        return Price * 1.14M;
-    }
-}
-
-var shirt = ImmutableItem.Create(10.00M);
-var priceWithTax = shirt.WithTax();
-Console.WriteLine(priceWithTax);
-</code></pre>
-                </section>
-                <section>
-                    <h5 style="text-align: left">For Better C#</h5>
+                <h4>Why Containers?</h4>
                     <table style="width: 80%">
-                        <tr><td><pre><code class="cs">private</code></pre></td><td><i>Lock down constructors</i></td></tr>
-                        <tr><td><pre><code class="cs">readonly</code></pre></td><td><i>Write-once properties</i></td></tr>
+                        <tr><td>Isolation</td><td><i>The spice of Life!</i></td></tr>
+                        <tr><td>Immutability</td><td><i>Good for the environment!</i></td></tr>
+                        <tr><td>Security</td><td><i>The compiler comes to you</i></td></tr>
+                        <tr><td>Intent</td><td><i>Enough spice, already!</i></td></tr>
                     </table>
-                    <h5 style="text-align: left">Or Use F#</h5>
-<pre><code class="fs">type Item = { Price: decimal }
-
-let withTax price = price * 1.14M; // price:decimal -> decimal
-
-let shirt = { Price = 10.00M }
-
-do shirt.Price
-|> withTax
-|> printfn "%.2f"
-</code></pre>
-                </section>
             </section>
+
+            <section>
+                <h4>Delivery Pre-Docker!</h4>
+                <p>Deploying on bare metal. Physical connections to the internet. Deploy with manual action, hands on keyboards and spreadsheets.</p>
+                <p>Deploying on VMs. Logical connections to the internet. Deploy with scripts, automation, and repositories.</p>
+                <p>Deploying with Containers. Back to bare metal, but isolated processes. Deploy with immutable images and throwaway containers.</p>
+            </section>
+
+            <section>
+                <h4>Conway's Law for Infrastructure</h4>
+                <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
+            </section>
+
+
+
             
             <section>
                 <section>
