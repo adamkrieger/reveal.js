@@ -93,7 +93,6 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                     <table style="width: 80%">
                         <tr><td>Isolation</td><td><i>Confidence in a vacuum</i></td></tr>
                         <tr><td>Immutability</td><td><i>Starting from square v1.0</i></td></tr>
-                        <tr><td>Security</td><td><i>Reduced complexity and variance</i></td></tr>
                         <tr><td>Intent</td><td><i>Why don't you just tell me the name of the movie you selected?</i></td></tr>
                     </table>
             </section>
@@ -146,14 +145,82 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
+                <h4>Isolation</h4>
+                Container process trees run in their own process, network, and file space.
+                PID0 is the lifecycle of the process.
+                Homogenize resources, log outputs.
+            </section>
+
+            <section>
                 <h4>Immutability, Images, LFS</h4>
                 <p>Mechanism for reuse. Nothing needs to be stored twice, even if a downstream image/container mutates.</p>
+                More than just code, now assets, file system, and configuration can be layered and immutable.
+                Environments specific configuration is the only thing that needs to be fed in at run time.
+            </section>
+
+            <section>
+                <h4>Intent</h4>
+                Dockerfiles explain the process of building an image.
+                Volumes, ports, and endpoints must be explicitly configured.
+                No service should be colocated, discourages shortcuts that cause fragility.
             </section>
 
             <section>
                 Docker Security
                 Priviledged v unpriviledged containers (whether they run as root on the host)
             </section>
+
+            <section>
+                <h4>Develop</h4>
+                Dockerfile
+                image
+                container
+
+                Environment, Everything in the right place
+                compiler
+                transpiler
+                ide
+                minimizer
+                in-memory db
+                light web service
+                environment variables
+                framework binaries
+                app binaries
+                assets
+                app config
+                package source
+                version manager
+                reset scripts
+
+                Dev-only
+                Mock at the container level
+                Pass in different environment variables
+                Seed data in images
+            </section>
+
+            <section>
+                <h4>Deliver</h4>
+                Provision
+                get from hub
+                run
+            </section>
+
+            <section>
+                <h4>Support</h4>
+                Monitor
+                Gather
+                Cycle
+                Upgrade
+                Recover
+
+                docker exec
+                docker cp
+
+                Monitoring
+                appdyn - monitor connections, detect traffic, build map
+                docker (weave?) - read container config
+            </section>
+            <!-- https://www.weave.works/guides/monitor-docker-containers/ -->
             
             <section>
                 
