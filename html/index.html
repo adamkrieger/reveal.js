@@ -89,6 +89,17 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
+                Values
+                Differentiated Value
+                Environmental Variance
+                Change in Behaviour
+                Developers, but also others
+                Scalability
+                Isolation
+                Reduction in Cycle time
+            </section>
+
+            <section>
                 <h4>Why Containers?</h4>
                     <table style="width: 80%">
                         <tr><td>Isolation</td><td><i>Confidence in a vacuum</i></td></tr>
@@ -124,8 +135,14 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
-                <h4>Conway's Law for Infrastructure</h4>
-                <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
+                <section>
+                    <h4>Conway's Law for Infrastructure</h4>
+                    <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
+                </section>
+                <section>
+                    Adoption is still ramping.
+                    <!-- https://www.datadoghq.com/docker-adoption/ -->
+                </section>
             </section>
 
             <section>
@@ -171,31 +188,85 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
-                <h4>Develop</h4>
-                Dockerfile
-                image
-                container
+                Containers are Agile
+                Declaration of interaction
+                Software is deployable, earlier
+                Lighter, flexible, apps, are more responsive to change
+            </section>
 
-                Environment, Everything in the right place
-                compiler
-                transpiler
-                ide
-                minimizer
-                in-memory db
-                light web service
-                environment variables
-                framework binaries
-                app binaries
-                assets
-                app config
-                package source
-                version manager
-                reset scripts
+            <section>
+                <section>
+                    <h4>Develop</h4>
+                    Dockerfile
+                    image
+                    container
 
-                Dev-only
-                Mock at the container level
-                Pass in different environment variables
-                Seed data in images
+                    Dev-only
+                    Mock at the container level
+                    Pass in different environment variables
+                    Seed data in images
+                </section>
+
+                <section>
+                    <h4>Develop: Tools</h4>
+                    Dockerfile
+                    docker engine - build/run
+                    docker compose
+                </section>
+
+                <section>
+                    <h4>Develop in Confusion</h4><!--Coincidence is a four-letter word-->
+                    IDE &#8226;
+                    Compiler &#8226;
+                    Transpiler &#8226;
+                    Framework Binaries &#8226;
+                    Source Code  &#8226;
+                    App Binaries &#8226;
+                    In-Mem DB &#8226;
+                    Minimizer &#8226;
+                    Web Server &#8226;
+                    Environment Variables &#8226;
+                    Assets &#8226;
+                    Dev Scripts &#8226;
+                    App Config &#8226;
+                    Package Mgmt &#8226;
+                    Version Mgmt
+                </section>
+
+                <section>
+                    <h4>Develop in Isolation</h4>
+                    <table>
+                        <tr>
+                            <td>Host
+                                Source Code
+                                IDE
+                                Dev Scripts
+                                Assets*
+                            </td>
+                            <td>Build
+                                Compiler
+                                Transpiler
+                                Minimizer
+                                Framework Bin.
+                                Package Mgmt
+                                Version Mgmt
+                            </td>
+                            <td>Other Container
+                                Web Server
+                                In-Mem DB
+                            </td>
+                            <td>Image
+                                Framework
+                                App
+                                Assets
+                            </td>
+                            <td>Running Container
+                                Environment
+                                Config
+                            </td>
+                        </tr>
+                    </table>
+                </section>
             </section>
 
             <section>
@@ -222,6 +293,18 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
             <!-- https://www.weave.works/guides/monitor-docker-containers/ -->
             
+            <section>
+                Scalability
+                App binaries define strong barriers of composability, but don't usually play well with each other (unless you have a system of telling them apart (Undiff Val))
+                VM images also provide barriers of composability, but are too heavy to shunt around
+                Containers are a user space wrapped around a collection of binaries, and are both portable and play nicely with each other
+            </section>
+
+            <section>
+                <h4>What's next?</h4>
+                Microkernels
+            </section>
+
             <section>
                 <h2>Thank you!</h2>
             </section>
