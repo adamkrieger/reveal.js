@@ -88,7 +88,7 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <i class="fa fa-github"></i> <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
             </section>
 
-            <section>
+            <!-- Notes
                 Values
                 Differentiated Value
                 Environmental Variance
@@ -96,123 +96,168 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 Developers, but also others
                 Scalability
                 Isolation
+                    -Confidence in a vacuum
                 Reduction in Cycle time
+                Immutability
+                    -Always starting from a clean slate
+                Documented Intent
+                    -Dockerfiles
+                Timeline
+                    Solaris Zones 2005
+                    LXC 2008
+                    Docker based on LXC 2013
+                    Docker based on Libcontainer 2014 (Docker 0.9, written in Golang)
+
+                2 main points
+                    - How docker changes deployment, enables a clean slate quickly, isolates variance
+                    - How docker changes runtime, isolates communication and responsibility, makes different process lifetimes more feasible
+            -->
+
+            <section>
+                <p>Containers != VMs</p>
+                <p>Evolving Deployment</p>
+                <p>Evolving Runtime</p>
+                <p>Bonus Round</p>
             </section>
 
             <section>
-                <h4>Why Containers?</h4>
-                    <table style="width: 80%">
-                        <tr><td>Isolation</td><td><i>Confidence in a vacuum</i></td></tr>
-                        <tr><td>Immutability</td><td><i>Starting from square v1.0</i></td></tr>
-                        <tr><td>Intent</td><td><i>Why don't you just tell me the name of the movie you selected?</i></td></tr>
-                    </table>
-            </section>
+                <section>
+                    <h4>What is a container?</h4>
+                    <p>Isolation of user space:</p>
+                    <ul>
+                        <li>Process Tree</li>
+                        <li>File System</li>
+                        <li>Network</li>
+                        <li>Users</li>
+                        <li>Env Vars</li>
+                    </ul>
+                </section>
 
-            <section>
-                <h4>What is a container</h4>
-                <p>LXC Around since 2008</p>
-                <p>(Solaris Zones in 2005)</p>
-                <p>libcontainer around since docker .9 (2014)</p>
-                <p>Operating-System-Level Virtualization - Kernel Reuse, not a full software computer. Container is supplied with its own process/network/file space, 
-                    but reuses the kernel.</p>
-                <p>This is a savings of resources, mainly of disk, second of memory, and a bit of CPU. (Always falling as new hardware comes out.)</p>
+                <section>
+                    <p>Kernel Reuse!</p>
+                </section>
             </section>
-            <!-- http://serverfault.com/questions/225719/so-really-what-is-the-overhead-of-virtualization-and-when-should-i-be-concerned -->
+            <!-- Own cubicle vs long table, elbows -->
+            <!-- http://serverfault.com/questions/225719/so-really-what-is-the-overhead-of-virtualization-and-when-should-i-be-concerned 
+            Operating-System-Level Virtualization - Kernel Reuse, not a full software computer emulator. Container is supplied with its own process/network/file space, 
+                    but reuses the kernel via a library.
+            -->
 
             <section>
                 <h4>What is Docker?</h4>
-                <p>Around since 2013</p>
-                <p>Layer of abstraction and tooling for Linux Containers written in Go</p>
-                <p>Process tree rooted at PID0</p>
-                <p>Wealth of integration with existing automation tooling (ansible, Chef, Cloud, et al)</p>
-            </section>
-
-            <section>
-                <h4>Delivery Pre-Docker!</h4>
-                <p>Deploying on bare metal. Physical connections to the internet. Deploy with manual action, hands on keyboards and spreadsheets.</p>
-                <p>Deploying on VMs. Logical connections to the internet. Deploy with scripts, automation, and repositories.</p>
-                <p>Deploying with Containers. Back to bare metal, but isolated processes. Deploy with immutable images and throwaway containers.</p>
+                <ul>
+                    <li>2013</li>
+                    <li>LXC, then libcontainer</li>
+                    <li>Build, Compose, Run, Scale</li>
+                </ul>
             </section>
 
             <section>
                 <section>
-                    <h4>Conway's Law for Infrastructure</h4>
-                    <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
-                </section>
-                <section>
-                    Adoption is still ramping.
-                    <!-- https://www.datadoghq.com/docker-adoption/ -->
-                </section>
-            </section>
-
-            <section>
-                <h4>Meanwhile, in Application Development</h4>
-                <p>N-Tier Apps: One app, one database, one UI. Lucky to see apps or databases broken by responsibility.</p>
-                <p>SOA: Loosely-coupled apps, serving individual purposes. Storage on queues, caches, or an assortment of databases.</p>
-                <p>Microservices: Services as small as is functionally appropriate. Denormalized and distributed data sources in service of user experience.</p>
-            </section>
-
-            <section>
-                <h4>Docker Toolset</h4>
-                <p>Docker Machine - For provisioning hosts</p>
-                <p>Docker Engine - Build/Run Containers</p>
-                <p>Docker Compose - For defining multi-container applications</p>
-                <p>Docker Hub - Image repository</p>
-                <p>Swarm Mode - Multi-host orchestration</p>
-            </section>
-
-            <section>
-                <h4>Isolation</h4>
-                Container process trees run in their own process, network, and file space.
-                PID0 is the lifecycle of the process.
-                Homogenize resources, log outputs.
-            </section>
-
-            <section>
-                <h4>Immutability, Images, LFS</h4>
-                <p>Mechanism for reuse. Nothing needs to be stored twice, even if a downstream image/container mutates.</p>
-                More than just code, now assets, file system, and configuration can be layered and immutable.
-                Environments specific configuration is the only thing that needs to be fed in at run time.
-            </section>
-
-            <section>
-                <h4>Intent</h4>
-                Dockerfiles explain the process of building an image.
-                Volumes, ports, and endpoints must be explicitly configured.
-                No service should be colocated, discourages shortcuts that cause fragility.
-            </section>
-
-            <section>
-                Docker Security
-                Priviledged v unpriviledged containers (whether they run as root on the host)
-            </section>
-
-            <section>
-                Containers are Agile
-                Declaration of interaction
-                Software is deployable, earlier
-                Lighter, flexible, apps, are more responsive to change
-            </section>
-
-            <section>
-                <section>
-                    <h4>Develop</h4>
-                    Dockerfile
-                    image
-                    container
-
-                    Dev-only
-                    Mock at the container level
-                    Pass in different environment variables
-                    Seed data in images
+                    <h4>Deployment with Docker</h4>
+                    <ol>
+                        <li>Run from Image with Config</li>
+                    </ol>
                 </section>
 
                 <section>
-                    <h4>Develop: Tools</h4>
-                    Dockerfile
-                    docker engine - build/run
-                    docker compose
+                    <h4>Deployment: VM</h4>
+                    <ol>
+                        <li>Install JVM</li>
+                        <li>Configure JVM</li>
+                        <li>Install Tomcat</li>
+                        <li>Configure Tomcat</li>
+                        <li>Install Drivers</li>
+                        <li>Install Application</li>
+                        <li>Configure Application</li>
+                        <li>Set Environment Variables</li>
+                        <li>Start Application</li>
+                    </ol>
                 </section>
+
+                <section>
+                    <h4>Deployment: VM (Reality)</h4>
+                    <ol>
+                        <li>Remove JVM</li>
+                        <li>Remove Tomcat</li>
+                        <li>Remove Drivers</li>
+                        <li>Remove Temp Files</li>
+                        <li>Remove Variables</li>
+                        <li>Remove Application</li>
+                        <li>Install JVM</li>
+                        <li>Configure JVM</li>
+                        <li>Install Tomcat</li>
+                        <li>Configure Tomcat</li>
+                        <li>Install Drivers</li>
+                        <li>Install Application</li>
+                        <li>Configure Application</li>
+                        <li>Set Environment Variables</li>
+                        <li>Start Application</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h4>Deployment: Docker</h4>
+                    <ol>
+                        <li>Run from Image with Config</li>
+                    </ol>
+                    <br />
+                    <br />
+                    <table>
+                        <tr>
+                            <td>Starting from Scratch, Everytime</td>
+                        </tr>
+                        <tr>
+                            <td>No Cleanup</td>
+                        </tr>
+                        <tr>
+                            <td>Dev/<i>Ops</i></td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <ul>
+                        <li>Container - Your Config</li>
+                        <li>Image - Your App</li>
+                        <li>Image - Tomcat</li>
+                        <li>Image - Java 8</li>
+                        <li>Image - CentOS</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Dockerfile: Intent</h4>
+                    <ul>
+                        <li>FROM - Starting image</li>
+                        <li>VOLUME - Data</li>
+                        <li>EXPOSE - Ports</li>
+                        <li>USER/COPY/ENV</li>
+                        <li>RUN - Seal the image</li>
+                    </ul>
+                </section>
+
+                <section>
+                    Flexibility
+                    Near the end of the whip is differentiated value
+                    The very end of the whip is environmental variance
+                </section>
+
+                <section>
+                    <ul>
+                        <li>Container - Identity</li>
+                        <li>Image - Special Sauce</li>
+                        <li>Image - Facilitation</li>
+                        <li>Image - Framework</li>
+                        <li>Image - Foundation</li>
+                    </ul>
+                </section>
+            </section>
+
+
+            <section>
 
                 <section>
                     <h4>Develop in Confusion</h4><!--Coincidence is a four-letter word-->
@@ -270,10 +315,41 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
-                <h4>Deliver</h4>
-                Provision
-                get from hub
-                run
+                <h4>Flexibility</h4>
+                What docker should look like in prod
+                Isolated components of an app working together
+                Compose and swarm
+            </section>
+            
+
+            <section>
+                <h2>Thank you!</h2>
+            </section>
+
+
+            <section>
+                <section>
+                    <h4>Conway's Law for Infrastructure</h4>
+                    <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
+                </section>
+                <section>
+                    Adoption is still ramping.
+                    <!-- https://www.datadoghq.com/docker-adoption/ -->
+                </section>
+            </section>
+
+            <section>
+                <h4>Docker Toolset</h4>
+                <p>Docker Machine - For provisioning hosts</p>
+                <p>Docker Engine - Build/Run Containers</p>
+                <p>Docker Compose - For defining multi-container applications</p>
+                <p>Docker Hub - Image repository</p>
+                <p>Swarm Mode - Multi-host orchestration</p>
+            </section>
+
+            <section>
+                Docker Security
+                Priviledged v unpriviledged containers (whether they run as root on the host)
             </section>
 
             <section>
@@ -306,7 +382,21 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             </section>
 
             <section>
-                <h2>Thank you!</h2>
+                What is a container?
+                Why do I care?
+                    - Flexibility via Isolation
+                        To use new tech
+                        To compose at the service layer
+                        To scale comfortably
+                    - Immutability and Portability together
+                        VMs can be immutable, but are heavy
+                        Binaries can be portable, but environmental variance often causes problems
+
+                What do I get, that I didn't know I would.
+                    - Security
+                    - Developers always thinking about touchpoints
+                    - Homogenized framwork use methods: No more deployed framework version managers
+                    - Developing in final production environment almost immediately
             </section>
         </div>
 
