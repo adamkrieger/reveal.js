@@ -79,9 +79,10 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <h1>Agility in Containers</h1>
                 <h2>How Work Evolves with Docker</h2>
                 <i class="icon ion-home"></i>
-                <div style="width: 300px; padding-left: 100px; margin: auto">
-                    <p style="text-align: left">
+                <div style="width: 300px; margin: auto">
+                    <p style="text-align: center">
                         <small>by Adam Krieger</small>
+                        <small>with Jules Van de Velde</small>
                     </p>
                 </div>
                 <i class="fa fa-chrome"></i> <a href="https://www.adamkrieger.ca/talks/dockerworkflows">https://www.adamkrieger.ca/talks/dockerworkflows</a><br />
@@ -114,28 +115,38 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             -->
 
             <section>
-                <p>Containers != VMs</p>
-                <p>Evolving Deployment</p>
-                <p>Evolving Runtime</p>
-                <p>Bonus Round</p>
+                <table>
+                    <tr><td>Containers are... </td></tr>
+                    <tr><td>Differentiated Value</td></tr>
+                    <tr><td>Environmental Variance</td></tr>
+                    <tr><td>Agility of Confidence</td></tr>
+                </table>
             </section>
 
             <section>
                 <section>
-                    <h4>What is a container?</h4>
-                    <p>Isolation of user space:</p>
+                    <h3>Containers Isolate User Space</h3>
                     <ul>
-                        <li>Process Tree</li>
+                        <li>Process</li>
                         <li>File System</li>
                         <li>Network</li>
-                        <li>Users</li>
-                        <li>Env Vars</li>
+                        <li>Users (recently added)</li>
+                        <li>Environment Variables</li>
                     </ul>
+
+                    <p>A Container stops when PID0 exits.</p>
                 </section>
 
                 <section>
-                    <p>Kernel Reuse!</p>
+                    <h3>Images are the Starting Line</h3>
+                    <ul>
+                        <li>Files</li>
+                        <li>Configuration</li>
+                        <li>Entrypoint</li>
+                    </ul>
                 </section>
+
+                <p class="section-subtitle">Containers</p>
             </section>
             <!-- Own cubicle vs long table, elbows -->
             <!-- http://serverfault.com/questions/225719/so-really-what-is-the-overhead-of-virtualization-and-when-should-i-be-concerned 
@@ -143,28 +154,99 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                     but reuses the kernel via a library.
             -->
 
+            
             <section>
-                <h4>What is Docker?</h4>
-                <ul>
-                    <li>2013</li>
-                    <li>LXC, then libcontainer</li>
-                    <li>Build, Compose, Run, Scale</li>
-                </ul>
-            </section>
-
-            <section>
+                <p class="section-subtitle">Differentiated Value</p>
+                <!-- Workflow: Structuring a container
+                    Benefit: Self-documenting process makes intent clear
+                        Flexibility to branch from known-good trunk -->
                 <section>
-                    <h4>Deployment with Docker</h4>
-                    <ol>
-                        <li>Run from Image with Config</li>
-                    </ol>
+                    <h3>Layer Cake</h3>
+                    <div style="float: left">
+                        <img src="img/layercake.png"/>
+                    </div>
+                    <div>
+                        <ul>
+                            <li style="margin: 10px 0 0 0">Icing - Production Config</li>
+                            <li style="margin: 20px 0 0 0">Layer - Your App</li>
+                            <li style="margin: 20px 0 0 0">Layer - Tomcat</li>
+                            <li style="margin: 20px 0 0 0">Layer - Java 8</li>
+                            <li style="margin: 20px 0 0 0">Layer - CentOS</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <section>
-                    <h4>Deployment: VM</h4>
-                    <ol>
-                        <li>Install JVM</li>
-                        <li>Configure JVM</li>
+                    <h3>Layer Cake</h3>
+                    <div style="float: left">
+                        <img src="img/layercake.png"/>
+                    </div>
+                    <ul>
+                        <li style="margin: 10px 0 0 0">Container - Identity</li>
+                        <li style="margin: 20px 0 0 0">Image - Your Value</li>
+                        <li style="margin: 20px 0 0 0">Image - Facilitation</li>
+                        <li style="margin: 20px 0 0 0">Image - Framework</li>
+                        <li style="margin: 20px 0 0 0">Image - Foundation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 style="text-transform: none">Dockerfile per Image</h3>
+                    <pre><code class="dockerfile">FROM centos:latest
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/bin
+
+RUN yum install -y -q java-1.8.0*</code></pre>
+                    <p>Build the image:</p>
+<pre><code>docker build -t akrieger/java:centos8 -t akrieger/java:latest .</code></pre>
+                </section>
+
+                <section>
+                    <h4>Self-Documenting and Intentional</h4>
+                    <ul>
+                        <li>FROM - Starting image</li>
+                        <li>COPY - Files for the new image</li> 
+                        <li>VOLUME - Data</li>
+                        <li>EXPOSE - Ports</li>
+                        <li>USER/ENV</li>
+                        <li>RUN - Runs/Compiles</li>
+                    </ul>
+                    <p>Image showing vol/file/config</p>
+                </section>
+
+                <section>
+                    <p>Ops/Dev - Precisely change the cake's recipe</p>
+                    <p>Dev/Architect - Easily adopt new frameworks or flavours</p>
+                    <p>Image showing framework adoption</p>
+                </section>
+
+                <!-- Who cares?
+                    Ops/Dev - Self-documented list of the cake's ingredients (easier for PEOPLE to understand)
+                    Dev/Architect - Easily adopt new frameworks (responding to CHANGE), taking advantage of the lower layers of the cake 
+                     -->
+            </section>
+
+
+            <section>
+                <p class="section-subtitle">Environmental Variance</p>
+                <!-- Workflow: Deployment of containers
+                    Benefit: Eliminate many points of environmental variance
+                        Cleanup is simple  -->
+                <section>
+                    <h4>Deploying Containers</h4>
+<pre><code>docker run --name presentation -d 
+    -p 7000:80 -p 7001:443 
+    -v $HERE/html:/usr/share/nginx/html
+    -e "SOME_ENV_VAR=yourEnvironmentalVariance"
+    akrieger/revealjs</code></pre>
+                </section>
+
+                <section>
+                    <h4>Deploying VMs</h4>
+                    <ul>
+                        <li>Deploy Image</li>
+                        <li>Install Java</li>
+                        <li>Configure Java</li>
                         <li>Install Tomcat</li>
                         <li>Configure Tomcat</li>
                         <li>Install Drivers</li>
@@ -172,153 +254,82 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                         <li>Configure Application</li>
                         <li>Set Environment Variables</li>
                         <li>Start Application</li>
-                    </ol>
+                    </ul>
                 </section>
 
                 <section>
-                    <h4>Deployment: VM (Reality)</h4>
-                    <ol>
-                        <li>Remove JVM</li>
+                    <h4>Deploying to Existing VMs</h4>
+                    <ul>
+                        <li>Remove Java</li>
                         <li>Remove Tomcat</li>
                         <li>Remove Drivers</li>
                         <li>Remove Temp Files</li>
                         <li>Remove Variables</li>
                         <li>Remove Application</li>
-                        <li>Install JVM</li>
-                        <li>Configure JVM</li>
-                        <li>Install Tomcat</li>
-                        <li>Configure Tomcat</li>
-                        <li>Install Drivers</li>
-                        <li>Install Application</li>
-                        <li>Configure Application</li>
-                        <li>Set Environment Variables</li>
-                        <li>Start Application</li>
-                    </ol>
+                        <li>Install Java</li>
+                        <li>Configure Java</li>
+                        <li>etc...</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h4>Deployment: Docker</h4>
-                    <ol>
-                        <li>Run from Image with Config</li>
-                    </ol>
-                    <br />
-                    <br />
+                    <h4>Deployment with Docker</h4>
+<pre><code>docker run --name presentation -d 
+    -p 7000:80 -p 7001:443 
+    -v $HERE/html:/usr/share/nginx/html
+    -e "SOME_ENV_VAR=yourEnvironmentalVariance"
+    akrieger/revealjs</code></pre>
                     <table>
                         <tr>
                             <td>Starting from Scratch, Everytime</td>
                         </tr>
                         <tr>
-                            <td>No Cleanup</td>
+                            <td>Ripcord Cleanup</td>
                         </tr>
                         <tr>
                             <td>Dev/<i>Ops</i></td>
                         </tr>
                     </table>
                 </section>
-            </section>
-
-            <section>
-                <section>
-                    <ul>
-                        <li>Container - Your Config</li>
-                        <li>Image - Your App</li>
-                        <li>Image - Tomcat</li>
-                        <li>Image - Java 8</li>
-                        <li>Image - CentOS</li>
-                    </ul>
-                </section>
 
                 <section>
-                    <h4>Dockerfile: Intent</h4>
-                    <ul>
-                        <li>FROM - Starting image</li>
-                        <li>VOLUME - Data</li>
-                        <li>EXPOSE - Ports</li>
-                        <li>USER/COPY/ENV</li>
-                        <li>RUN - Seal the image</li>
-                    </ul>
+                    <p>Ops/Dev/QA/Customer* - Never see a class of errors</p>
+                    <p>Architects - Fewer reasons for defensive design</p>
                 </section>
 
-                <section>
-                    Flexibility
-                    Near the end of the whip is differentiated value
-                    The very end of the whip is environmental variance
-                </section>
-
-                <section>
-                    <ul>
-                        <li>Container - Identity</li>
-                        <li>Image - Special Sauce</li>
-                        <li>Image - Facilitation</li>
-                        <li>Image - Framework</li>
-                        <li>Image - Foundation</li>
-                    </ul>
-                </section>
+                <!-- Who cares?
+                    Ops/Dev/QA - No red herrings from leftover files, env vars
+                        If you find an env issue, fast to toss out and start over (WORKING SOFTWARE)
+                    Arch - Component lifecycle can operate a little differently. If you know the container is getting tossed out, the cleanup process may not require design.
+                 -->
             </section>
 
 
             <section>
+                <p class="section-subtitle">Control, Composition, Agility</p>
 
                 <section>
-                    <h4>Develop in Confusion</h4><!--Coincidence is a four-letter word-->
-                    IDE &#8226;
-                    Compiler &#8226;
-                    Transpiler &#8226;
-                    Framework Binaries &#8226;
-                    Source Code  &#8226;
-                    App Binaries &#8226;
-                    In-Mem DB &#8226;
-                    Minimizer &#8226;
-                    Web Server &#8226;
-                    Environment Variables &#8226;
-                    Assets &#8226;
-                    Dev Scripts &#8226;
-                    App Config &#8226;
-                    Package Mgmt &#8226;
-                    Version Mgmt
+                    <h4>Controlled Complexity, now what?</h4>
                 </section>
 
                 <section>
-                    <h4>Develop in Isolation</h4>
-                    <table>
-                        <tr>
-                            <td>Host
-                                Source Code
-                                IDE
-                                Dev Scripts
-                                Assets*
-                            </td>
-                            <td>Build
-                                Compiler
-                                Transpiler
-                                Minimizer
-                                Framework Bin.
-                                Package Mgmt
-                                Version Mgmt
-                            </td>
-                            <td>Other Container
-                                Web Server
-                                In-Mem DB
-                            </td>
-                            <td>Image
-                                Framework
-                                App
-                                Assets
-                            </td>
-                            <td>Running Container
-                                Environment
-                                Config
-                            </td>
-                        </tr>
-                    </table>
+                    <h4>Composable Components</h4>
+                    <p>Simpler pieces</p>
+                    <p>Easier to fix</p>
+                    <p>Easier to improve</p>
+                    <p>Easier to reuse</p>
                 </section>
-            </section>
+                <!-- Ease of finding errors -->
+                <!-- Ease of adding func -->
+                <!-- Understanding a smaller piece -->
 
-            <section>
-                <h4>Flexibility</h4>
-                What docker should look like in prod
-                Isolated components of an app working together
-                Compose and swarm
+                <section>
+                    <p>Image: Using the same base image for multiple component images</p>
+                </section>
+
+                <section>
+                    <h4>Agility in Containers</h4>
+                </section>
             </section>
             
 

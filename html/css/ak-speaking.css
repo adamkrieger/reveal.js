@@ -67,3 +67,18 @@
     font-family: ALusine;
     src: url(../fonts/ALUSRG_.TTF);
 }
+
+.section-subtitle {
+    position: fixed;
+    top: 600px;
+    right: 50px;
+    color: dimgray;
+}
+
+.reveal h3 {
+    text-transform: none;
+}
+
+.reveal h4 {
+    text-transform: none;
+}
