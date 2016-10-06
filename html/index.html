@@ -160,14 +160,19 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <!-- Workflow: Structuring a container
                     Benefit: Self-documenting process makes intent clear
                         Flexibility to branch from known-good trunk -->
+
+                <section>
+                    <h3>What makes you special?</h3>
+                </section>
+
                 <section>
                     <h3>Layer Cake</h3>
                     <div style="float: left">
-                        <img src="img/layercake.png"/>
+                        <img src="img/layercake2.png"/>
                     </div>
                     <div>
                         <ul>
-                            <li style="margin: 10px 0 0 0">Icing - Production Config</li>
+                            <li style="margin: 30px 0 0 0">Icing - Production Config</li>
                             <li style="margin: 20px 0 0 0">Layer - Your App</li>
                             <li style="margin: 20px 0 0 0">Layer - Tomcat</li>
                             <li style="margin: 20px 0 0 0">Layer - Java 8</li>
@@ -177,9 +182,25 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 </section>
 
                 <section>
+                    <img src="img/buildimage.png" />
+                </section>
+
+                <section>
+                    <img src="img/buildtomcat.png" />
+                </section>
+
+                <section>
+                    <img src="img/buildseasheller.png" />
+                </section>
+                
+                <section>
+                    <img src="img/runseasheller.png" />
+                </section>
+
+                <section>
                     <h3>Layer Cake</h3>
                     <div style="float: left">
-                        <img src="img/layercake.png"/>
+                        <img src="img/layercake2.png"/>
                     </div>
                     <ul>
                         <li style="margin: 10px 0 0 0">Container - Identity</li>
@@ -215,8 +236,13 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                 </section>
 
                 <section>
-                    <p>Ops/Dev - Precisely change the cake's recipe</p>
-                    <p>Dev/Architect - Easily adopt new frameworks or flavours</p>
+                    <h4>Docker Registry</h4>
+
+                </section>
+
+                <section>
+                    <p>Control the Recipe</p>
+                    <p>Try new Flavours</p>
                     <p>Image showing framework adoption</p>
                 </section>
 
@@ -232,7 +258,13 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                 <!-- Workflow: Deployment of containers
                     Benefit: Eliminate many points of environmental variance
                         Cleanup is simple  -->
+
                 <section>
+                    <h4>Clean slate? How about new slate.</h4>
+                </section>
+
+                <section>
+                    <!--Everything but the icing is downloaded from the registry -->
                     <h4>Deploying Containers</h4>
 <pre><code>docker run --name presentation -d 
     -p 7000:80 -p 7001:443 
@@ -286,10 +318,11 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                         <tr>
                             <td>Ripcord Cleanup</td>
                         </tr>
-                        <tr>
-                            <td>Dev/<i>Ops</i></td>
-                        </tr>
                     </table>
+                </section>
+
+                <section>
+                    <h4>Rapid Cleanup</h4>
                 </section>
 
                 <section>
