@@ -50,7 +50,7 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
         <p><b>www.adamkrieger.ca</b><br /></p>
         <p><b><i class="fa fa-twitter"></i> @adamkrieger</b></p>
     </div>
-    <img id="onlinelogo" src="img/Online_logo.png" />
+    <img id="onlinelogo" src="img/Online-Wordmark-WhiteRed-CMYK.png" />
 
     <div class="reveal">
 
@@ -60,7 +60,7 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <div id="titleslide">
                     <div id="sessionbanner">
                         <div id="logo">
-                            <img src="img/PrDC_logo.png" />
+                            <img src="img/prdcdeliver_logo.jpg" />
                         </div>
                         <div id="sessiontitle">
                             <span>AGILITY IN CONTAINERS</span>
@@ -70,8 +70,7 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                         </div>
                     </div>
                     <div id="sponsors">
-                        <span>SPONSORS</span>
-                        <img src="img/sponsors.png" />
+                        <img src="img/prdcdeliver_sponsors.png" />
                     </div>
                 </div>
             </section>
@@ -116,10 +115,10 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
 
             <section>
                 <table>
-                    <tr><td>Containers are... </td></tr>
-                    <tr><td>Differentiated Value</td></tr>
-                    <tr><td>Environmental Variance</td></tr>
-                    <tr><td>Agility of Confidence</td></tr>
+                    <tr><td>Containers vs. Images</td></tr>
+                    <tr><td>Building an Image</td></tr>
+                    <tr><td>Launching a Container</td></tr>
+                    <tr><td>Adopting Docker</td></tr>
                 </table>
             </section>
 
@@ -140,13 +139,15 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <section>
                     <h3>Images are the Starting Line</h3>
                     <ul>
+                        <li>Tech Stack</li>
+                        <li>Product</li>
                         <li>Files</li>
                         <li>Configuration</li>
                         <li>Entrypoint</li>
                     </ul>
                 </section>
 
-                <p class="section-subtitle">Containers</p>
+                <p class="section-subtitle">Containers vs. Images</p>
             </section>
             <!-- Own cubicle vs long table, elbows -->
             <!-- http://serverfault.com/questions/225719/so-really-what-is-the-overhead-of-virtualization-and-when-should-i-be-concerned 
@@ -154,15 +155,39 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                     but reuses the kernel via a library.
             -->
 
+            <section>
+                <h2>Building Images</h2>
+            </section>
             
             <section>
-                <p class="section-subtitle">Differentiated Value</p>
+                <p class="section-subtitle">Layering</p>
                 <!-- Workflow: Structuring a container
                     Benefit: Self-documenting process makes intent clear
                         Flexibility to branch from known-good trunk -->
 
                 <section>
-                    <h3>What makes you special?</h3>
+                    <h3>Spoiler: My dog is fine.</h3>
+                </section>
+
+                <section>
+                    <table>
+                        <tr>
+                            <td>Charcoal</td>
+                            <td>$20</td>
+                        </tr>
+                        <tr>
+                            <td>Administration</td>
+                            <td>$50</td>
+                        </tr>
+                        <tr>
+                            <td>Appointment</td>
+                            <td>$75</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Fee</td>
+                            <td>$150</td>
+                        </tr>
+                    </table>
                 </section>
 
                 <section>
@@ -172,11 +197,11 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                     </div>
                     <div>
                         <ul>
-                            <li style="margin: 30px 0 0 0">Icing - Production Config</li>
-                            <li style="margin: 20px 0 0 0">Layer - Your App</li>
-                            <li style="margin: 20px 0 0 0">Layer - Tomcat</li>
-                            <li style="margin: 20px 0 0 0">Layer - Java 8</li>
-                            <li style="margin: 20px 0 0 0">Layer - CentOS</li>
+                            <li style="margin: 30px 0 0 0">Container - Running Process</li>
+                            <li style="margin: 20px 0 0 0; color:red">Image - Your App</li>
+                            <li style="margin: 20px 0 0 0; color:orange">Image - Tomcat</li>
+                            <li style="margin: 20px 0 0 0; color:yellow">Image - Java 8</li>
+                            <li style="margin: 20px 0 0 0; color:green">Image - CentOS</li>
                         </ul>
                     </div>
                 </section>
@@ -198,20 +223,6 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 </section>
 
                 <section>
-                    <h3>Layer Cake</h3>
-                    <div style="float: left">
-                        <img src="img/layercake2.png"/>
-                    </div>
-                    <ul>
-                        <li style="margin: 10px 0 0 0">Container - Identity</li>
-                        <li style="margin: 20px 0 0 0">Image - Your Value</li>
-                        <li style="margin: 20px 0 0 0">Image - Facilitation</li>
-                        <li style="margin: 20px 0 0 0">Image - Framework</li>
-                        <li style="margin: 20px 0 0 0">Image - Foundation</li>
-                    </ul>
-                </section>
-
-                <section>
                     <h3 style="text-transform: none">Dockerfile per Image</h3>
                     <pre><code class="dockerfile">FROM centos:latest
 
@@ -219,11 +230,11 @@ ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/bin
 
 RUN yum install -y -q java-1.8.0*</code></pre>
                     <p>Build the image:</p>
-<pre><code>docker build -t akrieger/java:centos8 -t akrieger/java:latest .</code></pre>
+<pre><code>docker build -t akrieger/java:8-centos -t akrieger/java:latest .</code></pre>
                 </section>
 
                 <section>
-                    <h4>Self-Documenting and Intentional</h4>
+                    <h4>#1: Self-Documenting and Intentional</h4>
                     <ul>
                         <li>FROM - Starting image</li>
                         <li>COPY - Files for the new image</li> 
@@ -233,6 +244,15 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                         <li>RUN - Runs/Compiles</li>
                     </ul>
                     <p>Image showing vol/file/config</p>
+                </section>
+
+                <section>
+                    <h4>#2: Cohesive</h4>
+                    <!-- Harder for responsibility to be confused -->
+                </section>
+
+                <section>
+                    <h4>#3: Portable and Pre-Compiled</h4>
                 </section>
 
                 <section>
@@ -252,77 +272,62 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                      -->
             </section>
 
+            <section>
+                <h2>Deploying Containers</h2>
+            </section>
 
             <section>
-                <p class="section-subtitle">Environmental Variance</p>
+                <p class="section-subtitle">Deployment</p>
                 <!-- Workflow: Deployment of containers
                     Benefit: Eliminate many points of environmental variance
                         Cleanup is simple  -->
 
                 <section>
-                    <h4>Clean slate? How about new slate.</h4>
+                    <img src="img/dockerdeploy_single.png" />
+                </section>
+
+                <section>
+                    <img src="img/vmdeploy1.png" />
+                    <ul>
+                        <li>Install/Boot takes time</li>
+                        <li>Depends on deploy-time resources</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="img/vmdeploy2.png" />
+                    <ul>
+                        <li>Mutated start state</li>
+                        <li><i>Still</i> depends on deploy-time resources</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="img/vmdeploy3.png" /><br />
+                    <ul>
+                        <li>Restoring a VM takes time</li>
+                        <li>Booting again?!</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img style="vertical-align:middle" src="img/dockerdeploy.png" />
+                    <ul style="vertical-align:middle">
+                        <li>Dependencies during build</li>
+                        <li>Use of binaries in place</li>
+                        <li>Always a clean slate</li>
+                        <li>Process + Container Setup</li>
+                    </ul>
                 </section>
 
                 <section>
                     <!--Everything but the icing is downloaded from the registry -->
-                    <h4>Deploying Containers</h4>
+                    <h4>Deploy with Docker</h4>
 <pre><code>docker run --name presentation -d 
     -p 7000:80 -p 7001:443 
     -v $HERE/html:/usr/share/nginx/html
-    -e "SOME_ENV_VAR=yourEnvironmentalVariance"
+    -e "SOME_ENV_VAR=devOrProdOrWhateverYoudLike"
     akrieger/revealjs</code></pre>
-                </section>
-
-                <section>
-                    <h4>Deploying VMs</h4>
-                    <ul>
-                        <li>Deploy Image</li>
-                        <li>Install Java</li>
-                        <li>Configure Java</li>
-                        <li>Install Tomcat</li>
-                        <li>Configure Tomcat</li>
-                        <li>Install Drivers</li>
-                        <li>Install Application</li>
-                        <li>Configure Application</li>
-                        <li>Set Environment Variables</li>
-                        <li>Start Application</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h4>Deploying to Existing VMs</h4>
-                    <ul>
-                        <li>Remove Java</li>
-                        <li>Remove Tomcat</li>
-                        <li>Remove Drivers</li>
-                        <li>Remove Temp Files</li>
-                        <li>Remove Variables</li>
-                        <li>Remove Application</li>
-                        <li>Install Java</li>
-                        <li>Configure Java</li>
-                        <li>etc...</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h4>Deployment with Docker</h4>
-<pre><code>docker run --name presentation -d 
-    -p 7000:80 -p 7001:443 
-    -v $HERE/html:/usr/share/nginx/html
-    -e "SOME_ENV_VAR=yourEnvironmentalVariance"
-    akrieger/revealjs</code></pre>
-                    <table>
-                        <tr>
-                            <td>Starting from Scratch, Everytime</td>
-                        </tr>
-                        <tr>
-                            <td>Ripcord Cleanup</td>
-                        </tr>
-                    </table>
-                </section>
-
-                <section>
-                    <h4>Rapid Cleanup</h4>
                 </section>
 
                 <section>
@@ -337,9 +342,12 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                  -->
             </section>
 
+            <section>
+                <h2>Adopting Docker</h2>
+            </section>
 
             <section>
-                <p class="section-subtitle">Control, Composition, Agility</p>
+                <p class="section-subtitle">Adopting Docker</p>
 
                 <section>
                     <h4>Controlled Complexity, now what?</h4>
