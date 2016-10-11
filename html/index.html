@@ -85,7 +85,6 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                     </p>
                 </div>
                 <i class="fa fa-chrome"></i> <a href="https://www.adamkrieger.ca/talks/dockerworkflows">https://www.adamkrieger.ca/talks/dockerworkflows</a><br />
-                <i class="fa fa-github"></i> <a href="https://github.com/adamkrieger/FSBetter">https://github.com/adamkrieger/FSBetter</a>
             </section>
 
             <!-- Notes
@@ -139,11 +138,11 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <section>
                     <h3>Images are the Starting Line</h3>
                     <ul>
-                        <li>Tech Stack</li>
-                        <li>Product</li>
-                        <li>Files</li>
-                        <li>Configuration</li>
-                        <li>Entrypoint</li>
+                        <li>Frameworks</li>
+                        <li>Binaries</li>
+                        <li>Files, Seed Data, etc.</li>
+                        <li>Non-Environment Configuration</li>
+                        <li>Default Process Command</li>
                     </ul>
                 </section>
 
@@ -156,11 +155,12 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
             -->
 
             <section>
-                <h2>Building Images</h2>
-            </section>
-            
-            <section>
                 <p class="section-subtitle">Layering</p>
+                
+                <section>
+                    <h2>Building Images</h2>
+                </section>
+                
                 <!-- Workflow: Structuring a container
                     Benefit: Self-documenting process makes intent clear
                         Flexibility to branch from known-good trunk -->
@@ -211,6 +211,17 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 </section>
 
                 <section>
+                    <h3 style="text-transform: none">Dockerfile per Image</h3>
+                    <pre><code class="dockerfile">FROM centos:latest
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/bin
+
+RUN yum install -y -q java-1.8.0*</code></pre>
+                    <p>Build the image:</p>
+<pre><code>docker build -t akrieger/java:8-centos -t akrieger/java:latest .</code></pre>
+                </section>
+
+                <section>
                     <img src="img/buildtomcat.png" />
                 </section>
 
@@ -223,18 +234,7 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 </section>
 
                 <section>
-                    <h3 style="text-transform: none">Dockerfile per Image</h3>
-                    <pre><code class="dockerfile">FROM centos:latest
-
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/bin
-
-RUN yum install -y -q java-1.8.0*</code></pre>
-                    <p>Build the image:</p>
-<pre><code>docker build -t akrieger/java:8-centos -t akrieger/java:latest .</code></pre>
-                </section>
-
-                <section>
-                    <h4>#1: Self-Documenting and Intentional</h4>
+                    <h4>Dockerfile Syntax</h4>
                     <ul>
                         <li>FROM - Starting image</li>
                         <li>COPY - Files for the new image</li> 
@@ -243,27 +243,21 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                         <li>USER/ENV</li>
                         <li>RUN - Runs/Compiles</li>
                     </ul>
-                    <p>Image showing vol/file/config</p>
                 </section>
 
                 <section>
-                    <h4>#2: Cohesive</h4>
-                    <!-- Harder for responsibility to be confused -->
+                    <h4>Using the Right Tools</h4>
+                    <img src="img/frameworkadoption.png" />
                 </section>
 
                 <section>
-                    <h4>#3: Portable and Pre-Compiled</h4>
-                </section>
-
-                <section>
-                    <h4>Docker Registry</h4>
-
-                </section>
-
-                <section>
-                    <p>Control the Recipe</p>
-                    <p>Try new Flavours</p>
-                    <p>Image showing framework adoption</p>
+                    <ul style="list-style-type: none">
+                        <li><i class="fa fa-arrow-up" style="color: green"></i> More Self-Documenting</li>
+                        <li><i class="fa fa-arrow-up" style="color: green"></i> More Cohesive</li>
+                        <li><i class="fa fa-arrow-up" style="color: green"></i> More Shareable</li>
+                        <li><i class="fa fa-arrow-up" style="color: green"></i> More Flexible</li>
+                        <li><i class="fa fa-arrow-up" style="color: yellow"></i> More Work?</li>
+                    </ul>
                 </section>
 
                 <!-- Who cares?
@@ -273,17 +267,25 @@ RUN yum install -y -q java-1.8.0*</code></pre>
             </section>
 
             <section>
-                <h2>Deploying Containers</h2>
-            </section>
-
-            <section>
                 <p class="section-subtitle">Deployment</p>
+
+                <section>
+                    <h2>Deploying Containers</h2>
+                </section>
+
                 <!-- Workflow: Deployment of containers
                     Benefit: Eliminate many points of environmental variance
                         Cleanup is simple  -->
 
                 <section>
                     <img src="img/dockerdeploy_single.png" />
+                    <!--Everything but the icing is downloaded from the registry -->
+<pre><code>docker run --name presentation -d 
+    -p 7000:80 -p 7001:443 
+    -v $HERE/html:/usr/share/nginx/html
+    -e "SOME_ENV_VAR=devOrProdOrWhateverYoudLike"
+    akrieger/revealjs:2.3</code></pre>
+                    
                 </section>
 
                 <section>
@@ -311,28 +313,40 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                 </section>
 
                 <section>
-                    <img style="vertical-align:middle" src="img/dockerdeploy.png" />
-                    <ul style="vertical-align:middle">
-                        <li>Dependencies during build</li>
-                        <li>Use of binaries in place</li>
-                        <li>Always a clean slate</li>
-                        <li>Process + Container Setup</li>
+                    <table>
+                        <tr>
+                            <td>
+                                <img style="vertical-align:middle" src="img/dockerdeploy.png" />
+                            </td>
+                            <td>
+                                <ul style="vertical-align:middle">
+                                    <li>Host OS is already booted</li>
+                                    <li>Always a clean slate</li>
+                                    <li>Shareable Binaries</li>
+                                    <li>Effort at Build-time</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h4>Procedure Deployment</h4>
+                    <img src="img/proceduredeployment.png" />
+                </section>
+
+                <section>
+                    <h4>Image Deployment</h4>
+                    <img src="img/dockerregistry.png" />
+                </section>
+
+                <section>
+                    <ul style="list-style-type: none">
+                        <li><i class="fa fa-arrow-down" style="color: green"></i> Less File Transfer</li>
+                        <li><i class="fa fa-arrow-down" style="color: green"></i> Less Disk Usage</li>
+                        <li><i class="fa fa-arrow-down" style="color: green"></i> Less Startup Time</li>
+                        <li><i class="fa fa-arrow-up" style="color: green"></i> More Consistency</li>
                     </ul>
-                </section>
-
-                <section>
-                    <!--Everything but the icing is downloaded from the registry -->
-                    <h4>Deploy with Docker</h4>
-<pre><code>docker run --name presentation -d 
-    -p 7000:80 -p 7001:443 
-    -v $HERE/html:/usr/share/nginx/html
-    -e "SOME_ENV_VAR=devOrProdOrWhateverYoudLike"
-    akrieger/revealjs</code></pre>
-                </section>
-
-                <section>
-                    <p>Ops/Dev/QA/Customer* - Never see a class of errors</p>
-                    <p>Architects - Fewer reasons for defensive design</p>
                 </section>
 
                 <!-- Who cares?
@@ -343,39 +357,76 @@ RUN yum install -y -q java-1.8.0*</code></pre>
             </section>
 
             <section>
-                <h2>Adopting Docker</h2>
+                <section>
+                    <h3>Adopting Docker</h3>
+                </section>
+
+                <section>
+                    <h4>Do what you know</h4>
+                    <ul>
+                        <li>Cloud or On-Prem</li>
+                        <li>Right framework, right time</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Give it a chance</h4>
+                    <ul>
+                        <li>Simple</li>
+                        <li>Independent, or Interfaced</li>
+                        <li>Background</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Self-Document</h4>
+                    <ul>
+                        <li>Dockerfiles</li>
+                        <li>Compose files</li>
+                        <li><i>Build</i></li>
+                        <li><i>Run</i></li>
+                    </ul>
+                    
+                </section>
+
+                <p class="section-subtitle">Adoption</p>
             </section>
 
             <section>
-                <p class="section-subtitle">Adopting Docker</p>
-
                 <section>
-                    <h4>Controlled Complexity, now what?</h4>
+                    <h3>Designing in Containers</h3>
                 </section>
 
                 <section>
                     <h4>Composable Components</h4>
-                    <p>Simpler pieces</p>
-                    <p>Easier to fix</p>
-                    <p>Easier to improve</p>
-                    <p>Easier to reuse</p>
-                </section>
-                <!-- Ease of finding errors -->
-                <!-- Ease of adding func -->
-                <!-- Understanding a smaller piece -->
-
-                <section>
-                    <p>Image: Using the same base image for multiple component images</p>
+                    <ul>
+                        <li>Simpler pieces</li>
+                        <li>Easier to fix</li>
+                        <li>Easier to improve</li>
+                        <li>Easier to reuse</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h4>Agility in Containers</h4>
+                    <h4>Rethink Services</h4>
+                    <ul>
+                        <li>Components at the Process Level</li>
+                        <li>Indefinite/Transitory Lifetimes</li>
+                        <li>Serverless (even on-prem)</li>
+                    </ul>
+                    <!-- https://blog.docker.com/2016/06/building-serverless-apps-with-docker/ -->
+                    
                 </section>
+
+                <p class="section-subtitle">Design</p>
             </section>
             
 
+            <!-- https://www.datadoghq.com/docker-adoption/ -->
+            <!-- https://www.weave.works/guides/monitor-docker-containers/ -->
             <section>
-                <h2>Thank you!</h2>
+                <h2>Agility in Containers</h2>
+                <h4>Thank you!</h4>
             </section>
 
 
@@ -384,48 +435,6 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                     <h4>Conway's Law for Infrastructure</h4>
                     <p>The structure of an organization's products and services will correspond to the structural capabilities of that organization's infrastructure.</p>
                 </section>
-                <section>
-                    Adoption is still ramping.
-                    <!-- https://www.datadoghq.com/docker-adoption/ -->
-                </section>
-            </section>
-
-            <section>
-                <h4>Docker Toolset</h4>
-                <p>Docker Machine - For provisioning hosts</p>
-                <p>Docker Engine - Build/Run Containers</p>
-                <p>Docker Compose - For defining multi-container applications</p>
-                <p>Docker Hub - Image repository</p>
-                <p>Swarm Mode - Multi-host orchestration</p>
-            </section>
-
-            <section>
-                Docker Security
-                Priviledged v unpriviledged containers (whether they run as root on the host)
-            </section>
-
-            <section>
-                <h4>Support</h4>
-                Monitor
-                Gather
-                Cycle
-                Upgrade
-                Recover
-
-                docker exec
-                docker cp
-
-                Monitoring
-                appdyn - monitor connections, detect traffic, build map
-                docker (weave?) - read container config
-            </section>
-            <!-- https://www.weave.works/guides/monitor-docker-containers/ -->
-            
-            <section>
-                Scalability
-                App binaries define strong barriers of composability, but don't usually play well with each other (unless you have a system of telling them apart (Undiff Val))
-                VM images also provide barriers of composability, but are too heavy to shunt around
-                Containers are a user space wrapped around a collection of binaries, and are both portable and play nicely with each other
             </section>
 
             <section>
@@ -433,23 +442,6 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                 Microkernels
             </section>
 
-            <section>
-                What is a container?
-                Why do I care?
-                    - Flexibility via Isolation
-                        To use new tech
-                        To compose at the service layer
-                        To scale comfortably
-                    - Immutability and Portability together
-                        VMs can be immutable, but are heavy
-                        Binaries can be portable, but environmental variance often causes problems
-
-                What do I get, that I didn't know I would.
-                    - Security
-                    - Developers always thinking about touchpoints
-                    - Homogenized framwork use methods: No more deployed framework version managers
-                    - Developing in final production environment almost immediately
-            </section>
         </div>
 
     </div>
