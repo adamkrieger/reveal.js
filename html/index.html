@@ -89,6 +89,7 @@
             </section>
 
             <section>
+                Rehill
                 <section>
                     <h4>Anonymous Polling</h4>
                     <ul>
@@ -97,20 +98,23 @@
                         <li>Regular Recognition</li>
                         <li>Simple & Convenient</li>
                     </ul>
-                    <p>How about Slack?</p>
+                    <p>How about Slack? <logo/></p>
                 </section>
             </section>
 
             <section>
-                <h3>Pollease</h3>
+                Rehill
+                <h3>Pollease Requirements</h3>
                 <ol>
                     <li>Open Poll</li>
                     <li>Voting Mechanic</li>
                     <li>Close Poll</li>
+                    <li>Print Results to Poller</li>
                 </ol>
             </section>
 
             <section>
+                Rehill
                 <h3>Ways to Integrate</h3>
                 <ul>
                     <li>Slash Commands *</li>
@@ -122,605 +126,158 @@
             </section>
 
             <section>
-                Open Poll - Slash Commands
-                Return Options - Interactive outputMessage
-                Take Votes
-                Close - Slash command
-
-                ngrok, docker, visual studio code, slack team (admin), sqlite
-
-                deployment 
-                build, deploy, infrastructure
-                docker hub, docker cloud, digital ocean
-
-                run
-                flask, gunicorn (nginx), docker, sqlite
+                Krieger
+                <section>
+                    <diagram of difference between normal api consumption and this />
+                    Slack UI -> Slack API -> Pollease API
+                </section>
+                <section>
+                    HIGHLIGHT what we have to build
+                    Abstract of adding to a team (authorize, html page, logged in user)
+                </section>
+                <section>
+                    HIGHLIGHT what we have to build
+                    Abstract of in-use data flow (/hello)
+                </section>
             </section>
 
             <section>
+                Krieger
                 <section>
-                    <h2>What is Better?</h2>
-                    <p>Types -> Enhanced Safety</p>
-                    <p>Funcs -> Roll-Forward Flow</p>
-                    <p>.Net  -> Pragmatic Leverage</p>
-                </section>
-            </section>
-            
-            <section>
-                <section data-transition="concave">
-                    <img src="img/feedbackloop.png"/>
-                </section>
-                <section data-transition="concave">
-                    <img src="img/feedbackloop_zoomout.png"/>
-                </section>
-            </section>
-            
-            <section>
-                <section>
-                    <h3>Foundation</h3>
-                    <table style="width: 100%">
-                        <tr><td>No nulls!</td><td><i>Absence of Absence</i></td></tr>
-                        <tr><td><pre><code class="fs">let x = 1</code></pre></td><td><i>Binding instead of Assignment</i></td></tr>
-                        <tr><td>Immutability</td><td><i>Write-once</i></td></tr>
-                        <tr><td><pre><code class="fs">data |> func</code></pre></td><td><i>Sequential Cohesion</i></td></tr>
-                    </table>
-                </section>
-                <section>
-                    <h5>Foundation: Basics</h5>
-<pre><code class="fs">
-type Item = { Price: decimal }
-
-let withTax price = price * 1.14M; // price:decimal -> decimal
-
-let shirt = { Price = 10.00M }
-
-do shirt.Price
-|> withTax
-|> printfn "%.2f"
-
-</code></pre>
-                </section>
-                <section>
-                    <h5>Foundation: Error-prone C#</h5>
-<pre><code class="cs" style="max-height: 500px;">
-public class Item{
-    public decimal Price;
-    public decimal WithTax()
-    {
-        Price *= 1.14M;
-        return Price;
-    }
-}
-
-Item shirt;
-// Oops #1: shirt is null
-
-shirt = new Item(); 
-// Oops #2: shirt.Price is 0
-shirt.Price = 10.00M;
-
-var priceWithTax = shirt.WithTax();
-//Oops #3: shirt.Price has been changed to 11.40
-
-</code></pre>
-                </section>
-                <section>
-                    <h5>Foundation: Safe-ish C#</h5>
-<pre><code class="cs" style="max-height: 500px">public class ImmutableItem
-{
-    private ImmutableItem(){}
-    private ImmutableItem(decimal price){ this.Price = price; }
-    
-    public readonly decimal Price;
-    
-    public static ImmutableItem Create(decimal price){
-        return new ImmutableItem(price);
-    }
-    
-    public decimal WithTax(){
-        //Price *= 1.14M; <-- A readonly field cannot be assigned to
-        return Price * 1.14M;
-    }
-}
-
-var shirt = ImmutableItem.Create(10.00M);
-var priceWithTax = shirt.WithTax();
-Console.WriteLine(priceWithTax);
-</code></pre>
-                </section>
-                <section>
-                    <h5 style="text-align: left">For Better C#</h5>
-                    <table style="width: 80%">
-                        <tr><td><pre><code class="cs">private</code></pre></td><td><i>Lock down constructors</i></td></tr>
-                        <tr><td><pre><code class="cs">readonly</code></pre></td><td><i>Write-once properties</i></td></tr>
-                    </table>
-                    <h5 style="text-align: left">Or Use F#</h5>
-<pre><code class="fs">type Item = { Price: decimal }
-
-let withTax price = price * 1.14M; // price:decimal -> decimal
-
-let shirt = { Price = 10.00M }
-
-do shirt.Price
-|> withTax
-|> printfn "%.2f"
-</code></pre>
-                </section>
-            </section>
-            
-            <section>
-                <section>
-                    <h3>Form (Types)</h3>
-                    <table style="width: 90%">
-                        <tr><td>Variety</td><td><i>The spice of Life!</i></td></tr>
-                        <tr><td>Decomposition</td><td><i>Good for the environment!</i></td></tr>
-                        <tr><td>Inference</td><td><i>The compiler comes to you</i></td></tr>
-                        <tr><td>Currying</td><td><i>Enough spice, already!</i></td></tr>
-                    </table>
-                </section>
-                
-                <section>
-                    <h5>Form: Composition / Decomposition</h5>
-<pre><code class="fs">// Tuple without Tuple&lt;int,int>
-let point = 4, 5
-let x, y = point
-
-// Record
-type person = { FirstName: string; LastName: string }
-let amySmith = { FirstName = "Amy"; LastName = "Smith" }
-let { LastName = smith } = amySmith
-</code></pre>
-                    <i>No need for GetHashCode() or Equals()!</i>
-                </section>
-                
-                <section>
-                    <h3>Form: Variety</h3>
-                    <table style="width: 80%">
-                        <tr><td>Tuples</td><td><i>Light as a feather</i></td></tr>
-                        <tr><td>Records</td><td><i>Immutable Databags</i></td></tr>
-                        <tr><td>Unions</td><td><i>This, That, or the Other</i></td></tr>
-                        <tr><td>Lists</td><td><i>Collections, redefined</i></td></tr>
-                        <tr><td>Functions</td><td><i>Automatically curried</i></td></tr>
-                    </table>
-                </section>
-                
-                <section>
-                    <h5>Form: Unions</h5>
-<pre><code class="fs" style="max-height: 500px">// Alias
-type Username     = string
-// Single-choice Union
-type Password     = Password of string
-// Two-choice Union
-type Server       = URL of string | IP of byte[]
-// Single-choice Union with a Tuple type
-type HttpResponse = Response of int * string
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Form: Inferent Typing</h5>
-<pre><code class="fs" style="max-height: 500px">type Username     = string
-type Password     = Password of string
-type Server       = URL of string | IP of byte[]
-type HttpResponse = Response of int * string
-    
-let sendSecureMessageToServer (name:Username) (pword:Password) 
-                              (dest:Server) message =
-    Response (200, "Delivered Successfully")
-     
-let password = Password "12345"
-let url = URL "https://localhost:9999/api/messages"
-
-let sendMessage = sendSecureMessageToServer "johnny" password url 
-do sendMessage "Oh hi, Mark."      |> ignore
-do sendMessage "I have a problem." |> ignore
-
-let sendNumber = sendSecureMessageToServer "mark" password url
-do sendNumber 9001                 |> ignore
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5 style="text-align: left">C# Types</h5>
-                    <i>Everything's an Object!</i>
-                    <h5 style="text-align: left">F# Types</h5>
-                    <table style="width: 90%">
-                        <tr><td>Types</td><td><i>Declare intent</i></td></tr>
-                        <tr><td>Composition</td><td><i>Over construction</i></td></tr>
-                        <tr><td>Safety</td><td><i>Lint the danger</i></td></tr>
-                        <tr><td>Currying</td><td><i>Without heavy DSLs</i></td></tr>
-                    </table>
-                </section>
-            </section>
-            
-            <section>
-                <section>
-                    <h3>Functions!</h3>
-                    <table style="width: 90%">
-                        <tr><td><pre><code class="fs">fun x = x + 2</code></pre></td><td><i>Lame joke alert.</i></td></tr>
-                        <tr><td>Pattern Matching</td><td><i>Ditch the switch</i></td></tr>
-                        <tr><td><pre><code class="fs">option 'a</code></pre></td><td><i>A friendly Monad</i></td></tr>
-                        <tr><td><pre><code class="fs">thisFunc >> thatFunc</code></pre></td><td><i>Snap functions together</i></td></tr>
-                    </table>
-                </section>
-                
-                <section>
-                    <h5>Func: F# Safety in 6 Lines</h5>
-<pre><code class="fs" style="max-height: 500px">let printName input =
-    match input with | Some cheese -> printfn "%s" cheese.Name
-                     | None        -> printfn "%s" "Completely out."
-    
-let pickCheese id =
-    List.tryFind (fun cheese -> cheese.Id = id)
-    >> printName
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Func: Unsafe C# (11 Lines)</h5>
-<pre><code class="cs" style="max-height: 500px">public Cheese GetCheese(Cheese[] cheeses, string id){
-    Cheese foundCheese = null;
-    
-    foreach (var cheese in cheeses){
-        // Oops #1
-        if(cheese.id == id){
-            foundCheese = cheese;
-        }
-    }
-    //Oops #2
-    return foundCheese;
-}
-
-var cheese = GetCheese(cheeses, "rwin");
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Func: Defensive C# (27 Lines)</h5>
-<pre><code class="cs" style="max-height: 500px">public bool GetCheese(Cheese[] cheeses, string id,
-    out Cheese notAtAllObviousActualValue){
-        
-    foreach (var cheese in cheeses){
-        if(cheese.id == id){
-            notAtAllObviousActualValue = cheese;
-            return true;
-        }
-    }
-    notAtAllObviousActualValue = null;
-    return false;
-}
-
-string outputMessage = string.Empty;
-Cheese cheese = null;
-
-if(GetCheese(cheeses, "none", out cheese)){
-    outputMessage = cheese.name;    
-}
-else{ outputMessage = "Could not find cheese."; }
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Func: A C# Maybe</h5>
-<pre><code class="cs" style="max-height: 500px">using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-
-public class Maybe&lt;T>
-{
-    public readonly T Value;
-    public readonly bool Is; 
-    
-    private Maybe(){}
-    private Maybe(bool isSome, T value){
-        Is = isSome;
-        Value = value;
-    }
-    
-    public static Maybe&lt;T> Some(T value){
-        return new Maybe&lt;T>(true, value);
-    }
-    
-    public static Maybe&lt;T> None(){
-        return new Maybe&lt;T>();
-    }
-    
-    public Maybe&lt;T> IfIs(Action&lt;T> action){
-        if(Is){
-            action(Value);
-        }
-        return this;
-    }
-    
-    public Maybe&lt;T> IfIsNot(Action action){
-        if(!Is){
-            action();
-        }
-        return this;
-    }
-}
-
-public static class EnumExt
-{
-    public static Maybe&lt;T> TrySingle&lt;T>(
-        this IEnumerable&lt;T> collection, Func&lt;T, bool> pred)
-    {
-        try{
-            return Maybe&lt;T>.Some(collection.Single(pred));
-        }
-        catch(InvalidOperationException){
-            return Maybe&lt;T>.None();
-        }
-    }
-}
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Func: Safe C# (4+50 Lines)</h5>
-<pre><code class="cs" style="max-height: 500px">cheeses
-    .TrySingle(cheese => cheese.id == "ched")
-    .IfIs(cheese => Console.WriteLine(cheese.name))
-    .IfIsNot(() => Console.WriteLine("Not found."));
-</code></pre>
+                    We have to get this complexity out of the way, so we're going to explain:
+                    Adding Authorize and Test Command
                 </section>
 
-                
                 <section>
-                    <h5 style="text-align: left">Better C# Functions</h5>
-                    <table style="width: 95%">
-                        <tr><td>Get 'out', out</td><td><i>Stop the confusion</i></td></tr>
-                        <tr><td><pre><code class="cs">Maybe&lt;T></code></pre></td><td><i>Build your own reusable control.</i></td></tr>
-                        <tr><td><pre><code class="cs">TrySingle().IfIs()</code></pre></td><td><i>Extend LINQ Generically</i></td></tr>
-                    </table>
-                    <h5 style="text-align: left">F# Functions</h5>
-<pre><code class="fs" style="max-height: 500px">let printName = function 
-              | Some cheese -> printfn "%s" cheese.Name
-              | None        -> printfn "%s" "Completely out."
-    
-let pickCheese id = List.tryFind (fun item -> item.Id = id)
-                    >> printName
-</code></pre>
+                    gunicorn + Flask running in a Docker container
                 </section>
-            </section>
-            
-            <section>
-                <section data-transition="fade">
-                    <img src="img/feedbackloop.png"/>
-                </section>
-                
-                <section data-transition="fade">
-                    <img src="img/feedbackloop_accel.png"/>
-                </section>
-            </section>
 
-            
-            <section>
                 <section>
-                    <h3>Railway-oriented Programming!</h3>
-                    <table style="width: 90%">
-                        <tr><td><pre><code class="fs">bind</code></pre></td><td><i>Lightweight coupling</i></td></tr>
-                        <tr><td><pre><code class="fs">choice</code></pre></td><td><i>What?! Another Monad?</i></td></tr>
-                        <tr><td>Roll Forward</td><td><i>Ride the rails</i></td></tr>
-                    </table>
+                    ngrok
                 </section>
-                
-                <section>
-                    <h5>Plug-in Validation</h5>
-<pre><code class="fs" style="max-height: 500px">myBooking
-|> idNotZero
-|> bind actuallyGoingSomewhere
-|> bind addPlanet
-|> function
-    | Success booking -> printfn "Have fun in %s!" booking.Destination
-    | Failure error -> printfn "%s" error
-</code></pre>
-                </section>
-                
-                <section>
-                    <h5>Start with one</h5>
-<pre><code class="fs" style="max-height: 500px">type Booking = { Id: int;
-                 Destination: string }
-    
-let idNotZero booking = 
-    match booking.Id with
-    | 0 -> None
-    | id -> Some booking
-    
-let myBooking = { Id = 2;
-              Destination = "France" }
 
-myBooking
-|> idNotZero
-|> function
-    | Some booking -> printfn "Have fun in %s!" booking.Destination
-    | None -> printfn "%s" "Oops!"
-</code></pre>
-                </section>
-                
                 <section>
-                    <h5>Add another</h5>
-<pre><code class="fs" style="max-height: 500px">let idNotZero booking = 
-    match booking.Id with
-    | 0 -> None
-    | id -> Some booking
-    
-let actuallyGoingSomewhere =
-    function
-    | None -> None
-    | Some booking ->
-        booking.Source = booking.Destination
-        |> function
-            | true -> None
-            | false -> Some booking  
-</code></pre>
-                    <i>But design for N</i>
+                    authorize endpoint
                 </section>
-                
-                <section>
-                    <h5>Option.bind</h5>
-<pre><code class="fs" style="max-height: 500px">let idNotZero booking = 
-    match booking.Id with
-    | 0 -> None
-    | id -> Some booking
-    
-let actuallyGoingSomewhere booking =
-    booking.Source = booking.Destination
-    |> function
-       | true -> None
-       | false -> Some booking
-       
-myBooking
-|> idNotZero
-|> Option.bind actuallyGoingSomewhere
-|> Option.bind planetExists
-|> function
-    | Some booking -> printfn "Have fun in %s!" booking.Destination
-    | None -> printfn "%s" "Oops!"
-</code></pre>
-                    <i>But which one failed?</i>
-                </section>
-                
-                <section>
-                    <h5>Custom 'switcher'</h5>
-<pre><code class="fs" style="max-height: 500px">type Result<'TSuccess, 'TFailure> =
-    | Success of 'TSuccess
-    | Failure of 'TFailure 
 
-let bind f = fun eitherInput ->
-                match eitherInput with
-                | Success x -> f x
-                | Failure x -> Failure x
-        
-let idNotZero booking = match booking.Id with
-                        | 0 -> Failure "Oops, the id is zero."
-                        | id -> Success booking
-    
-myBooking
-|> idNotZero
-|> bind actuallyGoingSomewhere
-|> bind addPlanet
-|> function
-    | Success booking -> printfn "Have fun in %s!" booking.Destination
-    | Failure error -> printfn "%s" error
-</code></pre>
+                <section>
+                    content of html page
                 </section>
-                
+
+                <section>
+                    Recenter everyone with the diagram of the auth flow
+                    More highlighting of what we just built
+                </section>
             </section>
 
             <section>
+                Rehill
                 <section>
-                    <h2>C# / F# Interop</h2>
-                    <p><i>Getting value without rewrites</i></p>
+                    Create open poll
+                    <screenshot of someone typing in the command />
                 </section>
+
                 <section>
-                    <h3>Bootstrapping the example</h3>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>using System;
-
-public enum PaymentType
-{
-    Cash, Visa, Mastercard, Chickens
-}
-
-public class Bill
-{
-    public DateTime DatePaid {get;set;}
-    public decimal Amount {get;set;}
-    public PaymentType TypeOfPayment {get;set;}    
-}
-
-public interface IBillProcessor
-{
-    void PayBill(int id, Bill bill);
-}
-</code></pre>
+                    <screenshot or code of what the payload looks like from the API endpoint />
+                    Data Sample
                 </section>
+
                 <section>
-                    <h4>Existing Flow</h4>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>#r "6.1_BillPay.dll"
-
-public class BillProcessor : IBillProcessor
-{
-    public void PayBill(int id, Bill bill){
-        Console.WriteLine(string.Format(
-         "Paying bill {0}, paid with {1}, in the amount of ${2} on {3}.", 
-         id, bill.TypeOfPayment, bill.Amount, bill.DatePaid));
-    }
-}
-
-IBillProcessor billProcessor = new BillProcessor();
-
-billProcessor.PayBill(
-    24,
-    new Bill(){ DatePaid = DateTime.Now,
-                Amount = 13.28M,
-                TypeOfPayment = PaymentType.Cash }
-);
-</code></pre>
+                    Parsing
                 </section>
+
                 <section>
-                    <h4>Implementing a C# Interface in F#</h4>
-                    <pre><code class="fs" style="max-height: 500px" data-trim contenteditable>module ReplacementBillPayProcessors
-#r "6.1_BillPay.dll"
-
-type BetterBillProcessor() =
-    let calculateTax paymentMethod paymentAmount = 
-        match paymentMethod with
-        | PaymentType.Chickens -> paymentAmount * 1.17M
-        | PaymentType.Mastercard
-        | PaymentType.Visa
-        | PaymentType.Cash -> paymentAmount * 1.05M
-
-    interface IBillProcessor with
-        member this.PayBill(id, bill) =
-            let taxedAmount = calculateTax bill.TypeOfPayment bill.Amount
-        
-            printfn 
-                "Paying %d in F#, with %A, in the amount of $%.2f on %A." 
-                id bill.TypeOfPayment taxedAmount bill.DatePaid
-</code></pre>
+                    Data structure
                 </section>
+                
                 <section>
-                    <h4>Using the F# Implementation from C#</h4>
-                    <pre><code class="cs" style="max-height: 500px" data-trim contenteditable>#r "6.3_BillPayFs.dll"
+                    Storage via sqlite
+                </section>
 
-IBillProcessor billProcessor = 
-    new ReplacementBillPayProcessors.BetterBillProcessor();
-
-billProcessor.PayBill(
-    24,
-    new Bill(){
-        DatePaid = DateTime.Now,
-        Amount = 13.28M,
-        TypeOfPayment = PaymentType.Cash
-    }
-);
-</code></pre>
+                <section>
+                    Return message "poll created"
                 </section>
             </section>
-            
+
             <section>
-                <h2>Thank you!</h2>
-<pre><code class="fs" style="max-height: 500px">let rec sortIter lt eq gt list pivot =
-     match list with
-     | [] -> lt, eq, gt
-     | head::tail when head < pivot -> 
-                                sortIter (head::lt) eq gt tail pivot
-                                
-     | head::tail when head > pivot -> 
-                                sortIter lt eq (head::gt) tail pivot
-                                
-     | head::tail -> 
-                                sortIter lt (head::eq) gt tail pivot
-            
-let rec qsort list = 
-    match list with
-    | []          -> []
-    | pivot::tail -> let lt, eq, gt = sortIter [] [] [] tail pivot
-                     List.collect id [ qsort lt; [pivot]; eq; qsort gt ]
-</code></pre>
+                Rehill
+                <section>
+                    Create a Voting Mechanism
+                    Could use another slash command, buuuut... 
+                </section>
+
+                <section>
+                    Interactive message options
+                    - buttons and menus
+                    We chose buttons
+                </section>
+
+                <section>
+                    <screenshot or code snip of button syntax />
+                    Button syntax
+                </section>
+
+                <section>
+                    Add a Callback API endpoint to flask
+                </section>
+
+                <section>
+                    Make use of callback back into vote options to refresh with selected choice
+                </section>
             </section>
+
+            <section>
+                Rehill
+                <section>
+                    Create a close Mechanism - closes the poll for the user that sent it
+                </section>
+
+                <section>
+                    Another slack command
+                    - reference existing open poll
+                </section>
+
+                <section>
+                    Pretty formatting
+                    Results:
+                    1 Bricks (10)
+                    2 Sticks (5)
+                    3 Straw (2)
+
+                    Congratulations, Bricks!
+                </section>
+            </section>
+
+            <section>
+                Krieger
+                <section>
+                    Deployment on a dime
+                </section>
+
+                <section>
+                    Changing from a dev volume to a prod image
+                </section>
+
+                <section>
+                    auto-build the image
+                    <screenshot of docker cloud config />
+                    <screenshot of build history />
+                </section>
+
+                <section>
+                    Docker Cloud Digital Ocean integration
+                    <screenshot of filling in account info and selecting node type />
+                </section>
+                
+                <section>
+                    <screenshot of deploy run history />
+                </section>
+
+                <section>
+                    update URLs to point at running node
+                </section>
+            </section>
+                
         </div>
 
     </div>
