@@ -231,41 +231,18 @@
             <section>
                 <!-- Rehill -->
                 <section>
-                    <h3>Create a Poll</h3>
-                    <img id="createPoll" src="img/create_poll.jpg">
+                    <h3>Create The Slash Command</h3>
+                    <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
                 </section>
-
                 <section>
                     <screenshot or code of what the payload looks like from the API endpoint />
-                    <h3>Payload Sample</h3>
-                </section>
-
-                <section>
-                    <h3>Parsing & Routing</h3>
-
-                    <pre><code class="py" style="max-height: 500px;">
-def route_pollease_command(command_text):
-    """
-        Parses the command text to an object.
-        If the command is valid, returns the command to be used.
-    """
-    params = shlex.split(command_text.encode('utf8'))
-    command = params.pop(0).lower()
-
-    if command not in VALID_COMMANDS:
-        raise CommandParsingException(ERR_PARSING_COMMAND)
-    else:
-        if command == COMMAND_CREATE:
-            return create_poll
-        elif command == COMMAND_CLOSE:
-            return close_poll
-                    </code></pre>
+                    <h3>Slack Slash Command - Payload Sample</h3>
                 </section>
 
                 <section>
                     <h3>The Domain</h3>
 
-                    <pre><code class="py" style="max-height: 500px;">
+                    <pre><code class="py" style="max-height: 700px;">
 class Poll(object):
     poll_id = ""
     team_id = ""
@@ -283,24 +260,57 @@ class PollChoice(object):
                 </section>
 
                 <section>
-                    <h3>Persisting to DB</h3>
-                    <pre><code class="py" style="max-height: 500px;">
-def persist_poll(self, db_conn, poll):
-    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
-        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
-        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
-    db_conn.execute(sql)
+                    <h3>Parse & Route Slash Command</h3>
 
-    self.persist_poll_choices(db_conn, poll)
-    db_conn.commit()
+                    <pre><code class="py" style="max-height: 700px;">
+def route_pollease_command(command_text):
+    params = shlex.split(command_text.encode('utf8'))
+    command = params.pop(0).lower()
+
+    if command not in VALID_COMMANDS:
+        raise CommandParsingException(ERR_PARSING_COMMAND)
+    else:
+        if command == COMMAND_CREATE:
+            return create_poll
+        elif command == COMMAND_CLOSE:
+            return close_poll
                     </code></pre>
-
+                    <img id="parsing" src="img/parsing.jpg"/>
                 </section>
 
                 <section>
-                    <h3>Back to Slack!</h3>
+                    <h3>Create Poll</h3>
 
-                    <pre><code class="py" style="max-height: 500px;">
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;"">
+def create_poll(repo, db_conn, command_details):
+    poll_name, raw_poll_choices = parse_create_command(command_details.text)
+
+    current_poll = repo.fetch_poll_by_channel(db_conn, \
+        command_details.team_id, command_details.channel_id, now)
+
+    if current_poll is not None:
+        return generate_return_message(ERR_POLL_ALREADY_IN_PROGRESS)
+    
+    poll_choices = []
+    for choice in raw_poll_choices:
+        poll_choices.append(PollChoice(str(uuid.uuid4()), choice))
+
+    new_poll = Poll(str(uuid.uuid4()), command_details.team_id, \
+        command_details.team_domain, command_details.channel_id, \
+        command_details.channel_name, poll_name, arrow.utcnow().timestamp \
+        None, command_details.user_id, poll_choices)
+
+    repo.persist_poll(db_conn, new_poll)
+
+    return generate_new_poll_response(new_poll)
+        
+                    </code></pre>
+                </section>
+
+                                <section>
+                    <h3>Create Poll - Response</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
 for choice in poll.poll_choices:
     options.append(
         {
@@ -328,17 +338,52 @@ return {
                     </code></pre>
                 </section>
                 <section>
-                 <h3>Back to Slack!<h3>
+                 <h3>Create Poll - Response<h3>
                  <img id="votePoll2" src="img/vote_poll2.jpg">
                  <img>
                 </section>
-            </section>
 
-            <section>
+                <section>
+                    <h3>Close Poll</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def close_poll(repo, db_conn, command_details):
+    current_poll = repo.fetch_poll_by_channel(db_conn, \
+        command_details.team_id, command_details.channel_id)
+
+    if current_poll is None:
+        return generate_return_message(ERR_NO_POLL_IN_PROGRESS)
+    elif current_poll.owner_user_id != command_details.user_id:
+        return generate_return_message("You do are not the creator of this poll.")
+    else:
+        current_poll.date_close = arrow.utcnow().timestamp
+        repo.update_poll(db_conn, current_poll)
+        poll_votes = repo.fetch_poll_votes(db_conn, current_poll.poll_id)
+
+        return generate_return_message("Poll: '" + current_poll.name + "' \
+        is now closed. \n Results: \n " + format_poll_votes(poll_votes))
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Close Poll - Response</h3>
+
+                    <pre><code class="py" style="max-height: 700px;">
+{
+    "text": "Poll: Where should we go for lunch? is now closed. \n 
+    Results: \n 
+    Bodegoes (5) \n 
+    Clay Oven (1) \n 
+    Stay and Work! (1)"
+}
+                    </code></pre>
+                    <img id="closePoll2" src="img/close_poll2.jpg"/>
+                </section>
+
                 <!-- Rehill -->
                 <section>
                     <h3>Handling a Vote</h3>
-                    <pre><code class="py" style="max-height: 500px;">
+                    <pre><code class="py" style="max-height: 700px;">
 def interactive():
     params = json.loads(request.form.get("payload"))
     voter_user_id = params.get("user").get("id")
@@ -355,7 +400,7 @@ def interactive():
 
                 <section>
                     <h3>Persisting a Vote</h3>
-                    <pre><code class="py" style="max-height: 500px;">
+                    <pre><code class="py" style="max-height: 700px;">
  def persist_vote(self, db_conn, poll_id, poll_choice_id, voter_user_id):
     previous_vote = self.fetch_vote_for_poll_and_user(db_conn, poll_id, voter_user_id)
 
@@ -367,7 +412,21 @@ def interactive():
         db_conn.commit()                    
                      </code></pre>
                 </section>
+                <section>
+                    <h3>Persisting to DB</h3>
+                    <pre><code class="py" style="max-height: 700px;">
+def persist_poll(self, db_conn, poll):
+    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
+        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
+        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
+    db_conn.execute(sql)
 
+    self.persist_poll_choices(db_conn, poll)
+    db_conn.commit()
+                    </code></pre>
+
+                </section>
+            </section>    
                 <section>
                     <screenshot or code snip of button syntax />
                     Button syntax
@@ -379,28 +438,6 @@ def interactive():
 
                 <section>
                     Make use of callback back into vote options to refresh with selected choice
-                </section>
-            </section>
-
-            <section>
-                Rehill
-                <section>
-                    Create a close Mechanism - closes the poll for the user that sent it
-                </section>
-
-                <section>
-                    Another slack command
-                    - reference existing open poll
-                </section>
-
-                <section>
-                    Pretty formatting
-                    Results:
-                    1 Bricks (10)
-                    2 Sticks (5)
-                    3 Straw (2)
-
-                    Congratulations, Bricks!
                 </section>
             </section>
 
