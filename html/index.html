@@ -231,18 +231,58 @@
             <section>
                 <!-- Rehill -->
                 <section>
-                    <h3>Create The Slash Command</h3>
+                    <h3>Configure Slash Command</h3>
                     <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
                 </section>
                 <section>
-                    <screenshot or code of what the payload looks like from the API endpoint />
                     <h3>Slack Slash Command - Payload Sample</h3>
+                     <pre><code class="py" style="max-height: 700px; font-size:16px;">
+{
+  "data": [
+    "token=TOKENNNNNN&team_id=T3F55CL14&team_domain=swedishchefs&channel_id=C3F55CNDC&
+    channel_name=general&user_id=U3DQ62P5X&user_name=adam.rehill&command=%2Fpollease&
+    text=create+%22Where+should+we+go+for+lunch%22&response_url=https%3A%2F%2F
+    hooks.slack.com%2Fcommands%2FT3GARBAGEFJuO0taWFevCp"
+  ]
+}
+
+class SlackCommand(object):
+    command = ""
+    text = ""
+    team_id = ""
+    team_domain = ""
+    channel_id = ""
+    channel_name = ""
+    user_id = ""
+    user_name = ""
+    response_url = ""
+                    </code></pre>
+                    
+                </section>
+
+                <section>
+                    <h3>Parsing & Routing the Slash Command</h3>
+
+                    <pre><code class="py" style="max-height: 700px;">
+def route_pollease_command(command_text):
+    params = shlex.split(command_text.encode('utf8'))
+    action = params.pop(0).lower()
+
+    if action not in VALID_ACTIONS:
+        raise CommandParsingException(ERR_PARSING_ACTION)
+    else:
+        if action == ACTION_CREATE:
+            return create_poll
+        elif action == ACTION_CLOSE:
+            return close_poll
+                    </code></pre>
+                    <img id="parsing" src="img/parsing.jpg"/>
                 </section>
 
                 <section>
                     <h3>The Domain</h3>
 
-                    <pre><code class="py" style="max-height: 700px;">
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
 class Poll(object):
     poll_id = ""
     team_id = ""
@@ -257,25 +297,6 @@ class PollChoice(object):
     choice_id = ""
     name = ""
                     </code></pre>
-                </section>
-
-                <section>
-                    <h3>Parse & Route Slash Command</h3>
-
-                    <pre><code class="py" style="max-height: 700px;">
-def route_pollease_command(command_text):
-    params = shlex.split(command_text.encode('utf8'))
-    command = params.pop(0).lower()
-
-    if command not in VALID_COMMANDS:
-        raise CommandParsingException(ERR_PARSING_COMMAND)
-    else:
-        if command == COMMAND_CREATE:
-            return create_poll
-        elif command == COMMAND_CLOSE:
-            return close_poll
-                    </code></pre>
-                    <img id="parsing" src="img/parsing.jpg"/>
                 </section>
 
                 <section>
@@ -304,6 +325,20 @@ def create_poll(repo, db_conn, command_details):
 
     return generate_new_poll_response(new_poll)
         
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Create Poll Persistence</h3>
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def persist_poll(self, db_conn, poll):
+    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
+        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
+        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
+    db_conn.execute(sql)
+
+    self.persist_poll_choices(db_conn, poll)
+    db_conn.commit()
                     </code></pre>
                 </section>
 
@@ -379,11 +414,17 @@ def close_poll(repo, db_conn, command_details):
                     </code></pre>
                     <img id="closePoll2" src="img/close_poll2.jpg"/>
                 </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Configure Interactive Messages</h3>
+                    <img id="interactiveMessages" src="img/interactive_messages.jpg"/>
+                </section>
 
                 <!-- Rehill -->
                 <section>
                     <h3>Handling a Vote</h3>
-                    <pre><code class="py" style="max-height: 700px;">
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
 def interactive():
     params = json.loads(request.form.get("payload"))
     voter_user_id = params.get("user").get("id")
@@ -398,9 +439,20 @@ def interactive():
                     </code></pre>
                 </section>
 
-                <section>
-                    <h3>Persisting a Vote</h3>
-                    <pre><code class="py" style="max-height: 700px;">
+                 <section>
+                    <h3>Handling a Vote</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;"">
+def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
+    repo.persist_vote(db_conn, poll_id, poll_choice_id, voter_user_id)
+
+    msg_options = {
+        "replace_original": False
+    }
+
+    return generate_return_message("Your vote has been received", msg_options)
+                    </code></pre>
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
  def persist_vote(self, db_conn, poll_id, poll_choice_id, voter_user_id):
     previous_vote = self.fetch_vote_for_poll_and_user(db_conn, poll_id, voter_user_id)
 
@@ -412,20 +464,12 @@ def interactive():
         db_conn.commit()                    
                      </code></pre>
                 </section>
+
                 <section>
-                    <h3>Persisting to DB</h3>
-                    <pre><code class="py" style="max-height: 700px;">
-def persist_poll(self, db_conn, poll):
-    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
-        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
-        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
-    db_conn.execute(sql)
-
-    self.persist_poll_choices(db_conn, poll)
-    db_conn.commit()
-                    </code></pre>
-
+                    <h3>Voting Response</h3>
+                    <img id="castVote" src="img/cast_vote.jpg"/>
                 </section>
+
             </section>    
                 <section>
                     <screenshot or code snip of button syntax />
