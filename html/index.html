@@ -81,15 +81,7 @@
             </section>
 
             <section>
-                <h1>Adam Krieger</h1>
-            </section>
-
-            <section>
-                <h1>Adam Rehill</h1>
-            </section>
-
-            <section>
-                Rehill
+                <!-- Krieger -->
                 <section>
                     <h4>Anonymous Polling</h4>
                     <ul>
@@ -103,30 +95,108 @@
             </section>
 
             <section>
-                Rehill
-                <h3>Pollease Requirements</h3>
-                <ol>
-                    <li>Open Poll</li>
-                    <li>Voting Mechanic</li>
-                    <li>Close Poll</li>
-                    <li>Print Results to Poller</li>
-                </ol>
+                <h1>Adam Krieger</h1>
             </section>
 
             <section>
-                Rehill
-                <h3>Ways to Integrate</h3>
-                <ul>
-                    <li>Slash Commands *</li>
-                    <li>Chat Bots</li>
-                    <li>Interactive Messages *</li>
-                    <li>Incoming Webhooks</li>
-                    <li>Events RTM</li>
-                </ul>
+                <h1>Adam Rehill</h1>
             </section>
 
             <section>
-                Krieger
+                <!-- Rehill -->
+                <section>
+                    <h3>Pollease Requirements</h3>
+                    <ol>
+                        <li>Create a Poll</li>
+                        <li>Anonymously Vote on a Poll</li>
+                        <li>Close a Poll & Display Results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Why Anonymous?</h3>
+                </section>
+                <section>
+                    <span style="font-style:italic;">What is your favorite Star Wars character?</span>
+                </section>
+                <section>
+                    <img id="jarJar" src="img/jar_jar.jpg"/>
+                </section>
+                <section>
+                    <img id="steveHarvey" src="img/steve_harvey.gif"/>
+                </section>
+                <section>
+                    <h3>Create a Poll</h3>
+                    <img id="createPoll" src="img/create_poll.jpg">
+                </section>
+                <section>
+                    <h3>Anonymously Vote on a Poll</h3>
+                    <img id="votePoll2" src="img/vote_poll2.jpg">
+                    <img id="votePoll" src="img/vote_poll.jpg">
+                </section>
+                <section>
+                    <h3>Close a Poll & Display Results</h3>
+                    <img id="closePoll" src="img/close_poll.jpg">
+                    <img id="closePoll2" src="img/close_poll2.jpg">
+                </section>
+            </section>
+
+            <section>
+                <!-- Rehill -->
+                <section>
+                    <h3>Ways to Integrate With Slack</h3>
+                    <ul>
+                        <li>Slash Commands *</li>
+                        <li>Interactive Messages *</li>
+                        <li>Incoming Webhooks</li>
+                        <li>Bot Users</li>
+                        <li>Event Subscriptions</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Slash Commands</h3>
+                    <img id=slashCommands src="img/slash_commands.png"/>
+                </section>
+                <section>
+                    <h3>Interactive Messages</h3>
+                    <img id=ineractiveMessages src="img/interactive_messages.gif"/>
+                    </br>
+                    <img id=ineractiveMessages2 src="img/interactive_messages2.png" style="background-color: white; padding:10px;"/>
+                </section>
+                <section>
+                    <h3>Bot Users</h3>
+                     <ul>
+                        <li>Monitor and process channel activity</li>
+                        <li>Post messages and react to users</li>
+                    </ul>
+                    <img id="botUsers" src="img/bot_users.gif">
+                </section>
+                <section>
+                    <h3>Bot Users</h3>
+                    <img id="botUsers2" src="img/bot_users2.jpg">
+                </section>
+                <section>
+                    <h3>Incoming Webhooks</h3>
+                    <img id="incomingWebhooks" src="img/incoming_webhooks.jpg">
+                </section>
+                <section>
+                    <h3>Incoming Webhooks</h3>
+                    <img id="incomingWebhooks2" src="img/incoming_webhooks2.jpg">
+                    <img id="incomingWebhooks3" src="img/incoming_webhooks3.jpg">
+                    <img id="incomingWebhooks4" src="img/incoming_webhooks4.jpg">
+                </section>
+                <section>
+                    <h3>Event Subscriptions</h3>
+                   
+                    <img id="eventSubscriptions" src="img/event_subscriptions.jpg">
+                     <ul>
+                        <li>Don't call Slack...let Slack call you</li>
+                        <li>Subscribe to the events YOU need</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section>
+                <!-- Krieger -->
                 <section>
                     <diagram of difference between normal api consumption and this />
                     Slack UI -> Slack API -> Pollease API
@@ -142,7 +212,7 @@
             </section>
 
             <section>
-                Krieger
+                <!-- Krieger -->
                 <section>
                     We have to get this complexity out of the way, so we're going to explain:
                     Adding Authorize and Test Command
@@ -171,85 +241,249 @@
             </section>
 
             <section>
-                Rehill
+                <!-- Rehill -->
                 <section>
-                    Create open poll
-                    <screenshot of someone typing in the command />
+                    <h3>Configure Slash Command</h3>
+                    <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
+                </section>
+                <section>
+                    <h3>Slack Slash Command - Payload Sample</h3>
+                     <pre><code class="py" style="max-height: 700px; font-size:16px;">
+{
+  "data": [
+    "token=TOKENNNNNN&team_id=T3F55CL14&team_domain=swedishchefs&channel_id=C3F55CNDC&
+    channel_name=general&user_id=U3DQ62P5X&user_name=adam.rehill&command=%2Fpollease&
+    text=create+%22Where+should+we+go+for+lunch%22&response_url=https%3A%2F%2F
+    hooks.slack.com%2Fcommands%2FT3GARBAGEFJuO0taWFevCp"
+  ]
+}
+
+class SlackCommand(object):
+    command = ""
+    text = ""
+    team_id = ""
+    team_domain = ""
+    channel_id = ""
+    channel_name = ""
+    user_id = ""
+    user_name = ""
+    response_url = ""
+                    </code></pre>
+                    
                 </section>
 
                 <section>
-                    <screenshot or code of what the payload looks like from the API endpoint />
-                    Data Sample
+                    <h3>Parsing & Routing the Slash Command</h3>
+
+                    <pre><code class="py" style="max-height: 700px;">
+def route_pollease_command(command_text):
+    params = shlex.split(command_text.encode('utf8'))
+    action = params.pop(0).lower()
+
+    if action not in VALID_ACTIONS:
+        raise CommandParsingException(ERR_PARSING_ACTION)
+    else:
+        if action == ACTION_CREATE:
+            return create_poll
+        elif action == ACTION_CLOSE:
+            return close_poll
+                    </code></pre>
+                    <img id="parsing" src="img/parsing.jpg"/>
                 </section>
 
                 <section>
-                    Parsing
+                    <h3>The Domain</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+class Poll(object):
+    poll_id = ""
+    team_id = ""
+    channel_id = ""
+    name = ""
+    date_open = 0
+    date_close = 0
+    owner_user_id = ""
+    poll_choices = []
+
+class PollChoice(object):
+    choice_id = ""
+    name = ""
+                    </code></pre>
                 </section>
 
                 <section>
-                    Data structure
-                </section>
-                
-                <section>
-                    Storage via sqlite
+                    <h3>Create Poll</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;"">
+def create_poll(repo, db_conn, command_details):
+    poll_name, raw_poll_choices = parse_create_command(command_details.text)
+
+    current_poll = repo.fetch_poll_by_channel(db_conn, \
+        command_details.team_id, command_details.channel_id, now)
+
+    if current_poll is not None:
+        return generate_return_message(ERR_POLL_ALREADY_IN_PROGRESS)
+    
+    poll_choices = []
+    for choice in raw_poll_choices:
+        poll_choices.append(PollChoice(str(uuid.uuid4()), choice))
+
+    new_poll = Poll(str(uuid.uuid4()), command_details.team_id, \
+        command_details.team_domain, command_details.channel_id, \
+        command_details.channel_name, poll_name, arrow.utcnow().timestamp \
+        None, command_details.user_id, poll_choices)
+
+    repo.persist_poll(db_conn, new_poll)
+
+    return generate_new_poll_response(new_poll)
+        
+                    </code></pre>
                 </section>
 
                 <section>
-                    Return message "poll created"
+                    <h3>Create Poll Persistence</h3>
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def persist_poll(self, db_conn, poll):
+    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
+        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
+        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
+    db_conn.execute(sql)
+
+    self.persist_poll_choices(db_conn, poll)
+    db_conn.commit()
+                    </code></pre>
+                </section>
+
+                                <section>
+                    <h3>Create Poll - Response</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
+for choice in poll.poll_choices:
+    options.append(
+        {
+            "text": choice.name,
+            "value": poll.poll_id + " " + choice.choice_id
+        }
+    )  
+
+return {
+    "text": poll.name,
+    "response_type": "in_channel",
+    "attachments": [
+        {
+            "callback_id": "vote_callback",
+            "color": "#3AA3E3",
+            "actions": [
+                {
+                    "type": "select",
+                    "options": options
+                }
+            ]
+        }
+    ]
+}
+                    </code></pre>
+                </section>
+                <section>
+                 <h3>Create Poll - Response<h3>
+                 <img id="votePoll2" src="img/vote_poll2.jpg">
+                 <img>
+                </section>
+
+                <section>
+                    <h3>Close Poll</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def close_poll(repo, db_conn, command_details):
+    current_poll = repo.fetch_poll_by_channel(db_conn, \
+        command_details.team_id, command_details.channel_id)
+
+    if current_poll is None:
+        return generate_return_message(ERR_NO_POLL_IN_PROGRESS)
+    elif current_poll.owner_user_id != command_details.user_id:
+        return generate_return_message("You do are not the creator of this poll.")
+    else:
+        current_poll.date_close = arrow.utcnow().timestamp
+        repo.update_poll(db_conn, current_poll)
+        poll_votes = repo.fetch_poll_votes(db_conn, current_poll.poll_id)
+
+        return generate_return_message("Poll: '" + current_poll.name + "' \
+        is now closed. \n Results: \n " + format_poll_votes(poll_votes))
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Close Poll - Response</h3>
+
+                    <pre><code class="py" style="max-height: 700px;">
+{
+    "text": "Poll: Where should we go for lunch? is now closed. \n 
+    Results: \n 
+    Bodegoes (5) \n 
+    Clay Oven (1) \n 
+    Stay and Work! (1)"
+}
+                    </code></pre>
+                    <img id="closePoll2" src="img/close_poll2.jpg"/>
                 </section>
             </section>
+            <section>
+                <section>
+                    <h3>Configure Interactive Messages</h3>
+                    <img id="interactiveMessages" src="img/interactive_messages.jpg"/>
+                </section>
+
+                <!-- Rehill -->
+                <section>
+                    <h3>Handling a Vote</h3>
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def interactive():
+    params = json.loads(request.form.get("payload"))
+    voter_user_id = params.get("user").get("id")
+    action_dict = params.get("actions")[0]
+    vote_values = action_dict.get("selected_options")[0].get("value").split()
+    
+    poll_id, poll_choice_id = vote_values[0], vote_values[1]
+    
+    db_conn = get_db()
+    
+    return cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id)
+                    </code></pre>
+                </section>
+
+                 <section>
+                    <h3>Handling a Vote</h3>
+
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;"">
+def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
+    repo.persist_vote(db_conn, poll_id, poll_choice_id, voter_user_id)
+
+    msg_options = {
+        "replace_original": False
+    }
+
+    return generate_return_message("Your vote has been received", msg_options)
+                    </code></pre>
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
+ def persist_vote(self, db_conn, poll_id, poll_choice_id, voter_user_id):
+    previous_vote = self.fetch_vote_for_poll_and_user(db_conn, poll_id, voter_user_id)
+
+    if previous_vote is None:
+        db_conn.execute(SQL_PERSIST_POLL_VOTE % (poll_id, poll_choice_id, voter_user_id))
+        db_conn.commit()
+    else:
+        db_conn.execute(SQL_UPDATE_POLL_VOTE % (poll_choice_id, poll_id, voter_user_id))
+        db_conn.commit()                    
+                     </code></pre>
+                </section>
+
+                <section>
+                    <h3>Voting Response</h3>
+                    <img id="castVote" src="img/cast_vote.jpg"/>
+                </section>
 
             <section>
-                Rehill
-                <section>
-                    Create a Voting Mechanism
-                    Could use another slash command, buuuut... 
-                </section>
-
-                <section>
-                    Interactive message options
-                    - buttons and menus
-                    We chose buttons
-                </section>
-
-                <section>
-                    <screenshot or code snip of button syntax />
-                    Button syntax
-                </section>
-
-                <section>
-                    Add a Callback API endpoint to flask
-                </section>
-
-                <section>
-                    Make use of callback back into vote options to refresh with selected choice
-                </section>
-            </section>
-
-            <section>
-                Rehill
-                <section>
-                    Create a close Mechanism - closes the poll for the user that sent it
-                </section>
-
-                <section>
-                    Another slack command
-                    - reference existing open poll
-                </section>
-
-                <section>
-                    Pretty formatting
-                    Results:
-                    1 Bricks (10)
-                    2 Sticks (5)
-                    3 Straw (2)
-
-                    Congratulations, Bricks!
-                </section>
-            </section>
-
-            <section>
-                Krieger
+                <!-- Krieger -->
                 <section>
                     Deployment on a dime
                 </section>
