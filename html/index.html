@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>F# Will Make You a Better .Net Developer - adamkrieger.ca</title>
+    <title>Slack Integrations - adamkrieger.ca</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -41,34 +41,14 @@
 <body>
 
     <img id="aklogo" src="img/aklogo.png" />
-    <div id="akinfo">
-        <p><b>www.adamkrieger.ca</b><br /></p>
-        <p><b><i class="fa fa-twitter"></i> @adamkrieger</b></p>
-    </div>
-    <img id="onlinelogo" src="img/Online_logo.png" />
+    <img id="onlinelogo" src="img/Online_wordmark_white.png" />
 
     <div class="reveal">
 
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section>
-                <div id="titleslide">
-                    <div id="sessionbanner">
-                        <div id="logo">
-                            <img src="img/PrDC_logo.png" />
-                        </div>
-                        <div id="sessiontitle">
-                            <span>Slack Integrations: From Concept to Deployment</span>
-                            <br />
-                            <br />
-                            <span>ADAM KRIEGER & Adam Rehill</span>
-                        </div>
-                    </div>
-                    <div id="sponsors">
-                        <span>SPONSORS</span>
-                        <img src="img/sponsors.png" />
-                    </div>
-                </div>
+                <img src="img/prdc_title.png" />
             </section>
 
             <section>
@@ -85,12 +65,11 @@
                 <section>
                     <h4>Anonymous Polling</h4>
                     <ul>
-                        <li>Great People</li>
-                        <li>Need Reminders</li>
+                        <li>Great People Need Reminders</li>
                         <li>Regular Recognition</li>
                         <li>Simple & Convenient</li>
                     </ul>
-                    <p>How about Slack? <logo/></p>
+                    <p>How about <img style="height: 75px; vertical-align: middle" src="img/slack_logo.svg"/> ?</p>
                 </section>
             </section>
 
@@ -107,9 +86,10 @@
                 <section>
                     <h3>Pollease Requirements</h3>
                     <ol>
-                        <li>Create a Poll</li>
-                        <li>Anonymously Vote on a Poll</li>
-                        <li>Close a Poll & Display Results</li>
+                        <li>Create</li>
+                        <li>Vote</li>
+                        <li>Close</li>
+                        <li>Results</li>
                     </ol>
                 </section>
                 <section>
@@ -199,23 +179,47 @@
                 <!-- Krieger -->
                 <section>
                     <diagram of difference between normal api consumption and this />
-                    Slack UI -> Slack API -> Pollease API
+                    Design & Architecture
                 </section>
                 <section>
-                    HIGHLIGHT what we have to build
-                    Abstract of adding to a team (authorize, html page, logged in user)
+                    <p>Typical Integrations</p>
+                    <img src="img/arch_typical.png" />
                 </section>
                 <section>
-                    HIGHLIGHT what we have to build
-                    Abstract of in-use data flow (/hello)
+                    <p>Slack Integrations</p>
+                    <img src="img/arch_slackint.png" />
+                </section>
+                <section>
+                    <p>Dev Tools</p>
+                    <img src="img/arch_slackdev.png" />
                 </section>
             </section>
 
             <section>
                 <!-- Krieger -->
                 <section>
+                    <p>https://api.slack.com/apps</p>
+                    <img src="img/slack_appsignin.png" />
+                </section>
+                <section>
+                    <img src="img/slack_chefquote.png" />
+                </section>
+                <section>
+                    <p>Your Apps</p>
+                    <img src="img/slack_yourapps.png" />
+                </section>
+                <section>
+                    <img src="img/slack_newapp.png" />
+                </section>
+
+                <section>
                     We have to get this complexity out of the way, so we're going to explain:
                     Adding Authorize and Test Command
+                </section>
+                
+                <section>
+                    <p>Basic Information</p>
+                    <img src="img/slack_authinfo.png" />
                 </section>
 
                 <section>
@@ -314,7 +318,7 @@ class PollChoice(object):
                 <section>
                     <h3>Create Poll</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;"">
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
 def create_poll(repo, db_conn, command_details):
     poll_name, raw_poll_choices = parse_create_command(command_details.text)
 
@@ -354,7 +358,7 @@ def persist_poll(self, db_conn, poll):
                     </code></pre>
                 </section>
 
-                                <section>
+                <section>
                     <h3>Create Poll - Response</h3>
 
                     <pre><code class="py" style="max-height: 700px; font-size:14px;">
@@ -385,9 +389,8 @@ return {
                     </code></pre>
                 </section>
                 <section>
-                 <h3>Create Poll - Response<h3>
-                 <img id="votePoll2" src="img/vote_poll2.jpg">
-                 <img>
+                    <h3>Create Poll - Response<h3>
+                    <img id="votePoll2" src="img/vote_poll2.jpg" />
                 </section>
 
                 <section>
@@ -454,7 +457,7 @@ def interactive():
                  <section>
                     <h3>Handling a Vote</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:14px;"">
+                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
 def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
     repo.persist_vote(db_conn, poll_id, poll_choice_id, voter_user_id)
 
@@ -481,6 +484,7 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
                     <h3>Voting Response</h3>
                     <img id="castVote" src="img/cast_vote.jpg"/>
                 </section>
+            </section>
 
             <section>
                 <!-- Krieger -->
