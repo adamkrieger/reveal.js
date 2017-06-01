@@ -75,6 +75,11 @@
 
             <section>
                 <h1>Adam Krieger</h1>
+                <p>Senior Software Developer</p>
+                <p>10+ yrs of XP</p>
+                <p>Functional, DevOps</p>
+                <p>adamkrieger.ca, @adamkrieger, GH: adamkrieger</p>
+                <p>wpg.NetUG Board Member</p>
             </section>
 
             <section>
@@ -82,14 +87,26 @@
             </section>
 
             <section>
+                <h3>Agenda</h3>
+                <ul>
+                    <li>R: Requirements/MVP</li>
+                    <li>R: Ways to Integrate with Slack</li>
+                    <li>K: Design & Architecture</li>
+                    <li>K: Development: Team Integrations</li>
+                    <li>R: Development: Functionality</li>
+                    <li>K: Deployment on the Cheap</li>
+                </ul>
+            </section>
+
+            <section>
                 <!-- Rehill -->
                 <section>
                     <h3>Pollease Requirements</h3>
                     <ol>
-                        <li>Create</li>
-                        <li>Vote</li>
-                        <li>Close</li>
-                        <li>Results</li>
+                        <li>Create a Poll</li>
+                        <li>Vote!</li>
+                        <li>Close the Poll</li>
+                        <li>Print Results</li>
                     </ol>
                 </section>
                 <section>
@@ -178,8 +195,7 @@
             <section>
                 <!-- Krieger -->
                 <section>
-                    <diagram of difference between normal api consumption and this />
-                    Design & Architecture
+                    <h3>Design & Architecture</h3>
                 </section>
                 <section>
                     <p>Typical Integrations</p>
@@ -198,6 +214,9 @@
             <section>
                 <!-- Krieger -->
                 <section>
+                    <h3>Development: Team Integrations</h3>
+                </section>
+                <section>
                     <p>https://api.slack.com/apps</p>
                     <img src="img/slack_appsignin.png" />
                 </section>
@@ -211,41 +230,18 @@
                 <section>
                     <img src="img/slack_newapp.png" />
                 </section>
-
-                <section>
-                    We have to get this complexity out of the way, so we're going to explain:
-                    Adding Authorize and Test Command
-                </section>
                 
                 <section>
                     <p>Basic Information</p>
                     <img src="img/slack_authinfo.png" />
                 </section>
-
-                <section>
-                    gunicorn + Flask running in a Docker container
-                </section>
-
-                <section>
-                    ngrok
-                </section>
-
-                <section>
-                    authorize endpoint
-                </section>
-
-                <section>
-                    content of html page
-                </section>
-
-                <section>
-                    Recenter everyone with the diagram of the auth flow
-                    More highlighting of what we just built
-                </section>
             </section>
 
             <section>
                 <!-- Rehill -->
+                <section>
+                    <h3>Development: Functionality</h3>
+                </section>
                 <section>
                     <h3>Configure Slash Command</h3>
                     <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
@@ -489,30 +485,48 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
             <section>
                 <!-- Krieger -->
                 <section>
-                    Deployment on a dime
+                    <h3>Deployment on the Cheap</h3>
                 </section>
 
                 <section>
-                    Changing from a dev volume to a prod image
+                    https://cloud.docker.com/app/akrieger/repository/list
+                    <img src="img/dockercloud_repo.png" />
                 </section>
 
                 <section>
-                    auto-build the image
-                    <screenshot of docker cloud config />
-                    <screenshot of build history />
+                    <img src="img/dockercloud_build.png" />
                 </section>
 
                 <section>
-                    Docker Cloud Digital Ocean integration
-                    <screenshot of filling in account info and selecting node type />
-                </section>
-                
-                <section>
-                    <screenshot of deploy run history />
+                    https://hub.docker.com/r/akrieger/pollease/
+                    <img src="img/dockerhub_pollease.png" />
                 </section>
 
                 <section>
-                    update URLs to point at running node
+                    <img src="img/dockercloud_bind.png" />
+                </section>
+
+                <section>
+                    <h3>Update Slash Commands</h3>
+                    <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
+                </section>
+
+                <section>
+                    <h3>Update Interactive Messages</h3>
+                    <img id="interactiveMessages" src="img/interactive_messages.jpg"/>
+                </section>
+
+                <section>
+                    <img src="img/arch_slackprod.png" />
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    Questions?
+                </section>
+                <section>
+                    Thanks much :)
                 </section>
             </section>
                 
