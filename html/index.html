@@ -281,13 +281,12 @@ def route_pollease_command(command_text):
     params = shlex.split(command_text.encode('utf8'))
     action = params.pop(0).lower()
 
-    if action not in VALID_ACTIONS:
-        raise CommandParsingException(ERR_PARSING_ACTION)
+    if action == ACTION_CREATE:
+        return create_poll
+    elif action == ACTION_CLOSE:
+        return close_action
     else:
-        if action == ACTION_CREATE:
-            return create_poll
-        elif action == ACTION_CLOSE:
-            return close_poll
+        raise CommandParsingException(ERR_PARSING_ACTION)
                     </code></pre>
                     <img id="parsing" src="img/parsing.jpg"/>
                 </section>
