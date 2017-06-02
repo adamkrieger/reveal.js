@@ -84,6 +84,11 @@
 
             <section>
                 <h1>Adam Rehill</h1>
+                <p>Consultant & Software Developer</p>
+                <p>7 yrs of XP</p>
+                <p>Web Dev & DevOps by day</p>
+                <p>Overwatch & Soccer by night</p>
+                <p>adamrehill.com, @adamrehill, GH: adamrehill</p>
             </section>
 
             <section>
@@ -276,13 +281,12 @@ def route_pollease_command(command_text):
     params = shlex.split(command_text.encode('utf8'))
     action = params.pop(0).lower()
 
-    if action not in VALID_ACTIONS:
-        raise CommandParsingException(ERR_PARSING_ACTION)
+    if action == ACTION_CREATE:
+        return create_poll
+    elif action == ACTION_CLOSE:
+        return close_action
     else:
-        if action == ACTION_CREATE:
-            return create_poll
-        elif action == ACTION_CLOSE:
-            return close_poll
+        raise CommandParsingException(ERR_PARSING_ACTION)
                     </code></pre>
                     <img id="parsing" src="img/parsing.jpg"/>
                 </section>
@@ -396,7 +400,7 @@ def close_poll(repo, db_conn, command_details):
     if current_poll is None:
         return generate_return_message(ERR_NO_POLL_IN_PROGRESS)
     elif current_poll.owner_user_id != command_details.user_id:
-        return generate_return_message("You do are not the creator of this poll.")
+        return generate_return_message("You are not the creator of this poll.")
     else:
         current_poll.date_close = arrow.utcnow().timestamp
         repo.update_poll(db_conn, current_poll)
