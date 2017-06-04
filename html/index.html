@@ -94,48 +94,13 @@
             <section>
                 <h3>Agenda</h3>
                 <ul>
-                    <li>R: Requirements/MVP</li>
-                    <li>R: Ways to Integrate with Slack</li>
-                    <li>K: Design & Architecture</li>
-                    <li>K: Development: Team Integrations</li>
-                    <li>R: Development: Functionality</li>
-                    <li>K: Deployment on the Cheap</li>
+                    <li>Ways to Integrate with Slack</li>
+                    <li>Requirements/MVP</li>
+                    <li>Design & Architecture</li>
+                    <li>Development: Team Integrations</li>
+                    <li>Development: Functionality</li>
+                    <li>Deployment on the Cheap</li>
                 </ul>
-            </section>
-
-            <section>
-                <!-- Rehill -->
-                <section>
-                    <h3>Pollease Requirements</h3>
-                    <ol>
-                        <li>Create a Poll</li>
-                        <li>Vote!</li>
-                        <li>Close the Poll</li>
-                        <li>Print Results</li>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Why Anonymous?</h3>
-                    <span style="font-style:italic;">What is your favorite Star Wars character?</span>
-                </section>
-                <section>
-                 <img id="jarJar" src="img/jar_jar.jpg" style="height:300px; width: auto;"/>
-                 <img id="steveHarvey" src="img/steve_harvey.gif"/>
-                </section>
-                <section>
-                    <h3>Create a Poll</h3>
-                    <img id="createPoll" src="img/create_poll.jpg">
-                </section>
-                <section>
-                    <h3>Anonymously Vote on a Poll</h3>
-                    <img id="votePoll2" src="img/vote_poll2.jpg">
-                    <img id="votePoll" src="img/vote_poll.jpg">
-                </section>
-                <section>
-                    <h3>Close a Poll & Display Results</h3>
-                    <img id="closePoll" src="img/close_poll.jpg">
-                    <img id="closePoll2" src="img/close_poll2.jpg">
-                </section>
             </section>
 
             <section>
@@ -190,6 +155,41 @@
                         <li>Don't call Slack...let Slack call you</li>
                         <li>Subscribe to the events YOU need</li>
                     </ul>
+                </section>
+            </section>
+
+            <section>
+                <!-- Rehill -->
+                <section>
+                    <h3>Pollease Requirements</h3>
+                    <ol>
+                        <li>Create a Poll</li>
+                        <li>Vote!</li>
+                        <li>Close the Poll</li>
+                        <li>Print Results</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Why Anonymous?</h3>
+                    <span style="font-style:italic;">What is your favorite Star Wars character?</span>
+                </section>
+                <section>
+                 <img id="jarJar" src="img/jar_jar.jpg" style="height:300px; width: auto;"/>
+                 <img id="steveHarvey" src="img/steve_harvey.gif"/>
+                </section>
+                <section>
+                    <h3>Create a Poll</h3>
+                    <img id="createPoll" src="img/create_poll.jpg">
+                </section>
+                <section>
+                    <h3>Anonymously Vote on a Poll</h3>
+                    <img id="votePoll2" src="img/vote_poll2.jpg">
+                    <img id="votePoll" src="img/vote_poll.jpg">
+                </section>
+                <section>
+                    <h3>Close a Poll & Display Results</h3>
+                    <img id="closePoll" src="img/close_poll.jpg">
+                    <img id="closePoll2" src="img/close_poll2.jpg">
                 </section>
             </section>
 
@@ -341,20 +341,6 @@ def create_poll(repo, db_conn, command_details):
                 </section>
 
                 <section>
-                    <h3>Create Poll Persistence</h3>
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
-def persist_poll(self, db_conn, poll):
-    sql = SQL_PERSIST_POLL.format(poll.poll_id, \
-        poll.team_id, poll.team_domain, poll.channel_id, poll.channel_name, \
-        poll.name, poll.date_open, poll.date_close, poll.owner_user_id)
-    db_conn.execute(sql)
-
-    self.persist_poll_choices(db_conn, poll)
-    db_conn.commit()
-                    </code></pre>
-                </section>
-
-                <section>
                     <h3>Create Poll - Response</h3>
 
                     <pre><code class="py" style="max-height: 700px; font-size:14px;">
@@ -410,6 +396,21 @@ def close_poll(repo, db_conn, command_details):
         is now closed. \n Results: \n " + format_poll_votes(poll_votes))
                     </code></pre>
                 </section>
+                <section>
+                    <h3>Return Helper Method</h3>
+                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+def generate_return_message(message, options=None):
+    msg = {
+        "response_type": "ephemeral",
+        "text": message
+    }
+
+    if options is not None:
+        msg.update(options)
+
+    return msg
+                    </code></pre>                
+                </section>
 
                 <section>
                     <h3>Close Poll - Response</h3>
@@ -463,17 +464,6 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
 
     return generate_return_message("Your vote has been received", msg_options)
                     </code></pre>
-                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
- def persist_vote(self, db_conn, poll_id, poll_choice_id, voter_user_id):
-    previous_vote = self.fetch_vote_for_poll_and_user(db_conn, poll_id, voter_user_id)
-
-    if previous_vote is None:
-        db_conn.execute(SQL_PERSIST_POLL_VOTE % (poll_id, poll_choice_id, voter_user_id))
-        db_conn.commit()
-    else:
-        db_conn.execute(SQL_UPDATE_POLL_VOTE % (poll_choice_id, poll_id, voter_user_id))
-        db_conn.commit()                    
-                     </code></pre>
                 </section>
 
                 <section>
