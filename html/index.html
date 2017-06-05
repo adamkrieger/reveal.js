@@ -249,7 +249,7 @@
                 </section>
                 <section>
                     <h3>Slack Slash Command - Payload Sample</h3>
-                     <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                     <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 {
   "data": [
     "token=TOKENNNNNN&team_id=T3F55CL14&team_domain=swedishchefs&channel_id=C3F55CNDC&
@@ -276,7 +276,7 @@ class SlackCommand(object):
                 <section>
                     <h3>Parsing & Routing the Slash Command</h3>
 
-                    <pre><code class="py" style="max-height: 700px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px;">
 def route_pollease_command(command_text):
     params = shlex.split(command_text.encode('utf8'))
     action = params.pop(0).lower()
@@ -294,7 +294,7 @@ def route_pollease_command(command_text):
                 <section>
                     <h3>The Domain</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 class Poll(object):
     poll_id = ""
     team_id = ""
@@ -314,7 +314,7 @@ class PollChoice(object):
                 <section>
                     <h3>Create Poll</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 def create_poll(repo, db_conn, command_details):
     poll_name, raw_poll_choices = parse_create_command(command_details.text)
 
@@ -343,7 +343,7 @@ def create_poll(repo, db_conn, command_details):
                 <section>
                     <h3>Create Poll - Response</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:14px;">
 for choice in poll.poll_choices:
     options.append(
         {
@@ -378,7 +378,7 @@ return {
                 <section>
                     <h3>Close Poll</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 def close_poll(repo, db_conn, command_details):
     current_poll = repo.fetch_poll_by_channel(db_conn, \
         command_details.team_id, command_details.channel_id)
@@ -398,7 +398,7 @@ def close_poll(repo, db_conn, command_details):
                 </section>
                 <section>
                     <h3>Return Helper Method</h3>
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 def generate_return_message(message, options=None):
     msg = {
         "response_type": "ephemeral",
@@ -415,7 +415,7 @@ def generate_return_message(message, options=None):
                 <section>
                     <h3>Close Poll - Response</h3>
 
-                    <pre><code class="py" style="max-height: 700px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 {
     "text": "Poll: Where should we go for lunch? is now closed. \n 
     Results: \n 
@@ -436,7 +436,7 @@ def generate_return_message(message, options=None):
                 <!-- Rehill -->
                 <section>
                     <h3>Handling a Vote</h3>
-                    <pre><code class="py" style="max-height: 700px; font-size:16px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
 def interactive():
     params = json.loads(request.form.get("payload"))
     voter_user_id = params.get("user").get("id")
@@ -454,7 +454,7 @@ def interactive():
                  <section>
                     <h3>Handling a Vote</h3>
 
-                    <pre><code class="py" style="max-height: 700px; font-size:14px;">
+                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:14px;">
 def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
     repo.persist_vote(db_conn, poll_id, poll_choice_id, voter_user_id)
 
@@ -545,7 +545,8 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/line-numbers/line-numbers.js' }
 				]
 			});
     </script>
