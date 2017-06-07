@@ -96,14 +96,7 @@
 
             <section>
                 <h3>Agenda</h3>
-                <ul>
-                    <li>Ways to Integrate with Slack</li>
-                    <li>Requirements/MVP</li>
-                    <li>Design & Architecture</li>
-                    <li>Dev: Team Integrations</li>
-                    <li>Dev: Functionality</li>
-                    <li>Deployment on the Cheap</li>
-                </ul>
+                <img src="img/breadcrumb0.png" />
             </section>
 
             <section>
@@ -131,37 +124,7 @@
                     </br>
                     <img id=ineractiveMessages2 src="img/interactive_messages2.png" style="background-color: white; padding:10px;"/>
                 </section>
-                <section>
-                    <h3>Bot Users</h3>
-                     <ul>
-                        <li>Monitor and process channel activity</li>
-                        <li>Post messages and react to users</li>
-                    </ul>
-                    <img id="botUsers" src="img/bot_users.gif">
-                </section>
-                <section>
-                    <h3>Bot Users</h3>
-                    <img id="botUsers2" src="img/bot_users2.jpg">
-                </section>
-                <section>
-                    <h3>Incoming Webhooks</h3>
-                    <img id="incomingWebhooks" src="img/incoming_webhooks.jpg">
-                </section>
-                <section>
-                    <h3>Incoming Webhooks</h3>
-                    <img id="incomingWebhooks2" src="img/incoming_webhooks2.jpg">
-                    <img id="incomingWebhooks3" src="img/incoming_webhooks3.jpg">
-                    <img id="incomingWebhooks4" src="img/incoming_webhooks4.jpg">
-                </section>
-                <section>
-                    <h3>Event Subscriptions</h3>
-                   
-                    <img id="eventSubscriptions" src="img/event_subscriptions.jpg">
-                     <ul>
-                        <li>Don't call Slack...let Slack call you</li>
-                        <li>Subscribe to the events YOU need</li>
-                    </ul>
-                </section>
+
             </section>
 
             <section>
@@ -314,7 +277,7 @@ class SlackCommand(object):
 
                 <section>
                     <h3>Parsing & Routing the Slash Command</h3>
-
+                     <img id="parsing" src="img/parsing.jpg"/>
                     <pre><code class="python line-numbers" style="max-height: 700px;">
 def route_pollease_command(command_text):
     params = shlex.split(command_text.encode('utf8'))
@@ -327,7 +290,7 @@ def route_pollease_command(command_text):
     else:
         raise CommandParsingException(ERR_PARSING_ACTION)
                     </code></pre>
-                    <img id="parsing" src="img/parsing.jpg"/>
+                   
                 </section>
 
                 <section>
@@ -521,21 +484,23 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
                 </section>
 
                 <section>
+                	<p>Docker Cloud</p>
+                    <img src="img/dockercloud_bind.png" />
+                </section>
+
+                <section>
+                	<p>GitHub Link</p>
+                    <img src="img/dockercloud_build.png" />
+                </section>
+
+                <section>
                     https://cloud.docker.com/app/akrieger/repository/list
                     <img src="img/dockercloud_repo.png" />
                 </section>
 
                 <section>
-                    <img src="img/dockercloud_build.png" />
-                </section>
-
-                <section>
                     https://hub.docker.com/r/akrieger/pollease/
                     <img src="img/dockerhub_pollease.png" />
-                </section>
-
-                <section>
-                    <img src="img/dockercloud_bind.png" />
                 </section>
 
                 <section>
@@ -559,6 +524,53 @@ def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
                 </section>
                 <section>
                     Thanks much :)
+                </section>
+            </section>
+            <section>
+            	<section>
+            		<h3>Bonus Material!</h3>
+            	</section>
+            	<section>
+                    <h3>Slash Commands</h3>
+                    <img id=slashCommands src="img/slash_commands.png"/>
+                </section>
+                <section>
+                    <h3>Interactive Messages</h3>
+                    <img id=ineractiveMessages src="img/interactive_messages.gif"/>
+                    </br>
+                    <img id=ineractiveMessages2 src="img/interactive_messages2.png" style="background-color: white; padding:10px;"/>
+                </section>
+
+                <section>
+                    <h3>Bot Users</h3>
+                     <ul>
+                        <li>Monitor and process channel activity</li>
+                        <li>Post messages and react to users</li>
+                    </ul>
+                    <img id="botUsers" src="img/bot_users.gif">
+                </section>
+                <section>
+                    <h3>Bot Users</h3>
+                    <img id="botUsers2" src="img/bot_users2.jpg">
+                </section>
+                <section>
+                    <h3>Incoming Webhooks</h3>
+                    <img id="incomingWebhooks" src="img/incoming_webhooks.jpg">
+                </section>
+                <section>
+                    <h3>Incoming Webhooks</h3>
+                    <img id="incomingWebhooks2" src="img/incoming_webhooks2.jpg">
+                    <img id="incomingWebhooks3" src="img/incoming_webhooks3.jpg">
+                    <img id="incomingWebhooks4" src="img/incoming_webhooks4.jpg">
+                </section>
+                <section>
+                    <h3>Event Subscriptions</h3>
+                   
+                    <img id="eventSubscriptions" src="img/event_subscriptions.jpg">
+                     <ul>
+                        <li>Don't call Slack...let Slack call you</li>
+                        <li>Subscribe to the events YOU need</li>
+                    </ul>
                 </section>
             </section>
                 
