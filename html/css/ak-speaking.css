@@ -1,13 +1,13 @@
 #aklogo {
     width: 10%;
     position: absolute;
-    top:5px;
-    left:5px;
+    top:30px;
+    left:30px;
 }
 
 #arlogo {
-    bottom: 5px;
-    left:5px;
+    bottom: 30px;
+    left:30px;
     position: absolute;
     width: 15%;
 }
@@ -23,7 +23,7 @@
 #onlinelogo{
     position: absolute;
     right: 0;
-    padding: 10px;
+    padding: 30px;
     width: 10%;
 }
 
