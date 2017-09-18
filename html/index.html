@@ -63,6 +63,7 @@
 
             <section>
                 <section>
+                    <h3>Adam Krieger (me)</h3>
                     <ul>
                         <li>Software Developer (2007)</li>
                         <li>Dev Lead (2013)</li>
@@ -112,428 +113,80 @@
                     <h2>Why Productivity Per Capita Suffers</h2>
                 </section>
                 <section>
-                    <h3>Merge Conflicts</h3>
+                    Change Conflict
+                    Person-Centric Dependencies
+                    Variance in Repetitive Procedures
+                    Details Lost During Value Delivery
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Change Conflicts</h3>
+                    Dev-specific: Code (Merge): Two ppl making a chg to same file
+                    Analytical: Flow: Two chg conflct on user Flow
+                    Deploy-time: Does a whole product suite need to be brought down to make an update?
+                </section>
+
+                <section>
+                    - Pair or group review, reduce parallelism in exchange for quality and speed
+                    - Componentize!
                     
-                </section>
-            </section>
-
-            <section>
-                <!-- Rehill -->
-                <section>
-                    <h3>Ways to Integrate With Slack</h3>
-                    <ul>
-                        <li>Slash Commands *</li>
-                        <li>Interactive Messages *</li>
-                        <li>Incoming Webhooks</li>
-                        <li>Bot Users</li>
-                        <li>Event Subscriptions</li>
-                    </ul>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb1.png" />
-                </section>
-                <section>
-                    <h3>Slash Commands</h3>
-                    <img id=slashCommands src="img/slash_commands.png"/>
-                </section>
-                <section>
-                    <h3>Interactive Messages</h3>
-                    <img id=ineractiveMessages src="img/interactive_messages.gif"/>
-                    </br>
-                    <img id=ineractiveMessages2 src="img/interactive_messages2.png" style="background-color: white; padding:10px;"/>
-                </section>
-
-            </section>
-
-            <section>
-                <!-- Rehill -->
-                <section>
-                    <h3>Pollease Requirements</h3>
-                    <ol>
-                        <li>Create a Poll</li>
-                        <li>Vote!</li>
-                        <li>Close the Poll</li>
-                        <li>Print Results</li>
-                    </ol>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb2.png" />
-                </section>
-                <section>
-                    <h3>Why Anonymous?</h3>
-                    <span style="font-style:italic;">What is your favorite Star Wars character?</span>
-                </section>
-                <section>
-                 <img id="jarJar" src="img/jar_jar.jpg" style="height:300px; width: auto;"/>
-                 <img id="steveHarvey" src="img/steve_harvey.gif"/>
-                </section>
-                <section>
-                    <h3>Create a Poll</h3>
-                    <img id="createPoll" src="img/create_poll.jpg">
-                </section>
-                <section>
-                    <h3>Anonymously Vote on a Poll</h3>
-                    <img id="votePoll2" src="img/vote_poll2.jpg">
-                    <img id="votePoll" src="img/vote_poll.jpg">
-                </section>
-                <section>
-                    <h3>Close a Poll & Display Results</h3>
-                    <img id="closePoll" src="img/close_poll.jpg">
-                    <img id="closePoll2" src="img/close_poll2.jpg">
-                </section>
-            </section>
-
-            <section>
-                <!-- Krieger -->
-                <section>
-                    <h3>Design & Architecture</h3>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb3.png" />
-                </section>
-                <section>
-                    #designgoals
-                    <br /><br />
-                    <ul style="list-style-type: none">
-                        <li>Try Different Tech</li>
-                        <li>Dirt-Cheap Infra</li>
-                        <li>Explore new APIs</li>
-                    </ul>
-                </section>
-                <section>
-                    Imagine you're already <i>in production</i>
-                    <br /><br />
-                    <ul style="list-style-type: none">
-                        <li>Cloud VM</li>
-                        <li>Container</li>
-                        <li>Continuous Integration</li>
-                    </ul>
-                </section>
-                <section>
-                    <img src="img/arch_slackprod.png" />
-                </section>
-                <section>
-                    <p>Typical Integrations</p>
-                    <img src="img/arch_typical.png" />
-                </section>
-                <section>
-                    <p>Slack Integrations</p>
-                    <img src="img/arch_slackint.png" />
-                </section>
-                <section>
-                    <p>Dev Tools</p>
-                    <img src="img/arch_slackdev.png" />
-                </section>
-            </section>
-
-            <section>
-                <!-- Krieger -->
-                <section>
-                    <h3>Development: Team Integrations</h3>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb4.png" />
-                </section>
-                <section>
-                    <p>https://api.slack.com/apps</p>
-                    <img src="img/slack_appsignin.png" />
-                </section>
-                <section>
-                    <img src="img/slack_chefquote.png" />
-                </section>
-                <section>
-                    <p>Your Apps</p>
-                    <img src="img/slack_yourapps.png" />
-                </section>
-                <section>
-                    <img src="img/slack_newapp.png" />
-                </section>
-                
-                <section>
-                    <p>Basic Information</p>
-                    <img src="img/slack_authinfo.png" />
-                </section>
-            </section>
-
-            <section>
-                <!-- Rehill -->
-                <section>
-                    <h3>Development: Functionality</h3>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb5.png" />
-                </section>
-                <section>
-                    <h3>Configure Slash Command</h3>
-                    <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
-                </section>
-                <section>
-                    <h3>Slack Slash Command - Payload Sample</h3>
-                     <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-{
-  "data": [
-    "token=TOKENNNNNN&team_id=T3F55CL14&team_domain=swedishchefs&channel_id=C3F55CNDC&
-    channel_name=general&user_id=U3DQ62P5X&user_name=adam.rehill&command=%2Fpollease&
-    text=create+%22Where+should+we+go+for+lunch%22&response_url=https%3A%2F%2F
-    hooks.slack.com%2Fcommands%2FT3GARBAGEFJuO0taWFevCp"
-  ]
-}
-
-class SlackCommand(object):
-    command = ""
-    text = ""
-    team_id = ""
-    team_domain = ""
-    channel_id = ""
-    channel_name = ""
-    user_id = ""
-    user_name = ""
-    response_url = ""
-                    </code></pre>
+                    - Smaller pieces are easier to modify without conflicts
+                    -- These component boundaries should usually bubble up to the analysis stage
+                    - Microservices, and pulling sub-application interfaces up (opening them to analysis)
                     
+                    - Deploy books that allow partial application update, and even gradual/graceful update
+                    - Smaller sub-apps and version-sensitive load balancing can 
+                    -- Dark deploy: no one uses
+                    -- White list: n users access
+                    -- Balance: x% users access
+                    -- Overdeploy: old and new up
+                    -- Teardown: remove old version handlers
+                    -- (Useful to imagine checkout lines?)
                 </section>
 
                 <section>
-                    <h3>Parsing & Routing the Slash Command</h3>
-                     <img id="parsing" src="img/parsing.jpg"/>
-                    <pre><code class="python line-numbers" style="max-height: 700px;">
-def route_pollease_command(command_text):
-    params = shlex.split(command_text.encode('utf8'))
-    action = params.pop(0).lower()
-
-    if action == ACTION_CREATE:
-        return create_poll
-    elif action == ACTION_CLOSE:
-        return close_action
-    else:
-        raise CommandParsingException(ERR_PARSING_ACTION)
-                    </code></pre>
-                   
+                    - During analysis, guess which pieces will change most often
+                    -- Don't tell a developer where to put physical boundaries
+                    - Pull Request
+                    - Docker 
+                    - Ansible
+                    - Jenkins
+                    - Post-deploy reports to verify change success
                 </section>
 
-                <section>
-                    <h3>The Domain</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-class Poll(object):
-    poll_id = ""
-    team_id = ""
-    channel_id = ""
-    name = ""
-    date_open = 0
-    date_close = 0
-    owner_user_id = ""
-    poll_choices = []
-
-class PollChoice(object):
-    choice_id = ""
-    name = ""
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Create Poll</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-def create_poll(repo, db_conn, command_details):
-    poll_name, raw_poll_choices = parse_create_command(command_details.text)
-
-    current_poll = repo.fetch_poll_by_channel(db_conn, \
-        command_details.team_id, command_details.channel_id, now)
-
-    if current_poll is not None:
-        return generate_return_message(ERR_POLL_ALREADY_IN_PROGRESS)
-    
-    poll_choices = []
-    for choice in raw_poll_choices:
-        poll_choices.append(PollChoice(str(uuid.uuid4()), choice))
-
-    new_poll = Poll(str(uuid.uuid4()), command_details.team_id, \
-        command_details.team_domain, command_details.channel_id, \
-        command_details.channel_name, poll_name, arrow.utcnow().timestamp \
-        None, command_details.user_id, poll_choices)
-
-    repo.persist_poll(db_conn, new_poll)
-
-    return generate_new_poll_response(new_poll)
-        
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Create Poll - Response</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:14px;">
-for choice in poll.poll_choices:
-    options.append(
-        {
-            "text": choice.name,
-            "value": poll.poll_id + " " + choice.choice_id
-        }
-    )  
-
-return {
-    "text": poll.name,
-    "response_type": "in_channel",
-    "attachments": [
-        {
-            "callback_id": "vote_callback",
-            "color": "#3AA3E3",
-            "actions": [
-                {
-                    "type": "select",
-                    "options": options
-                }
-            ]
-        }
-    ]
-}
-                    </code></pre>
-                </section>
-                <section>
-                    <h3>Create Poll - Response<h3>
-                    <img id="votePoll2" src="img/vote_poll2.jpg" />
-                </section>
-
-                <section>
-                    <h3>Close Poll</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-def close_poll(repo, db_conn, command_details):
-    current_poll = repo.fetch_poll_by_channel(db_conn, \
-        command_details.team_id, command_details.channel_id)
-
-    if current_poll is None:
-        return generate_return_message(ERR_NO_POLL_IN_PROGRESS)
-    elif current_poll.owner_user_id != command_details.user_id:
-        return generate_return_message("You are not the creator of this poll.")
-    else:
-        current_poll.date_close = arrow.utcnow().timestamp
-        repo.update_poll(db_conn, current_poll)
-        poll_votes = repo.fetch_poll_votes(db_conn, current_poll.poll_id)
-
-        return generate_return_message("Poll: '" + current_poll.name + "' \
-        is now closed. \n Results: \n " + format_poll_votes(poll_votes))
-                    </code></pre>
-                </section>
-                <section>
-                    <h3>Return Helper Method</h3>
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-def generate_return_message(message, options=None):
-    msg = {
-        "response_type": "ephemeral",
-        "text": message
-    }
-
-    if options is not None:
-        msg.update(options)
-
-    return msg
-                    </code></pre>                
-                </section>
-
-                <section>
-                    <h3>Close Poll - Response</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-{
-    "text": "Poll: Where should we go for lunch? is now closed. \n 
-    Results: \n 
-    Bodegoes (5) \n 
-    Clay Oven (1) \n 
-    Stay and Work! (1)"
-}
-                    </code></pre>
-                    <img id="closePoll2" src="img/close_poll2.jpg"/>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3>Configure Interactive Messages</h3>
-                    <img id="interactiveMessages" src="img/interactive_messages.jpg"/>
-                </section>
-
-                <!-- Rehill -->
-                <section>
-                    <h3>Handling a Vote</h3>
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:16px;">
-def interactive():
-    params = json.loads(request.form.get("payload"))
-    voter_user_id = params.get("user").get("id")
-    action_dict = params.get("actions")[0]
-    vote_values = action_dict.get("selected_options")[0].get("value").split()
-    
-    poll_id, poll_choice_id = vote_values[0], vote_values[1]
-    
-    db_conn = get_db()
-    
-    return cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id)
-                    </code></pre>
-                </section>
-
-                 <section>
-                    <h3>Handling a Vote</h3>
-
-                    <pre><code class="python line-numbers" style="max-height: 700px; font-size:14px;">
-def cast_vote(repo, db_conn, poll_id, poll_choice_id, voter_user_id):
-    repo.persist_vote(db_conn, poll_id, poll_choice_id, voter_user_id)
-
-    msg_options = {
-        "replace_original": False
-    }
-
-    return generate_return_message("Your vote has been received", msg_options)
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Voting Response</h3>
-                    <img id="castVote" src="img/cast_vote.jpg"/>
-                </section>
             </section>
 
             <section>
-                <!-- Krieger -->
                 <section>
-                    <h3>Deployment on the Cheap</h3>
-                    <br />
-                    <br />
-                    <img src="img/breadcrumb6.png" />
+                    <h3>Person-Centric Dependencies</h3>
+                    - Analysis: Single Wringable Neck
+                    -- Wait in line
+                    - Development: Esoteric or overengineered code
+                    - Deploy: Steve is the Process
                 </section>
 
                 <section>
-                	<p>Docker Cloud</p>
-                    <img src="img/dockercloud_bind.png" />
+                    - Always design in committee
+                    - Document agressively
+                    - Change requests come with 'whys'
+
+                    - Pair or group programming
+                    - Juniors and new team members doing work review for vets
+
+                    - Automate processes
                 </section>
 
-                <section>
-                	<p>GitHub Link</p>
-                    <img src="img/dockercloud_build.png" />
-                </section>
+            </section>
 
-                <section>
-                    https://cloud.docker.com/app/akrieger/repository/list
-                    <img src="img/dockercloud_repo.png" />
-                </section>
-
-                <section>
-                    https://hub.docker.com/r/akrieger/pollease/
-                    <img src="img/dockerhub_pollease.png" />
-                </section>
-
-                <section>
-                    <h3>Update Slash Commands</h3>
-                    <img id="createSlashCommand" src="img/create_slash_command.jpg"/>
-                </section>
-
-                <section>
-                    <h3>Update Interactive Messages</h3>
-                    <img id="interactiveMessages" src="img/interactive_messages.jpg"/>
-                </section>
-
-                <section>
-                    <img src="img/arch_slackprod.png" />
-                </section>
+            <section>
+                To remember
+                - twitter
+                - blog
+                - email
+                - winnipeg dotnet ug
+                - business card
             </section>
 
             <section>
