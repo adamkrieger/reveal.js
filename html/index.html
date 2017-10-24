@@ -56,35 +56,27 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
 
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
+
             <section>
-                <div id="titleslide">
-                    <div id="sessionbanner">
-                        <div id="logo">
-                            <img src="img/prdcdeliver_logo.jpg" />
-                        </div>
-                        <div id="sessiontitle">
-                            <span>AGILITY IN CONTAINERS</span>
-                            <br />
-                            <br />
-                            <span>ADAM KRIEGER</span>
-                        </div>
-                    </div>
-                    <div id="sponsors">
-                        <img src="img/prdcdeliver_sponsors.png" />
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h1>Agility in Containers</h1>
-                <h2>How Work Evolves with Docker</h2>
+                <h1>Docker</h1>
+                <h2>What you can and can't do</h2>
                 <i class="icon ion-home"></i>
                 <div style="width: 300px; margin: auto">
                     <p style="text-align: center">
-                        <small>by Adam Krieger</small>
-                        <small>with Jules Van de Velde</small>
+                        by Adam Krieger
                     </p>
                 </div>
-                <i class="fa fa-chrome"></i> <a href="http://www.adamkrieger.ca/talks/docker-workflows">adamkrieger.ca/talks/docker-workflows</a><br />
+            </section>
+
+            <section>
+                <h1>Docker</h1>
+                <h2>What you can, and just as importantly, if not moreso, what you can't do with it</h2>
+                <i class="icon ion-home"></i>
+                <div style="width: 300px; margin: auto">
+                    <p style="text-align: center">
+                        by Adam Krieger
+                    </p>
+                </div>
             </section>
 
             <!-- Notes
@@ -165,31 +157,6 @@ https://blog.docker.com/2016/03/containers-are-not-vms/
                 <!-- Workflow: Structuring a container
                     Benefit: Self-documenting process makes intent clear
                         Flexibility to branch from known-good trunk -->
-
-                <section>
-                    <h3>Spoiler: My dog is fine.</h3>
-                </section>
-
-                <section>
-                    <table>
-                        <tr>
-                            <td>Charcoal</td>
-                            <td>$20</td>
-                        </tr>
-                        <tr>
-                            <td>Administration</td>
-                            <td>$50</td>
-                        </tr>
-                        <tr>
-                            <td>Appointment</td>
-                            <td>$75</td>
-                        </tr>
-                        <tr>
-                            <td>Emergency Fee</td>
-                            <td>$150</td>
-                        </tr>
-                    </table>
-                </section>
 
                 <section>
                     <h3>Layer Cake</h3>
@@ -283,7 +250,7 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                     <!--Everything but the icing is downloaded from the registry -->
 <pre><code>docker run --name presentation -d 
     -p 7000:80 -p 7001:443 
-    -v $HERE/html:/usr/share/nginx/html
+    -v `pwd`/html:/usr/share/nginx/html
     -e "SOME_ENV_VAR=devOrProdOrWhateverYoudLike"
     akrieger/revealjs:2.3</code></pre>
                     
@@ -324,7 +291,7 @@ RUN yum install -y -q java-1.8.0*</code></pre>
                                     <li>Host OS is already booted</li>
                                     <li>Always a clean slate</li>
                                     <li>Shareable Binaries</li>
-                                    <li>Effort at Build-time</li>
+                                    <li>Concentrate Effort at Build-time</li>
                                 </ul>
                             </td>
                         </tr>
@@ -359,33 +326,33 @@ RUN yum install -y -q java-1.8.0*</code></pre>
 
             <section>
                 <section>
-                    <h2>Adopting Docker</h2>
+                    <h2>The Catch!</h2>
                 </section>
 
                 <section>
-                    <h4>Do what you know</h4>
+                    <h4>Linux!</h4>
                     <ul>
-                        <li>Cloud or On-Prem</li>
-                        <li>Right framework, right time</li>
+                        <li>Docker for Windows/Mac (Dev Only)</li>
+                        <li>May limit framework choices</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h4>Give it a chance</h4>
+                    <h4>Extra-Application!</h4>
                     <ul>
-                        <li>Simple</li>
-                        <li>Independent, or Interfaced</li>
-                        <li>Background</li>
+                        <li>Can't fix bad design</li>
+                        <li>Doesn't automate anything</li>
+                        <li>No Dev Magic</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h4>Self-Document</h4>
+                    <h4>More Work!</h4>
                     <ul>
                         <li>Dockerfiles</li>
                         <li>Compose files</li>
-                        <li><i>Build</i></li>
-                        <li><i>Run</i></li>
+                        <li>Build and Run scripts</li>
+                        <li>Low Layer changes cause big rebuilds</li>
                     </ul>
                     
                 </section>
@@ -395,25 +362,25 @@ RUN yum install -y -q java-1.8.0*</code></pre>
 
             <section>
                 <section>
-                    <h3>Designing in Containers</h3>
+                    <h3>Examples</h3>
                 </section>
 
                 <section>
-                    <h4>Composable Components</h4>
+                    <h4>This Presentation</h4>
                     <ul>
-                        <li>Simpler pieces</li>
-                        <li>Easier to fix</li>
-                        <li>Easier to improve</li>
-                        <li>Easier to reuse</li>
+                        <li>nginx</li>
+                        <li>volumes</li>
+                        <li>ports</li>
+                        <li>alpine (svelte)</li>
                     </ul>
                 </section>
 
                 <section>
-                    <h4>Rethink Services</h4>
+                    <h4>adamkrieger.ca</h4>
                     <ul>
-                        <li>Components at the Process Level</li>
-                        <li>Indefinite/Transitory Lifetimes</li>
-                        <li>Serverless (even on-prem)</li>
+                        <li>Build-time</li>
+                        <li>ENV Variables</li>
+                        <li><i>Borrowing</i> Compute</li>
                     </ul>
                     <!-- https://blog.docker.com/2016/06/building-serverless-apps-with-docker/ -->
                     
